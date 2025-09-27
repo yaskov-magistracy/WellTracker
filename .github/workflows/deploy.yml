@@ -21,8 +21,8 @@ jobs:
         host: ${{ vars.VPS_HOST }}
         username: ${{ vars.SSH_USERNAME }}
         key: ${{ secrets.VPS_SSH_KEY }}
-        source: "./cloud,docker-env-shared,copy-env.sh,compose.sh"
-        target: "~/WellTracker"
+        source: "./deploy"
+        target: "~/deploy"
 
     - name: Create secrets 
       uses: appleboy/ssh-action@v1
@@ -31,7 +31,7 @@ jobs:
         username: ${{ vars.SSH_USERNAME }}
         key: ${{ secrets.VPS_SSH_KEY }} 
         script: |
-          cd $DEPLOY_FOLDER
+          cd deploy
 
           sudo echo -e \
             "POSTGRES_USER = ${{ secrets.POSTGRES_USER }}\nPOSTGRES_PASSWORD = ${{ secrets.POSTGRES_PASSWORD }}"\
@@ -55,5 +55,5 @@ jobs:
         username: ${{ vars.SSH_USERNAME }}
         key: ${{ secrets.VPS_SSH_KEY }}
         script: |
-          cd $DEPLOY_FOLDER
+          cd deploy
           sudo sh compose.sh

@@ -42,7 +42,7 @@ public class AccountsController(
     public async Task<ActionResult> RegisterAdmin(AdminCreateRequest request)
     {
         var result = await adminsService.Register(request);
-        return result.ActionResult;
+        return result.ActionResult; // TODO: remove hashedPass from response
     }
 
     /// <summary>

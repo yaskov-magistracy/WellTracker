@@ -15,10 +15,14 @@ public class DatabaseController(
     /// <summary>
     /// Пересоздаёт БД
     /// </summary>
+    /// <remarks>
+    /// Если поставлен флаг withAutoFilling:
+    /// Создаёт дефолтного Админа - admin/admin
+    /// </remarks>
     [HttpPost("recreate")]
-    public async Task<ActionResult> RecreateDatabase()
+    public async Task<ActionResult> RecreateDatabase([FromQuery] bool withAutoFilling = true)
     {
-        var response = await databaseService.RecreateDatabase();
+        var response = await databaseService.RecreateDatabase(withAutoFilling);
         return response.ActionResult;
     }
 }

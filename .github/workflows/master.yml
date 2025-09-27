@@ -5,7 +5,7 @@ on:
     branches: [ "master" ]
 
 env:
-  BACKEND_IMAGE: fnatikjk/wellTracker-backend:last
+  BACKEND_IMAGE: fnatikjk/welltracker-backend:last
   BACKEND_DOCKER_LOGIN: fnatikjk
   VPS_HOST: 82.202.129.190
   SSH_USERNAME: root

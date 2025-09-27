@@ -54,7 +54,7 @@ services:
 
 
 volumes:
-  eduteka_postgres_data:
+  wellTracker_postgres_data:
   backend_static_files:
 
 networks:

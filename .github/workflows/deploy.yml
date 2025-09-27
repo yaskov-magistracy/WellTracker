@@ -38,7 +38,7 @@ jobs:
             > docker-env-secrets
           sudo sh copy-env.sh
 
-          cd cloud/configs/nginx
+          cd cloud/nginx
           sudo echo "${{ secrets.SSL_FULLCHAIN }}" > fullchain.pem
           sudo echo "${{ secrets.SSL_PRIVATE_KEY }}" > privkey.pem
 

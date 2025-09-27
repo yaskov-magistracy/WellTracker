@@ -43,7 +43,7 @@ services:
     image: nginx
     container_name: nginx
     volumes:
-      - ../configs/nginx:/etc/nginx
+      - ./nginx:/etc/nginx
     ports:
       - 80:80
       - 443:443

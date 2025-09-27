@@ -22,7 +22,7 @@ jobs:
         username: ${{ vars.SSH_USERNAME }}
         key: ${{ secrets.VPS_SSH_KEY }}
         source: "./deploy"
-        target: "~/deploy"
+        target: "~/"
 
     - name: Create secrets 
       uses: appleboy/ssh-action@v1

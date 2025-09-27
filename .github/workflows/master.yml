@@ -6,7 +6,7 @@ on:
 
 env:
   BACKEND_IMAGE: fnatikjk/wellTracker-backend:last
-  BACKEND_DOCKER_LOGIN: fnarikjk
+  BACKEND_DOCKER_LOGIN: fnatikjk
   VPS_HOST: 82.202.129.190
   SSH_USERNAME: root
 

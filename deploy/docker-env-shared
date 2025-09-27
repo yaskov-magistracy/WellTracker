@@ -1,0 +1,2 @@
+BACKEND_IMAGE = fnatikjk/WellTracker-backend:last
+FRONTEND_IMAGE = :last

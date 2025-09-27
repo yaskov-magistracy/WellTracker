@@ -1,0 +1,62 @@
+version: "3.8"
+
+services:
+  postgres:
+    image: postgres
+    environment:
+      POSTGRES_DB: "WellTacker"
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}  
+    ports:
+      - ":5432"
+    volumes:
+      - wellTracker_postgres_data:/var/lib/postgresql/data/
+    networks:
+      - my-network
+
+  app:
+    image: ${BACKEND_IMAGE}
+    container_name: app
+    environment:
+      - "APP_NAME=WellTacker"
+      - "APP_ENVIRONMENT=PRODUCTION"
+      - "DATABASE_CONNECTION_STRING=host=postgres;Port=5432;Database=WellTacker;User Id=${POSTGRES_USER};Password=${POSTGRES_PASSWORD};"
+    ports:
+      - :8080
+      - :8081
+    volumes:
+      - backend_static_files:/app/StaticFiles
+    depends_on:
+      - postgres
+    networks:
+      - my-network
+
+#  front: TODO
+#    image: ${FRONTEND_IMAGE}
+#    container_name: front
+#    ports:
+#      - :3000
+#    networks:
+#      - my-network
+
+  nginx:
+    image: nginx
+    container_name: nginx
+    volumes:
+      - ../configs/nginx:/etc/nginx
+    ports:
+      - 80:80
+      - 443:443
+    depends_on:
+      - app
+    networks:
+      - my-network
+
+
+volumes:
+  eduteka_postgres_data:
+  backend_static_files:
+
+networks:
+  my-network:
+    driver: bridge

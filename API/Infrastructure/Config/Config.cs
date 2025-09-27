@@ -7,7 +7,7 @@ public class Config
 
     public Config()
     {
-        IsDev = ConfigReader.GetVar<bool>("IS_PRODUCTION");
+        IsDev = ConfigReader.GetVar<string>("APP_ENVIRONMENT") != "PRODUCTION";
         Database = new DatabaseConfig();
     }
 }

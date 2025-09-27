@@ -22,7 +22,7 @@ jobs:
         username: ${{ vars.SSH_USERNAME }}
         key: ${{ secrets.VPS_SSH_KEY }}
         source: "./cloud,docker-env-shared,copy-env.sh,compose.sh"
-        target: "~/$DEPLOY_FOLDER"
+        target: "~/WellTracker"
 
     - name: Create secrets 
       uses: appleboy/ssh-action@v1

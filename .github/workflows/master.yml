@@ -49,7 +49,7 @@ jobs:
 
     - name: Build and push image
       env:
-        IMAGE_TAG: ${{ env.BACKEND_IMAGE }}
+        IMAGE_TAG: ${{ env.FRONTEND_IMAGE }}
       run: |
         cd ./client
         docker build -f Dockerfile --force-rm -t $IMAGE_TAG .

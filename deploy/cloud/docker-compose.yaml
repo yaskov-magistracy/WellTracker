@@ -34,7 +34,7 @@ services:
   front:
     image: ${FRONTEND_IMAGE}
     volumes:
-      - ./nginx.conf:/etc/nginx/nginx.conf
+      - ./nginx:/etc/nginx
     container_name: front
     ports:
       - 80:80

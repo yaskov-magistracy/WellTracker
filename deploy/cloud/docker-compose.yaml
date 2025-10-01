@@ -34,7 +34,9 @@ services:
   front:
     image: ${FRONTEND_IMAGE}
     volumes:
-      - ./nginx:/etc/nginx
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./nginx/fullchain.pem:/etc/nginx/fullchain.pem
+      - ./nginx/privkey.pem:/etc/nginx/privkey.pem
     container_name: front
     ports:
       - 80:80

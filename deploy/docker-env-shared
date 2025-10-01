@@ -1,2 +1,2 @@
 BACKEND_IMAGE = fnatikjk/welltracker-backend:last
-FRONTEND_IMAGE = :last
+FRONTEND_IMAGE = iceneo/welltracker-frontend:last

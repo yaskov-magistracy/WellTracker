@@ -7,6 +7,7 @@ on:
 env:
   BACKEND_IMAGE: fnatikjk/welltracker-backend:last
   BACKEND_DOCKER_LOGIN: fnatikjk
+  FRONTEND_DOCKER_LOGIN: iceneo
 
 jobs:
   build-backend:

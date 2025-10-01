@@ -1,6 +1,9 @@
 echo on
-IF NOT EXIST "local\.env" (copy /b docker-env-shared + local\docker-env-local local\.env)
-
+IF NOT EXIST "local\.env" (
+    copy docker-env-shared local\.env >nul
+    echo. >> local\.env
+    type local\docker-env-local >> local\.env
+)
 cd local
 
 docker compose pull

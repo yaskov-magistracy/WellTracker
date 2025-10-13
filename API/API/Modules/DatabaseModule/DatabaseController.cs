@@ -13,7 +13,7 @@ public class DatabaseController(
 ) : ControllerBase
 {
     /// <summary>
-    /// Пересоздаёт БД
+    /// Пересоздаёт БД, чистит статические файлы
     /// </summary>
     /// <remarks>
     /// Если поставлен флаг withAutoFilling:

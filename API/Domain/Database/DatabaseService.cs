@@ -1,4 +1,5 @@
 ﻿using Domain.Accounts.Admins;
+using Domain.StaticFiles;
 using Infrastructure;
 using Infrastructure.Results;
 
@@ -11,6 +12,7 @@ public interface IDatabaseService
 
 public class DatabaseService(
     IDatabaseAccessor databaseAccessor,
+    IStaticFilesCleaner staticFilesCleaner,
     IAdminsService adminsService
 ) : IDatabaseService
 {
@@ -19,6 +21,7 @@ public class DatabaseService(
         try
         {
             await databaseAccessor.RecreateDatabase();
+            staticFilesCleaner.CleanUp(); 
             await adminsService.Register(new("admin", "admin"));
         }
         catch (Exception e)

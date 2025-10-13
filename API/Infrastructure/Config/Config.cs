@@ -2,14 +2,8 @@
 
 public class Config
 {
-    public bool IsDev { get; private set; }
-    public DatabaseConfig Database { get; private set; } 
-
-    public Config()
-    {
-        IsDev = ConfigReader.GetVar<string>("APP_ENVIRONMENT") != "PRODUCTION";
-        Database = new DatabaseConfig();
-    }
+    public bool IsDev { get; private set; } = ConfigReader.GetVar<string>("APP_ENVIRONMENT") != "PRODUCTION";
+    public DatabaseConfig Database { get; private set; } = new();
 }
 
 public class DatabaseConfig

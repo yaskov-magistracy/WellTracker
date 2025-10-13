@@ -1,6 +1,7 @@
 ﻿using System.Reflection;
 using DAL.Accounts.Admins;
 using DAL.Accounts.Users;
+using DAL.StaticFiles;
 using Infrastructure.Config;
 using Microsoft.EntityFrameworkCore;
 
@@ -26,4 +27,5 @@ public class DataContext(
     
     internal DbSet<AdminEntity> Admins => Set<AdminEntity>();
     internal DbSet<UserEntity> Users => Set<UserEntity>();
+    internal DbSet<StaticFileEntity> StaticFiles => Set<StaticFileEntity>();
 }

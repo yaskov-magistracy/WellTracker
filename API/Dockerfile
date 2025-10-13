@@ -27,5 +27,5 @@ FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
 # Создаём папку под статику
-RUN mkdir -p StaticFiles 
+RUN mkdir -p _staticFiles 
 ENTRYPOINT ["dotnet", "API.dll"]

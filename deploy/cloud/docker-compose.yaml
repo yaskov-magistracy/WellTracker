@@ -25,7 +25,7 @@ services:
       - 8080:8080
       - 8081:8081
     volumes:
-      - backend_static_files:/app/StaticFiles
+      - backend_static_files:/app/_staticFiles
     depends_on:
       - postgres
     networks:

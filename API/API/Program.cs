@@ -28,8 +28,6 @@ var app = builder.Build();
     app.UseSwaggerUI();
 }
 
-// app.UseHttpsRedirection(); TODO: remove when get https
-
 app.UseAuthentication();
 app.UseAuthorization();
 

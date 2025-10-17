@@ -1,8 +1,9 @@
-﻿namespace Domain.Accounts.Users.DTO;
+﻿using Domain.Accounts.Users;
 
-public class UserUpdateEntity
+namespace API.Modules.UsersModule.DTO;
+
+public class UserInfoPatchRequest
 {
-    public string? HashedPassword { get; set; }
     public UserGender? Gender {get; set; }
     public float? Weight {get; set; }
     public int? Height {get; set; }

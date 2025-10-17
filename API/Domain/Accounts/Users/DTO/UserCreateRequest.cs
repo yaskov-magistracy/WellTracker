@@ -1,6 +1,10 @@
 ﻿namespace Domain.Accounts.Users.DTO;
 
-public record class UserCreateRequest(
+public record UserCreateRequest(
     string Login,
-    string Password
+    string Password,
+    UserGender Gender,
+    float Weight,
+    int Height,
+    UserTarget Target
 );

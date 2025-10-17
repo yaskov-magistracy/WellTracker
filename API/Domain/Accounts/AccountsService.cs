@@ -11,7 +11,6 @@ public interface IAccountsService
 {
     Task<Result<Account>> Login(AccountLoginRequest request);
     Task<Result<Account>> GetByLogin(string login);
-    Task<Result<Account>> Add(AccountCreateRequest request);
     Task<EmptyResult> ChangePassword(AccountChangePasswordRequest request);
 }
 
@@ -44,33 +43,6 @@ public class AccountsService(
             return Results.Ok(ToAccount(adminResponse.Value));
 
         return Results.NotFound<Account>("Аккаунта с таким логином не существует");
-    }
-
-    public async Task<Result<Account>> Add(AccountCreateRequest request)
-    {
-        var existedResponse = await GetByLogin(request.Login);
-        if (existedResponse.StatusCode != HttpStatusCode.NotFound)
-            return Results.BadRequest<Account>("Логин занят");
-
-        if (request.Role == AccountRole.User)
-        {
-            var userResponse = await usersService.Register(new(request.Login, request.Password));
-            if (!userResponse.IsSuccess)
-                return Results.From<User, Account>(userResponse);
-            
-            return Results.Ok(ToAccount(userResponse.Value));
-        }
-        
-        if (request.Role == AccountRole.Admin)
-        {
-            var adminResponse = await adminsService.Register((AdminCreateRequest) new(request.Login, request.Password));
-            if (!adminResponse.IsSuccess)
-                return Results.From<Admin, Account>(adminResponse);
-            
-            return Results.Ok(ToAccount(adminResponse.Value));
-        }
-
-        return Results.BadRequest<Account>($"Unsupported role: {request.Role}");
     }
 
     public async Task<EmptyResult> ChangePassword(AccountChangePasswordRequest request)

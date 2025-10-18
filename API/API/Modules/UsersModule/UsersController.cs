@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace API.Modules.UsersModule;
 
-[Route("api/accounts")]
+[Route("api/[controller]")]
 [ApiController]
 public class UsersController(
     IUsersService usersService) : ControllerBase

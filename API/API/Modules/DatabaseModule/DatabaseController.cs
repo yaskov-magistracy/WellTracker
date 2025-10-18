@@ -6,7 +6,7 @@ namespace API.Modules.DatabaseModule;
 /// <summary>
 /// Работа с БД
 /// </summary>
-[Route("api/database")]
+[Route("api/[controller]")]
 [ApiController]
 public class DatabaseController(
     IDatabaseService databaseService

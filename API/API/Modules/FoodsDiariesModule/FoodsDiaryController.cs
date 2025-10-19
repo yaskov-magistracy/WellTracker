@@ -12,6 +12,12 @@ public class FoodsDiaryController(
     IFoodDiariesService foodDiariesService
 ) : ControllerBase
 {
+    /// <summary>
+    /// Получить записи по дню
+    /// </summary>
+    /// <remarks>
+    /// `date` - в формате `dd.MM.yyyy` или `dd-MM-yyyy`
+    /// </remarks>>
     [AuthorizeRoles(AccountRole.User)]
     [HttpGet("{date:DateOnly}")]
     public async Task<ActionResult<FoodDiary>> GetByDate([FromRoute] DateOnly date)
@@ -20,6 +26,13 @@ public class FoodsDiaryController(
         return response.ActionResult;
     }
     
+    /// <summary>
+    /// Обновить записи по дню
+    /// </summary>
+    /// <remarks>
+    /// `date` - в формате `dd.MM.yyyy` или `dd-MM-yyyy` <br/>
+    /// `Полностью` переписывает приём пищи, который ему передаешь
+    /// </remarks>>
     [AuthorizeRoles(AccountRole.User)]
     [HttpPost("{date:DateOnly}")]
     public async Task<ActionResult<FoodDiary>> UpdateFoodDiary([FromRoute] DateOnly date, FoodDiaryUpdateEntity updateEntity)

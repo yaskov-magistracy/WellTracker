@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using NpgsqlTypes;
 
 namespace DAL.Foods;
@@ -7,7 +8,7 @@ namespace DAL.Foods;
 public class FoodEntity
 {
     [Key] public Guid Id { get; set; }
-    public NpgsqlTsVector SearchVector { get; set; }
+    [JsonIgnore] public NpgsqlTsVector SearchVector { get; set; }
     public string Name { get; set; }
     public string? BrandName { get; set; }
     public float? GramsInPortion { get; set; }

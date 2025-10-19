@@ -36,6 +36,6 @@ internal static class FoodsMapper
     public static FoodNutriments ToDomain(FoodNutrimentsEntity entity)
         => new(entity.Protein, entity.Fat, entity.Сarbohydrates);
 
-    private static FoodEnergy ToDomain(FoodEnergyEntity entity)
+    public static FoodEnergy ToDomain(FoodEnergyEntity entity)
         => new(entity.Kcal, entity.Kj);
 }

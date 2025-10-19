@@ -17,5 +17,10 @@ internal class UserEntityConfiguration : IEntityTypeConfiguration<UserEntity>
         builder
             .Property(e => e.HashedPassword)
             .IsRequired();
+
+        builder
+            .HasMany(e => e.FoodDiaries)
+            .WithOne(e => e.User)
+            .HasForeignKey(e => e.UserId);
     }
 }

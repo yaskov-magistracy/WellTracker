@@ -9,16 +9,3 @@ public record Food(
     FoodEnergy Energy)
 {
 }
-
-public record FoodNutriments(
-    float Protein,
-    float Fat,
-    float Сarbohydrates)
-{
-}
-
-public record FoodEnergy(
-    float Kcal,
-    float Kj)
-{
-}

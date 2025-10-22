@@ -18,6 +18,7 @@ COPY ./Infrastructure ./Infrastructure
 COPY ./Domain ./Domain
 COPY ./DAL ./DAL
 COPY ./API ./API
+COPY ./TelegramBot ./TelegramBot
 WORKDIR "/src/API"
 RUN dotnet build "API.csproj" -c Release -o /app/build
 

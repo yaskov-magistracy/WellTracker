@@ -12,6 +12,7 @@ COPY ["Infrastructure/Infrastructure.csproj", "Infrastructure/"]
 COPY ["Domain/Domain.csproj", "Domain/"]
 COPY ["DAL/DAL.csproj", "DAL/"]
 COPY ["API/API.csproj", "API/"]
+COPY ["TelegramBot/TelegramBot.csproj", "TelegramBot/"]
 RUN dotnet restore "API/API.csproj"
 COPY ./Infrastructure ./Infrastructure
 COPY ./Domain ./Domain

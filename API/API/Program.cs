@@ -6,6 +6,7 @@ using Infrastructure.Config;
 using Infrastructure.Configuration.Routes;
 using Infrastructure.Configuration.Routes.ModelBinding;
 using Infrastructure.Configuration.Serialization;
+using TelegramBot;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -42,5 +43,7 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.Services.GetRequiredService<TelegramDaemon>();
 
 app.Run();

@@ -23,6 +23,7 @@ public static class ConfigReader
     private static Lazy<Dictionary<string, string>> localPublicEnvVars = new(() =>
     {
         return File.ReadAllLines(PathToConfig)
+            .Select(e => e.Trim())
             .Where(e => !string.IsNullOrEmpty(e))
             .Select(e => e.Split(" = "))
             .ToDictionary(e => e.First(), e => e.Last());
@@ -31,6 +32,7 @@ public static class ConfigReader
     private static Lazy<Dictionary<string, string>> localSecretEnvVars = new(() =>
     {
         return File.ReadAllLines(PathToSecretConfig)
+            .Select(e => e.Trim())
             .Where(e => !string.IsNullOrEmpty(e))
             .Select(e => e.Split(" = "))
             .ToDictionary(e => e.First(), e => e.Last());

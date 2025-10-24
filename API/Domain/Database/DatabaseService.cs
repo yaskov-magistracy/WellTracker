@@ -23,7 +23,7 @@ public class DatabaseService(
         try
         {
             await databaseAccessor.RecreateDatabase();
-            staticFilesCleaner.CleanUp(); 
+            // staticFilesCleaner.CleanUp(); TODO: fix `Device or resource busy : '/app/_staticFiles/'` 
             await adminsService.Register(new("admin", "admin"));
             await usersService.Register(new("user", "user", UserGender.Male, 91.32f, 179, UserTarget.LossWeight));
         }

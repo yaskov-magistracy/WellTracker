@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {IonApp, IonIcon, IonRouterOutlet} from "@ionic/angular/standalone";
+import {IonApp, IonContent, IonHeader, IonIcon, IonRouterOutlet, IonTitle, IonToolbar} from "@ionic/angular/standalone";
 import {addIcons} from "ionicons";
 import {ellipse, square, triangle} from "ionicons/icons";
 
@@ -9,7 +9,11 @@ import {ellipse, square, triangle} from "ionicons/icons";
   imports: [
     IonApp,
     IonRouterOutlet,
-    IonIcon
+    IonIcon,
+    IonHeader,
+    IonToolbar,
+    IonTitle,
+    IonContent
   ],
   styleUrls: ['app.component.scss']
 })

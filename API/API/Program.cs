@@ -1,18 +1,13 @@
+using API.Configuration;
 using API.Configuration.Auth;
 using API.Configuration.Swagger;
 using API.Modules;
 using DAL;
-using Domain.Database.Github;
 using Infrastructure.Config;
 using Infrastructure.Configuration.Routes;
 using Infrastructure.Configuration.Routes.ModelBinding;
 using Infrastructure.Configuration.Serialization;
 using TelegramBot;
-
-
-var reader = new GitHubFileReader();
-await reader.Read();
-
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -44,6 +39,8 @@ var app = builder.Build();
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseMiddleware<ErrorHandlingMiddleware>();
 
 app.UseAuthentication();
 app.UseAuthorization();

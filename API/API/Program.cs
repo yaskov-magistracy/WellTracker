@@ -1,3 +1,4 @@
+using API.Configuration;
 using API.Configuration.Auth;
 using API.Configuration.Swagger;
 using API.Modules;
@@ -38,6 +39,8 @@ var app = builder.Build();
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseMiddleware<ErrorHandlingMiddleware>();
 
 app.UseAuthentication();
 app.UseAuthorization();

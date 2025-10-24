@@ -45,6 +45,14 @@ public class UsersRepository(
         var user = await Users.FirstAsync(e => e.Id == userId);
         if (updateEntity.HashedPassword != null)
             user.HashedPassword = updateEntity.HashedPassword;
+        if (updateEntity.Gender != null)
+            user.Gender = UsersMapper.ToEntity(updateEntity.Gender.Value);
+        if (updateEntity.Weight != null)
+            user.Weight = updateEntity.Weight.Value;
+        if (updateEntity.Height != null)
+            user.Height = updateEntity.Height.Value;
+        if (updateEntity.Target != null)
+            user.Target = UsersMapper.ToEntity(updateEntity.Target.Value);
         
         await dataContext.SaveChangesAsync();
         return UsersMapper.ToDomain(user);

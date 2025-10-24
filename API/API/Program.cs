@@ -3,7 +3,10 @@ using API.Configuration.Swagger;
 using API.Modules;
 using DAL;
 using Infrastructure.Config;
+using Infrastructure.Configuration.Routes;
+using Infrastructure.Configuration.Routes.ModelBinding;
 using Infrastructure.Configuration.Serialization;
+using TelegramBot;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,7 +15,15 @@ builder.Services.AddSingleton<Config>();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(SwaggerConfiguration.Apply);
 
-builder.Services.AddControllers()
+// TODO: to config/etc
+builder.Services.Configure<RouteOptions>(options =>
+{
+    options.ConstraintMap.Add(nameof(DateOnly), typeof(DateOnlyRouteConstraint));
+});
+builder.Services.AddControllers(opt =>
+    {
+        opt.ModelBinderProviders.Insert(0, new DateOnlyModelBinderProvider());
+    })
     .AddJsonOptions(JsonConverters.ConfigureJson);
 CookieAuth.Configure(builder.Services);
 
@@ -28,11 +39,11 @@ var app = builder.Build();
     app.UseSwaggerUI();
 }
 
-// app.UseHttpsRedirection(); TODO: remove when get https
-
 app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.Services.GetRequiredService<TelegramDaemon>();
 
 app.Run();

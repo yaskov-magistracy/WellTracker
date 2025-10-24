@@ -14,7 +14,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace API.Modules.AccountsModule;
 
-[Route("api/accounts")]
+[Route("api/[controller]")]
 [ApiController]
 public class AccountsController(
     IAccountsService accountsService,

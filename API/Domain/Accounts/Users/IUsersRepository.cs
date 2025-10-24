@@ -8,5 +8,5 @@ public interface IUsersRepository
     Task<User?> GetByLogin(string login);
     Task<bool> Exists(string login);
     Task<User> Add(UserCreateEntity createEntity);
-    Task<User> Update(Guid adminId, UserUpdateEntity updateEntity);
+    Task<User> Update(Guid userId, UserUpdateEntity updateEntity);
 }

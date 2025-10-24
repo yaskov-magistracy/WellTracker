@@ -8,8 +8,10 @@ public interface IUsersService
 {
     Task<Result<User>> Login(AccountLoginRequest request);
     Task<Result<User>> GetByLogin(string login);
+    Task<Result<User>> GetById(Guid userId);
     Task<Result<User>> Register(UserCreateRequest request);
     Task<EmptyResult> ChangePassword(AccountChangePasswordRequest request);
+    Task<Result<User>> Update(Guid userId, UserUpdateEntity request);
 }
 
 public class UsersService(
@@ -38,6 +40,15 @@ public class UsersService(
         return Results.Ok(user);
     }
 
+    public async Task<Result<User>> GetById(Guid userId)
+    {
+        var user = await usersRepository.Get(userId);
+        if (user == null)
+            return Results.NotFound<User>($"Пользователя с id: {user.Id} не существует");
+
+        return Results.Ok(user);
+    }
+
     public async Task<Result<User>> Register(UserCreateRequest request)
     {
         var existed = await usersRepository.GetByLogin(request.Login);
@@ -46,7 +57,11 @@ public class UsersService(
 
         var newUser = await usersRepository.Add(new(
             request.Login,
-            passwordHasher.HashPassword(request.Password)));
+            passwordHasher.HashPassword(request.Password),
+            request.Gender,
+            request.Weight,
+            request.Height,
+            request.Target));
         return Results.Ok(newUser);
     }
 
@@ -66,5 +81,17 @@ public class UsersService(
                 HashedPassword = passwordHasher.HashPassword(request.NewPassword)
             });
         return EmptyResults.NoContent();
+    }
+
+    public async Task<Result<User>> Update(Guid userId, UserUpdateEntity request)
+    {
+        var existed = await usersRepository.Get(userId);
+        if (existed == null)
+            return Results.NotFound<User>("Пользователя с таким логином не существует");
+
+        var updated = await usersRepository.Update(
+            existed.Id,
+            request);
+        return Results.Ok(updated);
     }
 }

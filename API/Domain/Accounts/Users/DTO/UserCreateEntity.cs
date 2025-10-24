@@ -1,7 +1,10 @@
 ﻿namespace Domain.Accounts.Users.DTO;
 
-public record class UserCreateEntity(
+public record UserCreateEntity(
     string Login,
-    string HashedPassword)
-{
-}
+    string HashedPassword,
+    UserGender Gender,
+    float Weight,
+    int Height,
+    UserTarget Target
+);

@@ -21,6 +21,7 @@ services:
       - "APP_NAME=WellTacker"
       - "APP_ENVIRONMENT=PRODUCTION"
       - "DATABASE_CONNECTION_STRING=host=postgres;Port=5432;Database=WellTacker;User Id=${POSTGRES_USER};Password=${POSTGRES_PASSWORD};"
+      - "TELEGRAM_BOT_TOKEN=${TELEGRAM_BOT_TOKEN}"
     ports:
       - 8080:8080
       - 8081:8081

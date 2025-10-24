@@ -36,7 +36,7 @@ jobs:
           sudo echo -e \
             "POSTGRES_USER = ${{ secrets.POSTGRES_USER }}\n"\
             "POSTGRES_PASSWORD = ${{ secrets.POSTGRES_PASSWORD }}\n"\
-            "TELEGRAM_BOT_TOKEN = ${{ secrets.TELEGRAM_BOT_TOKEN }}\n"\
+            "TELEGRAM_BOT_TOKEN = ${{ secrets.TELEGRAM_BOT_TOKEN }}"\
             > docker-env-secrets
           sudo sh copy-env.sh
 

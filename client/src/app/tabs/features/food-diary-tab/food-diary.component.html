@@ -1,0 +1,26 @@
+
+  <ion-header [translucent]="true">
+    <ion-toolbar [color]="'primary'">
+      <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+      <ion-title>
+        WellTracker
+      </ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content [fullscreen]="true">
+    <app-kcal-summary
+      [kcalRequired]="kcalRequired()"
+      [kcalConsumed]="kcalConsumed()"
+      [kcalBurnt]="kcalBurnt()"
+      [fatRequired]="fatRequired()"
+      [fatConsumed]="fatConsumed()"
+      [proteinRequired]="proteinRequired()"
+      [proteinConsumed]="proteinConsumed()"
+      [carbsRequired]="carbsRequired()"
+      [carbsConsumed]="carbsConsumed()"
+    ></app-kcal-summary>
+  </ion-content>
+

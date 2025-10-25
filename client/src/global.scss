@@ -35,3 +35,9 @@
 /* @import "@ionic/angular/css/palettes/dark.always.css"; */
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
 @import "@ionic/angular/css/palettes/dark.system.css";
+
+html {
+  --fat: rgba(227, 148, 21, 0.87);
+  --protein: rgba(13, 194, 244, 0.69);
+  --carb: rgba(16, 227, 207, 0.7);
+}

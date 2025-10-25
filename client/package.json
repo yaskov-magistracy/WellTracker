@@ -24,7 +24,9 @@
     "@angular/router": "^20.0.0",
     "@capacitor/core": "7.4.3",
     "@ionic/angular": "^8.0.0",
+    "echarts": "^6.0.0",
     "ionicons": "^7.0.0",
+    "ngx-echarts": "^20.0.2",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0"
   },

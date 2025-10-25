@@ -1,0 +1,20 @@
+<ion-card>
+  <ion-card-header>
+    <ion-card-title>Сегодня</ion-card-title>
+  </ion-card-header>
+  <ion-card-content>
+    <section class="kcalSection">
+<!--      <span>{{ kcalConsumed() }} <br>съедено</span>-->
+      <div class="kcalSection__pie" echarts
+           [options]="kcalPieOptions()"
+           [autoResize]="true"
+      ></div>
+<!--      <span>{{ kcalBurnt() }} <br>сожжено</span>-->
+    </section>
+    <section class="nutrientsSection">
+      <div class="nutrientsSection__pie" echarts
+           [options]="nutrientsPieOptions()"
+      ></div>
+    </section>
+  </ion-card-content>
+</ion-card>

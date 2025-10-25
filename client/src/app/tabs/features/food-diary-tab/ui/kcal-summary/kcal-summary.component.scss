@@ -1,9 +1,14 @@
 :host {
   .kcalSection {
+    display: flex;
+    align-items: center;
     &__pie {
-      //flex: 1 0 auto;
-      //width: 400px;
-      //height: 400px;
+      width: 100%;
+    }
+  }
+  .nutrientsSection {
+    &__pie {
+      height: 150px;
     }
   }
 }

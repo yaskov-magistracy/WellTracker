@@ -4,14 +4,14 @@
   </ion-card-header>
   <ion-card-content>
     <section class="kcalSection">
-<!--      <span>{{ kcalConsumed() }} <br>съедено</span>-->
+      <span>{{ kcalConsumed() }} <br>съедено</span>
       <div class="kcalSection__pie" echarts
            [options]="kcalPieOptions()"
-           [autoResize]="true"
       ></div>
-<!--      <span>{{ kcalBurnt() }} <br>сожжено</span>-->
+      <span>{{ kcalBurnt() }} <br>сожжено</span>
     </section>
     <section class="nutrientsSection">
+<!--      переписать под 3 разных canvas и display flex-->
       <div class="nutrientsSection__pie" echarts
            [options]="nutrientsPieOptions()"
       ></div>

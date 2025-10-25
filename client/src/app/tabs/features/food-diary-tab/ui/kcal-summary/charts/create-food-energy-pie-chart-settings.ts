@@ -20,7 +20,7 @@ export function createFoodEnergyPieChartSettings(kcalInfo: ConsumedEnergyNutrien
     series: [
       {
         type: 'pie',
-        radius: ['40%', '70%'],
+        radius: ['100%', '70%'],
         label: {
           show: false
         },

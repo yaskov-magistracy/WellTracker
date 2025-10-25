@@ -8,6 +8,7 @@ export function createFoodEnergyPieChartSettings(kcalInfo: ConsumedEnergyNutrien
       text: `${left}`,
       top: 'center',
       left: 'center',
+      textVerticalAlign: 'top',
       textStyle: {
         fontSize: 28,
       },

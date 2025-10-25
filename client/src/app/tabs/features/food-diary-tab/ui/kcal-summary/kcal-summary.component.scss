@@ -1,14 +1,75 @@
 :host {
+  .piesWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
   .kcalSection {
     display: flex;
     align-items: center;
+    gap: 15px;
+    &__text {
+      text-align: center;
+      color: var(--ion-color-dark);
+      font-weight: bold;
+      font-size: 20px;
+      flex-grow: 1;
+      &-end {
+        font-weight: normal;
+        font-size: 14px;
+      }
+    }
     &__pie {
-      width: 100%;
+      aspect-ratio: 1;
+      height: 220px;
     }
   }
+
   .nutrientsSection {
     &__pie {
       height: 150px;
+    }
+  }
+
+  @media (max-width: 450px) {
+    .nutrientsSection {
+      &__pie {
+        height: 130px;
+      }
+    }
+  }
+
+  @media (max-width: 414px) {
+    .kcalSection {
+      &__pie {
+        height: 180px;
+      }
+    }
+    .nutrientsSection {
+      &__pie {
+        height: 110px;
+      }
+    }
+  }
+
+  @media (max-width: 375px) {
+    .kcalSection {
+      &__pie {
+        height: 150px;
+      }
+    }
+    .nutrientsSection {
+      &__pie {
+        height: 100px;
+      }
+    }
+  }
+
+  @media (max-width: 330px) {
+    .kcalSection {
+      &__pie {
+        height: 130px;
+      }
     }
   }
 }

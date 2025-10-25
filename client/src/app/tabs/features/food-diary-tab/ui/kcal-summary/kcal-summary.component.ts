@@ -1,5 +1,5 @@
 import {ChangeDetectionStrategy, Component, computed, input, signal} from '@angular/core';
-import {IonCard, IonCardContent, IonCardHeader, IonCardTitle} from "@ionic/angular/standalone";
+import {IonCard, IonCardContent, IonCardHeader, IonCardTitle, IonText} from "@ionic/angular/standalone";
 import {NgxEchartsDirective} from "ngx-echarts";
 import {
   createFoodEnergyPieChartSettings,
@@ -15,7 +15,8 @@ import {createNutrientsPieChartSettings} from "./charts/create-nutrients-pie-cha
     IonCardHeader,
     IonCardTitle,
     IonCardContent,
-    NgxEchartsDirective
+    NgxEchartsDirective,
+    IonText
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })

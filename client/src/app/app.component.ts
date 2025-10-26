@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
-import {IonApp, IonContent, IonHeader, IonIcon, IonRouterOutlet, IonTitle, IonToolbar} from "@ionic/angular/standalone";
+import {ChangeDetectionStrategy, Component} from '@angular/core';
+import {IonApp, IonRouterOutlet} from "@ionic/angular/standalone";
+import * as allIcons from 'ionicons/icons';
 import {addIcons} from "ionicons";
-import {ellipse, square, triangle} from "ionicons/icons";
+import {IconModule} from "./shared/ui/icons/icon/icon-module";
 
 @Component({
   selector: 'app-root',
@@ -9,17 +10,18 @@ import {ellipse, square, triangle} from "ionicons/icons";
   imports: [
     IonApp,
     IonRouterOutlet,
-    IonIcon,
-    IonHeader,
-    IonToolbar,
-    IonTitle,
-    IonContent
+    IconModule
   ],
-  styleUrls: ['app.component.scss']
+  styleUrls: ['app.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AppComponent {
+
   constructor() {
-    addIcons({ square, triangle, ellipse })
+    addIcons({
+      ...allIcons,
+
+    })
     fetch('/api/accounts/session');
   }
 }

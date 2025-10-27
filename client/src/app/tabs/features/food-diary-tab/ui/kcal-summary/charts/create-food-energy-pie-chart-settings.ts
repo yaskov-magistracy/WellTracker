@@ -2,7 +2,10 @@ import {EChartsCoreOption} from "echarts/core";
 import {ConsumedEnergyNutrientInfo} from "./types/EnergyNutrientOption";
 
 export function createFoodEnergyPieChartSettings(kcalInfo: ConsumedEnergyNutrientInfo): EChartsCoreOption {
+  const documentElementComputedStyle = window.getComputedStyle(document.documentElement);
   const left = kcalInfo.required - kcalInfo.consumed;
+  const mainTextColor = documentElementComputedStyle.getPropertyValue('--ion-text-color-step-100');
+  const secondaryTextColor = documentElementComputedStyle.getPropertyValue('--ion-text-color-step-500');
   return {
     title: {
       text: `${left}`,
@@ -11,10 +14,12 @@ export function createFoodEnergyPieChartSettings(kcalInfo: ConsumedEnergyNutrien
       textVerticalAlign: 'top',
       textStyle: {
         fontSize: 28,
+        color: mainTextColor
       },
       subtext: 'осталось',
       subtextStyle: {
         fontSize: 16,
+        color: secondaryTextColor
       },
       itemGap: 0
     },

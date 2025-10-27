@@ -11,16 +11,22 @@
   </ion-header>
 
   <ion-content [fullscreen]="true">
-    <app-kcal-summary
-      [kcalRequired]="kcalRequired()"
-      [kcalConsumed]="kcalConsumed()"
-      [kcalBurnt]="kcalBurnt()"
-      [fatRequired]="fatRequired()"
-      [fatConsumed]="fatConsumed()"
-      [proteinRequired]="proteinRequired()"
-      [proteinConsumed]="proteinConsumed()"
-      [carbsRequired]="carbsRequired()"
-      [carbsConsumed]="carbsConsumed()"
-    ></app-kcal-summary>
+    <section class="kcalAndNutrientsSection">
+      <h2 class="kcalAndNutrientsSection__title">Итоги дня</h2>
+      <app-kcal-summary
+        [kcalRequired]="kcalRequired()"
+        [kcalConsumed]="kcalConsumed()"
+        [kcalBurnt]="kcalBurnt()"
+        [fatRequired]="fatRequired()"
+        [fatConsumed]="fatConsumed()"
+        [proteinRequired]="proteinRequired()"
+        [proteinConsumed]="proteinConsumed()"
+        [carbsRequired]="carbsRequired()"
+        [carbsConsumed]="carbsConsumed()"
+      ></app-kcal-summary>
+
+      <app-today-meals [diary]="diaryMock"></app-today-meals>
+    </section>
+
   </ion-content>
 

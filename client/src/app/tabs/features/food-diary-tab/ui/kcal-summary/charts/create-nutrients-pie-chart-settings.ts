@@ -8,6 +8,8 @@ export function createNutrientsPieChartSettings(fatInfo: ConsumedEnergyNutrientI
   const fatColor = documentElementComputedStyle.getPropertyValue('--fat');
   const proteinColor = documentElementComputedStyle.getPropertyValue('--protein');
   const carbColor = documentElementComputedStyle.getPropertyValue('--carb');
+  const mainTextColor = documentElementComputedStyle.getPropertyValue('--ion-text-color-step-100');
+  const secondaryTextColor = documentElementComputedStyle.getPropertyValue('--ion-text-color-step-500');
 
   return {
     title: [
@@ -16,9 +18,9 @@ export function createNutrientsPieChartSettings(fatInfo: ConsumedEnergyNutrientI
       createNutrientTitle('Углеводы', carbColor, '83.33%'),
     ],
     series: [
-      createNutrientPieSeries(fatInfo, fatColor, ['16.66%', '60%']),
-      createNutrientPieSeries(proteinInfo, proteinColor, ['50%', '60%%']),
-      createNutrientPieSeries(carbInfo, carbColor, ['83.33%', '60%%'])
+      createNutrientPieSeries(fatInfo, fatColor, ['16.66%', '60%'], mainTextColor, secondaryTextColor),
+      createNutrientPieSeries(proteinInfo, proteinColor, ['50%', '60%%'], mainTextColor, secondaryTextColor),
+      createNutrientPieSeries(carbInfo, carbColor, ['83.33%', '60%%'], mainTextColor, secondaryTextColor)
     ]
   };
 }
@@ -35,11 +37,14 @@ const createNutrientTitle = (nutrientName: string, nutrientColor: string, leftPa
   }
 }
 
-const createNutrientPieSeries = (nutrientInfo: ConsumedEnergyNutrientInfo, nutrientColor: string, center: [string, string]) => {
+const createNutrientPieSeries = (nutrientInfo: ConsumedEnergyNutrientInfo,
+                                 nutrientColor: string, center: [string, string],
+                                 mainTextColor: string, secondaryTextColor: string
+) => {
   return {
     type: 'pie',
     radius: ['70%', '50%'],
-    label: createNutrientLabel(nutrientInfo),
+    label: createNutrientLabel(nutrientInfo, mainTextColor, secondaryTextColor),
     center,
     data: [
       { name: 'consumed', value: nutrientInfo.consumed, itemStyle: { color: nutrientColor } },
@@ -48,7 +53,9 @@ const createNutrientPieSeries = (nutrientInfo: ConsumedEnergyNutrientInfo, nutri
   };
 }
 
-const createNutrientLabel = (nutrientInfo: ConsumedEnergyNutrientInfo) => {
+const createNutrientLabel = (nutrientInfo: ConsumedEnergyNutrientInfo,
+                             mainTextColor: string, secondaryTextColor: string
+) => {
   return {
     fontSize: '16',
     position: 'center',
@@ -58,10 +65,11 @@ const createNutrientLabel = (nutrientInfo: ConsumedEnergyNutrientInfo) => {
     ].join('\n'),
     rich: {
       a: {
+        color: mainTextColor,
         fontWeight: 'bolder'
       },
       b: {
-        color: '#aaa',
+        color: secondaryTextColor,
         fontSize: 10
       },
     }

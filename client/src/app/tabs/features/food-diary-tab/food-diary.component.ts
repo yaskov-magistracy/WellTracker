@@ -7,6 +7,8 @@ import {
   IonToolbar
 } from "@ionic/angular/standalone";
 import {KcalSummaryComponent} from "./ui/kcal-summary/kcal-summary.component";
+import {TodayMealsComponent} from "./ui/today-meals/today-meals.component";
+import {diaryMock} from "./mocks/diary";
 
 @Component({
   selector: 'app-main-tab',
@@ -19,7 +21,8 @@ import {KcalSummaryComponent} from "./ui/kcal-summary/kcal-summary.component";
     IonContent,
     KcalSummaryComponent,
     IonButtons,
-    IonMenuButton
+    IonMenuButton,
+    TodayMealsComponent
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
@@ -37,4 +40,5 @@ export default class FoodDiaryComponent {
 
   protected carbsRequired = signal(450);
   protected carbsConsumed = signal(173);
+  protected readonly diaryMock = diaryMock;
 }

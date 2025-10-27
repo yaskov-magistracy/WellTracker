@@ -1,0 +1,12 @@
+
+@mixin ionCardStyles() {
+  --ion-card-left-margin: 10px;
+  .ios {
+    --ion-card-left-margin: 16px;
+  }
+  ion-card-header {
+    ion-card-title {
+      font-weight: 400;
+    }
+  }
+}

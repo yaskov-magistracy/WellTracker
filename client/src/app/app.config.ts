@@ -4,12 +4,12 @@ import {IonicRouteStrategy} from "@ionic/angular/standalone";
 import {provideIonicAngular} from "@ionic/angular/standalone";
 import {routes} from "./app.routes";
 import * as echarts from 'echarts/core';
-import {PieChart} from "echarts/charts";
+import {BarChart, PieChart} from "echarts/charts";
 import {CanvasRenderer} from "echarts/renderers";
 import {provideEchartsCore} from "ngx-echarts";
-import {TitleComponent} from "echarts/components";
+import {GridComponent, TitleComponent} from "echarts/components";
 
-echarts.use([PieChart, CanvasRenderer, TitleComponent]);
+echarts.use([PieChart, BarChart, GridComponent, CanvasRenderer, TitleComponent]);
 
 export const appConfig: ApplicationConfig = {
   providers: [

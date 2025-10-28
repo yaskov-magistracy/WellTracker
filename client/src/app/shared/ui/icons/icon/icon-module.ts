@@ -11,7 +11,8 @@ export class IconModule {
   constructor() {
     addIcons({
       ...allIcons,
-      ai: 'assets/custom-icons/ai.svg'
+      ai: 'assets/custom-icons/ai.svg',
+      food: 'assets/custom-icons/food.svg'
     })
   }
 }

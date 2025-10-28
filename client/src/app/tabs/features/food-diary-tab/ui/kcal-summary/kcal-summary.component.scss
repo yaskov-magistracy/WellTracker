@@ -1,8 +1,11 @@
 :host {
-  .piesWrapper {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
+  .kcalCard {
+    margin-top: 0;
+    .piesWrapper {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
   }
   .kcalSection {
     display: flex;
@@ -10,13 +13,12 @@
     gap: 15px;
     &__text {
       text-align: center;
-      color: var(--ion-color-dark);
       font-weight: bold;
       font-size: 20px;
       flex-grow: 1;
       &-end {
         font-weight: normal;
-        font-size: 14px;
+        font-size: 16px;
       }
     }
     &__pie {

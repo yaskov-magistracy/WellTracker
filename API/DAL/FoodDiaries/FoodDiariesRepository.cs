@@ -82,7 +82,7 @@ public class FoodDiariesRepository(
                 entity.TotalEnergy.Kj += meal.Food.Energy.Kj * coef;
                 entity.TotalNutriments.Protein += meal.Food.Nutriments.Protein * coef;
                 entity.TotalNutriments.Fat += meal.Food.Nutriments.Fat * coef;
-                entity.TotalNutriments.Сarbohydrates += meal.Food.Nutriments.Сarbohydrates * coef;
+                entity.TotalNutriments.carbohydrates += meal.Food.Nutriments.carbohydrates * coef;
             }
         }
     }

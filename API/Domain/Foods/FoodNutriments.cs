@@ -3,6 +3,6 @@
 public record FoodNutriments(
     float Protein,
     float Fat,
-    float Сarbohydrates)
+    float carbohydrates)
 {
 }

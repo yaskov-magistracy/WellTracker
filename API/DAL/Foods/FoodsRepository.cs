@@ -66,8 +66,8 @@ public class FoodsRepository(
             food.Nutriments.Fat = updateEntity.Nutriments.Fat.Value;
         if (updateEntity.Nutriments?.Protein != null)
             food.Nutriments.Protein = updateEntity.Nutriments.Protein.Value;
-        if (updateEntity.Nutriments?.carbohydrates != null)
-            food.Nutriments.carbohydrates = updateEntity.Nutriments.carbohydrates.Value;
+        if (updateEntity.Nutriments?.Carbohydrates != null)
+            food.Nutriments.Carbohydrates = updateEntity.Nutriments.Carbohydrates.Value;
         if (updateEntity.Energy?.Kcal != null)
             food.Energy.Kcal = updateEntity.Energy.Kcal.Value;
         if (updateEntity.Energy?.Kj != null)

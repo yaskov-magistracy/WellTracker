@@ -21,7 +21,7 @@ public class FoodNutrimentsEntity
 {
     public float Protein { get; set; }
     public float Fat { get; set; }
-    public float carbohydrates { get; set; }
+    public float Carbohydrates { get; set; }
 }
 
 [Owned]

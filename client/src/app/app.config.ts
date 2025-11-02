@@ -19,6 +19,6 @@ export const appConfig: ApplicationConfig = {
     provideZonelessChangeDetection(),
     provideEchartsCore({ echarts }),
     provideHttpClient(),
-    provideRouter(routes, withPreloading(PreloadAllModules), withDebugTracing())
+    provideRouter(routes, withPreloading(PreloadAllModules))
   ]
 }

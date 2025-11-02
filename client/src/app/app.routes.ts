@@ -1,11 +1,13 @@
 import {Routes} from "@angular/router";
+import {isAuthorizedGuard} from "./shared/guards/is-authorized-guard";
+import {isUnauthorizedGuard} from "./shared/guards/is-unauthorized-guard";
 
 export const routes: Routes = [
   {
     path: '',
-    pathMatch: 'full',
-    redirectTo: 'auth',
+    canActivate: [isAuthorizedGuard],
     children: [
+      { path: '', redirectTo: 'tabs', pathMatch: 'full' },
       {
         path: 'tabs',
         loadComponent: () => import('./tabs/shell/tabs.page'),
@@ -15,6 +17,7 @@ export const routes: Routes = [
   },
   {
     path: 'auth',
-    loadChildren: () => import('./auth/shell/auth.routes')
+    loadChildren: () => import('./auth/shell/auth.routes'),
+    canActivate: [isUnauthorizedGuard],
   }
 ]

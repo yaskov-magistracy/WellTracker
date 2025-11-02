@@ -27,7 +27,6 @@ import {AccountService} from "../../data-access/account.service";
     IonInputPasswordToggle,
     IonButton,
     ReactiveFormsModule,
-    IonText,
     RouterLink,
     IonCard,
     IonCardContent,

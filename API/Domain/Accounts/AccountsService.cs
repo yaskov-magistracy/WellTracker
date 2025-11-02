@@ -9,8 +9,8 @@ namespace Domain.Accounts;
 
 public interface IAccountsService
 {
-    Task<Result<AccountService>> Login(AccountLoginRequest request);
-    Task<Result<AccountService>> GetByLogin(string login);
+    Task<Result<Account>> Login(AccountLoginRequest request);
+    Task<Result<Account>> GetByLogin(string login);
     Task<EmptyResult> ChangePassword(AccountChangePasswordRequest request);
 }
 
@@ -19,7 +19,7 @@ public class AccountsService(
     IUsersService usersService
 ) : IAccountsService
 {
-    public async Task<Result<AccountService>> Login(AccountLoginRequest request)
+    public async Task<Result<Account>> Login(AccountLoginRequest request)
     {
         var userResponse = await usersService.Login(request);
         if (userResponse.IsSuccess)
@@ -29,10 +29,10 @@ public class AccountsService(
         if (adminResponse.IsSuccess)
             return Results.Ok(ToAccount(adminResponse.Value));
         
-        return Results.BadRequest<AccountService>("Неправильный логин или пароль");
+        return Results.BadRequest<Account>("Неправильный логин или пароль");
     }
 
-    public async Task<Result<AccountService>> GetByLogin(string login)
+    public async Task<Result<Account>> GetByLogin(string login)
     {
         var userResponse = await usersService.GetByLogin(login);
         if (userResponse.IsSuccess)
@@ -42,7 +42,7 @@ public class AccountsService(
         if (adminResponse.IsSuccess)
             return Results.Ok(ToAccount(adminResponse.Value));
 
-        return Results.NotFound<AccountService>("Аккаунта с таким логином не существует");
+        return Results.NotFound<Account>("Аккаунта с таким логином не существует");
     }
 
     public async Task<EmptyResult> ChangePassword(AccountChangePasswordRequest request)
@@ -58,9 +58,9 @@ public class AccountsService(
         return EmptyResults.BadRequest("Неправильный логин или пароль");
     }
     
-    private AccountService ToAccount(Admin admin)
+    private Account ToAccount(Admin admin)
         => new(admin.Id, AccountRole.Admin, admin.Login, admin.HashedPassword);
 
-    private AccountService ToAccount(User user)
+    private Account ToAccount(User user)
         => new(user.Id, AccountRole.User, user.Login, user.HashedPassword);
 }

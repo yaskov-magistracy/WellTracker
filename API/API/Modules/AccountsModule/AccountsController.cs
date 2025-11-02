@@ -104,7 +104,7 @@ public class AccountsController(
         return NoContent();
     }
 
-    private ClaimsPrincipal BuildClaims(AccountService account)
+    private ClaimsPrincipal BuildClaims(Account account)
     {
         var claims = new List<Claim>
         {

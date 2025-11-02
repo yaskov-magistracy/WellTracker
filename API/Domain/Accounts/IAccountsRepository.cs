@@ -2,6 +2,6 @@
 
 public interface IAccountsRepository
 {
-    Task<Account> GetByLogin(string login);
+    Task<AccountService> GetByLogin(string login);
     Task<bool> Exists(string login);
 }

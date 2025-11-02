@@ -4,7 +4,7 @@ namespace DAL.Accounts;
 
 public class AccountsRepository : IAccountsRepository
 {
-    public Task<Account> GetByLogin(string login)
+    public Task<AccountService> GetByLogin(string login)
     {
         throw new NotImplementedException();
     }

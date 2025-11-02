@@ -4,11 +4,17 @@ export const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    redirectTo: 'tabs'
+    redirectTo: 'auth',
+    children: [
+      {
+        path: 'tabs',
+        loadComponent: () => import('./tabs/shell/tabs.page'),
+        loadChildren: () => import('./tabs/shell/tabs.routes')
+      },
+    ]
   },
   {
-    path: 'tabs',
-    loadComponent: () => import('./tabs/shell/tabs.page'),
-    loadChildren: () => import('./tabs/shell/tabs.routes')
-  },
+    path: 'auth',
+    loadChildren: () => import('./auth/shell/auth.routes')
+  }
 ]

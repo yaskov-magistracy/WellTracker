@@ -1,6 +1,6 @@
 ﻿namespace Domain.Accounts;
 
-public record class Account(
+public record class AccountService(
     Guid Id,
     AccountRole Role,
     string Login,

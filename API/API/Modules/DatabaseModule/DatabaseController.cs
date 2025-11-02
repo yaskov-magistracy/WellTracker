@@ -1,4 +1,5 @@
 ﻿using Domain.Database;
+using Domain.Database.DTO;
 using Domain.Database.FoodsFilling;
 using Microsoft.AspNetCore.Mvc;
 
@@ -18,15 +19,16 @@ public class DatabaseController(
     /// Пересоздаёт БД, чистит статические файлы
     /// </summary>
     /// <remarks>
-    /// Если поставлен флаг withAutoFilling: <br/> 
-    /// Создаёт дефолтного Админа - admin/admin. <br/>
-    /// Создаёт дефолтного Юзера - user/user. <br/>
-    /// Заполняет 100 продуктов из csv в репозитории
+    /// Параметры реквеста: <br/>
+    /// <strong>AutoFillingParams</strong>: <br/>
+    /// `OnlySimpleData` - Только Создаёт дефолтного Админа - admin/admin. Создаёт дефолтного Юзера - user/user. <br/>
+    /// `SomeRealData` - Дополнительно Заполняет 100 продуктов из csv в репозитории <br/>
+    /// `FullRealData` - Дополнительно Полностью заполняет БД данными из csv в репозитории <br/>
     /// </remarks>
     [HttpPost("recreate")]
-    public async Task<ActionResult> RecreateDatabase([FromQuery] bool withAutoFilling = true)
+    public async Task<ActionResult> RecreateDatabase([FromBody] RecreateDatabaseRequest request)
     {
-        var response = await databaseService.RecreateDatabase(withAutoFilling);
+        var response = await databaseService.RecreateDatabase(request);
         return response.ActionResult;
     }
     

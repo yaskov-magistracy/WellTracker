@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace DAL.Foods;
 
-public class FoodEntityConfiguration : IEntityTypeConfiguration<FoodEntity>
+internal class FoodEntityConfiguration : IEntityTypeConfiguration<FoodEntity>
 {
     public void Configure(EntityTypeBuilder<FoodEntity> builder)
     {

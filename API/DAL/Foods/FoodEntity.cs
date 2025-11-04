@@ -5,7 +5,7 @@ using NpgsqlTypes;
 
 namespace DAL.Foods;
 
-public class FoodEntity
+internal class FoodEntity
 {
     [Key] public Guid Id { get; set; }
     [JsonIgnore] public NpgsqlTsVector SearchVector { get; set; }
@@ -17,7 +17,7 @@ public class FoodEntity
 }
 
 [Owned]
-public class FoodNutrimentsEntity
+internal class FoodNutrimentsEntity
 {
     public float Protein { get; set; }
     public float Fat { get; set; }

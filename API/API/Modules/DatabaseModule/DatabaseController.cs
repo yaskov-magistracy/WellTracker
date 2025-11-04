@@ -11,8 +11,7 @@ namespace API.Modules.DatabaseModule;
 [Route("api/[controller]")]
 [ApiController]
 public class DatabaseController(
-    IDatabaseService databaseService,
-    IDatabaseFoodsFiller databaseFoodsFiller
+    IDatabaseService databaseService
 ) : ControllerBase
 {
     /// <summary>
@@ -22,7 +21,7 @@ public class DatabaseController(
     /// Параметры реквеста: <br/>
     /// <strong>AutoFillingParams</strong>: <br/>
     /// `OnlySimpleData` - Только Создаёт дефолтного Админа - admin/admin. Создаёт дефолтного Юзера - user/user. <br/>
-    /// `SomeRealData` - Дополнительно Заполняет 100 продуктов из csv в репозитории <br/>
+    /// `SomeRealData` - Дополнительно Заполняет 100 продуктов/упражнений из csv в репозитории <br/>
     /// `FullRealData` - Дополнительно Полностью заполняет БД данными из csv в репозитории <br/>
     /// </remarks>
     [HttpPost("recreate")]
@@ -39,7 +38,7 @@ public class DatabaseController(
     public async Task<ActionResult> AddFullFoods()
     {
         // TODO: Добавить чистку перед добавлением?
-        await databaseFoodsFiller.FillFromRepo();
+        await databaseService.FillFromRepo();
         return NoContent();
     }
 }

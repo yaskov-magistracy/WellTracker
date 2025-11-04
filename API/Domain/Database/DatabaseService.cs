@@ -2,6 +2,7 @@
 using Domain.Accounts.Users;
 using Domain.Database.DTO;
 using Domain.Database.FoodsFilling;
+using Domain.Database.Helpers;
 using Domain.StaticFiles;
 using Infrastructure;
 using Infrastructure.Results;
@@ -11,6 +12,10 @@ namespace Domain.Database;
 public interface IDatabaseService
 {
     Task<EmptyResult> RecreateDatabase(RecreateDatabaseRequest request);
+    
+    Task FillFromRepo(
+        int? maxEntities = null,
+        int maxInChunk = 20);
 }
 
 public class DatabaseService(
@@ -18,7 +23,8 @@ public class DatabaseService(
     IStaticFilesCleaner staticFilesCleaner,
     IAdminsService adminsService,
     IUsersService usersService,
-    IDatabaseFoodsFiller databaseFoodsFiller
+    IDatabaseFoodsFiller databaseFoodsFiller,
+    IDatabaseExercisesFiller databaseExercisesFiller
 ) : IDatabaseService
 {
     public async Task<EmptyResult> RecreateDatabase(RecreateDatabaseRequest request)
@@ -32,6 +38,7 @@ public class DatabaseService(
             if (request.AutoFillingParams == AutoFillingParams.SomeRealData)
             {
                 await databaseFoodsFiller.FillFromRepo(100);
+                await databaseExercisesFiller.FillFromRepo(100);
             }
             if (request.AutoFillingParams == AutoFillingParams.FullRealData)
             {
@@ -45,4 +52,7 @@ public class DatabaseService(
 
         return EmptyResults.NoContent();
     }
+
+    public Task FillFromRepo(int? maxEntities = null, int maxInChunk = 20)
+        => databaseFoodsFiller.FillFromRepo();
 }

@@ -22,6 +22,5 @@ export class AppComponent {
       ...allIcons,
 
     })
-    fetch('/api/accounts/session');
   }
 }

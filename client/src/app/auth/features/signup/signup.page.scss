@@ -1,0 +1,28 @@
+:host {
+  .wrapper {
+    height: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .card {
+      width: 100%;
+      padding-top: 15px;
+      max-width: 600px;
+      .form {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        height: 60%;
+        gap: 10px;
+        padding-top: 5px;
+        &__input, &__submitBtn, &__select {
+          width: 90%;
+        }
+        &__loginBtn {
+          margin-top: -10px;
+        }
+      }
+    }
+  }
+}

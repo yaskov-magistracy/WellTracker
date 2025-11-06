@@ -7,7 +7,3 @@ public record FoodDiaryUpdateEntity(
     ICollection<EatenFoodUpdateEntity>? Dinner
 );
 
-public record EatenFoodUpdateEntity(
-    Guid FoodId,
-    int Grams
-);

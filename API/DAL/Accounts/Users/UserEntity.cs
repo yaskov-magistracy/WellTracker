@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using DAL.ExerciseDiaries;
 using DAL.FoodDiaries;
 
 namespace DAL.Accounts.Users;
@@ -14,6 +15,7 @@ internal class UserEntity
     public UserTargetEntity Target { get; set; }
     
     public ICollection<FoodDiaryEntity> FoodDiaries { get; set; }
+    public ICollection<ExerciseDiaryEntity> ExerciseDiaries { get; set; }
 }
 
 public enum UserGenderEntity

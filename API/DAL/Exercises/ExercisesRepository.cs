@@ -1,5 +1,4 @@
-﻿using DAL.Exercises.Models;
-using Domain.Exercises;
+﻿using Domain.Exercises;
 using Domain.Exercises.DTO;
 using Microsoft.EntityFrameworkCore;
 

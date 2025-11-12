@@ -9,6 +9,7 @@ import {
 import {KcalSummaryComponent} from "./ui/kcal-summary/kcal-summary.component";
 import {TodayMealsComponent} from "./ui/today-meals/today-meals.component";
 import {diaryMock} from "./mocks/diary";
+import {DiaryStatisticComponent} from "./ui/diary-statistic/diary-statistic.component";
 
 @Component({
   selector: 'app-main-tab',
@@ -22,7 +23,8 @@ import {diaryMock} from "./mocks/diary";
     KcalSummaryComponent,
     IonButtons,
     IonMenuButton,
-    TodayMealsComponent
+    TodayMealsComponent,
+    DiaryStatisticComponent
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })

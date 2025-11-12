@@ -3,8 +3,8 @@ import {IonCard, IonCardContent} from "@ionic/angular/standalone";
 import {NgxEchartsDirective} from "ngx-echarts";
 import {
   createFoodEnergyPieChartSettings,
-} from "./charts/create-food-energy-pie-chart-settings";
-import {createNutrientsPieChartSettings} from "./charts/create-nutrients-pie-chart-settings";
+} from "./charts-options/create-food-energy-pie-chart-settings";
+import {createNutrientsPieChartSettings} from "./charts-options/create-nutrients-pie-chart-settings";
 
 @Component({
   selector: 'app-kcal-summary',

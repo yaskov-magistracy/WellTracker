@@ -2,7 +2,7 @@ import {ChangeDetectionStrategy, Component, computed, CUSTOM_ELEMENTS_SCHEMA, in
 import {IonButton, IonCard, IonCardContent, IonCardHeader, IonCardTitle, IonIcon} from "@ionic/angular/standalone";
 import {FoodDiary} from "../../types/FoodDiary";
 import {diaryToMealArrayView} from "../../utils/diary-to-meal-array-view";
-import {createFoodEnergyProgressBarSettings} from "./charts/create-food-energy-progress-bar-settings";
+import {createFoodEnergyProgressBarSettings} from "./charts-options/create-food-energy-progress-bar-settings";
 import {NgxEchartsDirective} from "ngx-echarts";
 
 @Component({

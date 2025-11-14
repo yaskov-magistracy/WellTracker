@@ -6,10 +6,11 @@ import {
   IonTitle,
   IonToolbar
 } from "@ionic/angular/standalone";
-import {KcalSummaryComponent} from "./ui/kcal-summary/kcal-summary.component";
-import {TodayMealsComponent} from "./ui/today-meals/today-meals.component";
+import {KcalSummaryComponent} from "./components/kcal-summary/kcal-summary.component";
+import {TodayMealsComponent} from "./components/today-meals/today-meals.component";
 import {diaryMock} from "./mocks/diary";
-import {DiaryStatisticComponent} from "./ui/diary-statistic/diary-statistic.component";
+import {DiaryStatisticComponent} from "./components/diary-statistic/diary-statistic.component";
+import {WeightTableComponent} from "./components/weight-table/weight-table.component";
 
 @Component({
   selector: 'app-main-tab',
@@ -24,7 +25,8 @@ import {DiaryStatisticComponent} from "./ui/diary-statistic/diary-statistic.comp
     IonButtons,
     IonMenuButton,
     TodayMealsComponent,
-    DiaryStatisticComponent
+    DiaryStatisticComponent,
+    WeightTableComponent
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })

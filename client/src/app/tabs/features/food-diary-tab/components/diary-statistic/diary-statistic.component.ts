@@ -3,6 +3,9 @@ import {
   WeightStatisticAxisChartComponent
 } from "./charts/weight-statistic-axis-chart/weight-statistic-axis-chart.component";
 import {KcalStatisticBarChartComponent} from "./charts/kcal-statistic-bar-chart/kcal-statistic-bar-chart.component";
+import {
+  NutrientStatisticPieChartComponent
+} from "./charts/nutrients-statistic-pie-chart/nutrients-statistic-pie-chart.component";
 @Component({
   selector: 'app-diary-statistic',
   templateUrl: './diary-statistic.component.html',
@@ -10,7 +13,8 @@ import {KcalStatisticBarChartComponent} from "./charts/kcal-statistic-bar-chart/
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
     WeightStatisticAxisChartComponent,
-    KcalStatisticBarChartComponent
+    KcalStatisticBarChartComponent,
+    NutrientStatisticPieChartComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

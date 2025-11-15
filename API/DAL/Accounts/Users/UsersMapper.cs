@@ -13,21 +13,13 @@ internal static class UsersMapper
             ToDomain(entity.Gender),
             entity.Weight,
             entity.Height,
-            ToDomain(entity.Target)
+            entity.TargetWeight
         );
 
     private static UserGender ToDomain(UserGenderEntity entity) => entity switch
     {
         UserGenderEntity.Male => UserGender.Male,
         UserGenderEntity.Female => UserGender.Female,
-        _ => throw new ArgumentOutOfRangeException(nameof(entity), entity, null),
-    };
-    
-    private static UserTarget ToDomain(UserTargetEntity entity) => entity switch
-    {
-        UserTargetEntity.LossWeight => UserTarget.LossWeight,
-        UserTargetEntity.KeepWeight => UserTarget.KeepWeight,
-        UserTargetEntity.GainWeight => UserTarget.GainWeight,
         _ => throw new ArgumentOutOfRangeException(nameof(entity), entity, null),
     };
 
@@ -39,20 +31,13 @@ internal static class UsersMapper
             Gender = ToEntity(createEntity.Gender),
             Weight = createEntity.Weight,
             Height = createEntity.Height,
-            Target =ToEntity(createEntity.Target),
+            TargetWeight = createEntity.TargetWeight,
         };
 
     public static UserGenderEntity ToEntity(UserGender createEntity) => createEntity switch
     {
         UserGender.Male => UserGenderEntity.Male,
         UserGender.Female => UserGenderEntity.Female,
-        _ => throw new ArgumentOutOfRangeException(nameof(createEntity), createEntity, null),
-    };
-    
-    public static UserTargetEntity ToEntity(UserTarget createEntity) => createEntity switch
-    {
-        UserTarget.LossWeight => UserTargetEntity.LossWeight,
-        UserTarget.KeepWeight => UserTargetEntity.KeepWeight,
         _ => throw new ArgumentOutOfRangeException(nameof(createEntity), createEntity, null),
     };
 }

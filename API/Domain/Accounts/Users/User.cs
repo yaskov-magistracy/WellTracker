@@ -7,18 +7,11 @@ public record User(
     UserGender Gender,
     float Weight,
     int Height,
-    UserTarget Target
+    float TargetWeight
 );
 
 public enum UserGender
 {
     Male,
     Female,
-}
-
-public enum UserTarget
-{
-    LossWeight,
-    KeepWeight,
-    GainWeight,
 }

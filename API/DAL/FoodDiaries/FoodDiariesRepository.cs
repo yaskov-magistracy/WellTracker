@@ -19,7 +19,24 @@ public class FoodDiariesRepository(
             ? FoodDiariesMapper.ToDomain(entity)
             : null;
     }
-    
+
+    public async Task<FoodDiary[]> GetByRange(Guid userId, DateOnly from, DateOnly to)
+    {
+        var result = new List<FoodDiary>();
+        var curDate = from;
+        while (curDate <= to)
+        {
+            var foodDiary = await GetByDate(userId, curDate);
+            curDate = curDate.AddDays(1);
+            if (foodDiary == null)
+                continue;
+            
+            result.Add(foodDiary);
+        }
+
+        return result.ToArray();
+    }
+
     public async Task<bool> Exists(Guid userId, DateOnly date)
     {
         var entity = await GetByDateInternal(userId, date);

@@ -1,11 +1,10 @@
 import {FoodDiary} from "../types/FoodDiary";
-import {FoodDiarySimplified} from "../types/FoodDiarySimplified";
 
-export function diaryToMealArrayView (diary: FoodDiary): FoodDiarySimplified[] {
+export function diaryToMealArrayView(diary: FoodDiary) {
   return [
-    { name: 'Завтрак', kcalConsumed: 800 },
-    { name: 'Обед', kcalConsumed: 576 },
-    { name: 'Перекус', kcalConsumed: 400 },
-    { name: 'Ужин', kcalConsumed: 1000 }
+    {...diary.breakfast, name: 'Завтрак' },
+    {...diary.lunch, name: 'Перекус' },
+    {...diary.snack, name: 'Обед' },
+    {...diary.dinner, name: 'Ужин' },
   ];
 }

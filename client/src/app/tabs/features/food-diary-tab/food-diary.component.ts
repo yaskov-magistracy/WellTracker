@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, signal} from '@angular/core';
+import {ChangeDetectionStrategy, Component, inject, signal} from '@angular/core';
 import {
   IonButtons,
   IonContent,
@@ -11,6 +11,8 @@ import {TodayMealsComponent} from "./components/today-meals/today-meals.componen
 import {diaryMock} from "./mocks/diary";
 import {DiaryStatisticComponent} from "./components/diary-statistic/diary-statistic.component";
 import {WeightTableComponent} from "./components/weight-table/weight-table.component";
+import {FoodDiaryService} from "./services/food-diary.service";
+import {AsyncPipe} from "@angular/common";
 
 @Component({
   selector: 'app-main-tab',
@@ -26,23 +28,16 @@ import {WeightTableComponent} from "./components/weight-table/weight-table.compo
     IonMenuButton,
     TodayMealsComponent,
     DiaryStatisticComponent,
-    WeightTableComponent
+    WeightTableComponent,
+    AsyncPipe
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export default class FoodDiaryComponent {
 
-  protected kcalRequired = signal(3708);
-  protected kcalConsumed = signal(2144);
-  protected kcalBurnt = signal(908);
+  private _foodDiaryS = inject(FoodDiaryService);
 
-  protected fatRequired = signal(130);
-  protected fatConsumed = signal(94);
+  todayFoodDiary$ = this._foodDiaryS.getFoodDiaryByDate$(new Date().toLocaleDateString());
 
-  protected proteinRequired = signal(80);
-  protected proteinConsumed = signal(94);
-
-  protected carbsRequired = signal(450);
-  protected carbsConsumed = signal(173);
   protected readonly diaryMock = diaryMock;
 }

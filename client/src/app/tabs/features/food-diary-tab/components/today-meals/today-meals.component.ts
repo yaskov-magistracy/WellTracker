@@ -26,5 +26,11 @@ export class TodayMealsComponent {
   diary = input.required<FoodDiary>();
   mealsArray = computed(() => diaryToMealArrayView(this.diary()));
 
-  todayMealsKcalProgressBarSettings = createFoodEnergyProgressBarSettings({ required: 1000, consumed: 500 });
+  todayMealsKcalProgressBarSettings = computed(() => {
+    const mealsArray = this.mealsArray();
+    return mealsArray.map(meal => createFoodEnergyProgressBarSettings({
+      consumed: meal.totalEnergy.kcal,
+      required: 1000
+    }))
+  });
 }

@@ -1,6 +1,9 @@
-import {Food} from "./Food";
+import {EatenFood} from "./EatenFood";
+import {FoodNutriments} from "./FoodNutriments";
+import {FoodEnergy} from "./FoodEnergy";
 
 export type FoodMeal = {
-  food: Food;
-  grams: number;
+  eatenFoods: EatenFood[];
+  totalNutriments: FoodNutriments;
+  totalEnergy: FoodEnergy;
 }

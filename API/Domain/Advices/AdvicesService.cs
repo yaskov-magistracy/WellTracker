@@ -6,6 +6,7 @@ namespace Domain.Advices;
 
 public interface IAdvicesService
 {
+    Task<(FoodEnergy, FoodNutriments)> GetTargets(Guid userId);
     Task<(FoodEnergy, string[])> GetTargetAndAdvice(Guid userId, ICollection<NutrimentsRecord> records);
 }
 
@@ -13,6 +14,12 @@ public class AdvicesService(
     IUsersService usersService
 ) : IAdvicesService
 {
+    public async Task<(FoodEnergy, FoodNutriments)> GetTargets(Guid userId)
+    {
+        var user = (await usersService.GetById(userId)).Value;
+        return GetTargets(user);
+    }
+
     public async Task<(FoodEnergy, string[])> GetTargetAndAdvice(Guid userId, ICollection<NutrimentsRecord> records)
     {
         var user = (await usersService.GetById(userId)).Value;
@@ -26,7 +33,7 @@ public class AdvicesService(
         );
     }
 
-    private (FoodEnergy, FoodNutriments) GetTargets(User user)
+    private  (FoodEnergy, FoodNutriments) GetTargets(User user)
     {
         var targetKcal = user.Gender == UserGender.Male
             ? (15*user.TargetWeight) + (7*user.Height)

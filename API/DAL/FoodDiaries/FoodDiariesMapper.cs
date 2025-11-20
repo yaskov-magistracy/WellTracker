@@ -12,7 +12,9 @@ internal static class FoodDiariesMapper
             entity.Snack == null ? null : ToDomain(entity.Snack),
             entity.Dinner == null ? null : ToDomain(entity.Dinner),
             FoodsMapper.ToDomain(entity.TotalNutriments), 
-            FoodsMapper.ToDomain(entity.TotalEnergy));
+            FoodsMapper.ToDomain(entity.TotalEnergy),
+            null,
+            null);
 
     public static Meal ToDomain(MealEntity entity)
         => new(

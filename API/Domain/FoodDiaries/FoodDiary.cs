@@ -11,7 +11,9 @@ public record FoodDiary(
     Meal? Snack,
     Meal? Dinner,
     FoodNutriments TotalNutriments,
-    FoodEnergy TotalEnergy
+    FoodEnergy TotalEnergy,
+    FoodNutriments TargetNutriments,
+    FoodEnergy TargetEnergy
 );
 
 public record Meal(

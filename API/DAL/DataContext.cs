@@ -6,6 +6,7 @@ using DAL.Exercises;
 using DAL.FoodDiaries;
 using DAL.Foods;
 using DAL.StaticFiles;
+using DAL.Statistics.Weight;
 using Infrastructure.Config;
 using Microsoft.EntityFrameworkCore;
 
@@ -36,4 +37,5 @@ public class DataContext(
     internal DbSet<ExerciseEntity> Exercises => Set<ExerciseEntity>();
     internal DbSet<ExerciseDiaryEntity> ExerciseDiaries => Set<ExerciseDiaryEntity>();
     internal DbSet<StaticFileEntity> StaticFiles => Set<StaticFileEntity>();
+    internal DbSet<WeightRecordEntity> WeightRecords => Set<WeightRecordEntity>();
 }

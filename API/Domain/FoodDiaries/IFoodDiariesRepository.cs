@@ -5,6 +5,7 @@ namespace Domain.FoodDiaries;
 public interface IFoodDiariesRepository
 {
     Task<FoodDiary?> GetByDate(Guid userId, DateOnly date);
+    Task<FoodDiary[]> GetByRange(Guid userId, DateOnly from, DateOnly to);
     Task<bool> Exists(Guid userId, DateOnly date);
     Task<FoodDiary> CreateOrUpdate(Guid userId, DateOnly date, FoodDiaryUpdateEntity updateEntity);
 }

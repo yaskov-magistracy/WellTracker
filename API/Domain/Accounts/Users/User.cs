@@ -7,8 +7,19 @@ public record User(
     UserGender Gender,
     float Weight,
     int Height,
-    UserTarget Target
-);
+    float TargetWeight
+)
+{
+    public UserTargetType GetTargetType()
+    {
+        if (TargetWeight > Weight)
+            return UserTargetType.Gain;
+        if (TargetWeight < Weight)
+            return UserTargetType.Lose;
+
+        return UserTargetType.Keep;
+    }
+}
 
 public enum UserGender
 {
@@ -16,9 +27,9 @@ public enum UserGender
     Female,
 }
 
-public enum UserTarget
+public enum UserTargetType
 {
-    LossWeight,
-    KeepWeight,
-    GainWeight,
+    Gain,
+    Keep,
+    Lose,
 }

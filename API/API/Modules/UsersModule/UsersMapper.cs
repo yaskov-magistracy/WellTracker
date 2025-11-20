@@ -7,7 +7,7 @@ namespace API.Modules.UsersModule;
 internal static class UsersMapper
 {
     public static UserInfoApiResponse ToApiResponse(User user)
-        => new(user.Gender, user.Weight, user.Height, user.Target);
+        => new(user.Gender, user.Weight, user.Height, user.TargetWeight);
 
     public static UserUpdateEntity ToDomain(UserInfoPatchRequest request)
         => new()
@@ -15,6 +15,6 @@ internal static class UsersMapper
             Gender = request.Gender,
             Weight = request.Weight,
             Height = request.Height,
-            Target = request.Target,
+            TargetWeight = request.TargetWeight,
         };
 }

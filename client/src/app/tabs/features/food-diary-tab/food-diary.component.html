@@ -1,4 +1,6 @@
 
+@let todayFoodDiary = todayFoodDiary$ | async;
+
   <ion-header [translucent]="true">
     <ion-toolbar [color]="'primary'">
       <ion-buttons slot="start">
@@ -13,19 +15,22 @@
   <ion-content [fullscreen]="true">
     <section class="kcalAndNutrientsSection">
       <h2 class="kcalAndNutrientsSection__title">Итоги дня</h2>
-      <app-kcal-summary
-        [kcalRequired]="kcalRequired()"
-        [kcalConsumed]="kcalConsumed()"
-        [kcalBurnt]="kcalBurnt()"
-        [fatRequired]="fatRequired()"
-        [fatConsumed]="fatConsumed()"
-        [proteinRequired]="proteinRequired()"
-        [proteinConsumed]="proteinConsumed()"
-        [carbsRequired]="carbsRequired()"
-        [carbsConsumed]="carbsConsumed()"
-      ></app-kcal-summary>
-
-      <app-today-meals [diary]="diaryMock"></app-today-meals>
+      @if (todayFoodDiary) {
+        <app-kcal-summary
+          [kcalRequired]="3708"
+          [kcalConsumed]="todayFoodDiary.totalEnergy.kcal"
+          [kcalBurnt]="908"
+          [fatRequired]="130"
+          [fatConsumed]="todayFoodDiary.totalNutriments.fat"
+          [proteinRequired]="80"
+          [proteinConsumed]="todayFoodDiary.totalNutriments.protein"
+          [carbsRequired]="450"
+          [carbsConsumed]="todayFoodDiary.totalNutriments.carbohydrates"
+        ></app-kcal-summary>
+        <app-today-meals [diary]="todayFoodDiary"></app-today-meals>
+      } @else {
+        Loading
+      }
 
       <app-diary-statistic></app-diary-statistic>
 

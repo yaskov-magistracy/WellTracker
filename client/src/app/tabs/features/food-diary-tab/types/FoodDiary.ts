@@ -6,10 +6,10 @@ export type FoodDiary = {
   id: string;
   userId: string;
   date: string;
-  breakfast: FoodMeal[];
-  lunch: FoodMeal[];
-  snack: FoodMeal[];
-  dinner: FoodMeal[];
+  breakfast: FoodMeal;
+  lunch: FoodMeal;
+  snack: FoodMeal;
+  dinner: FoodMeal;
   totalNutriments: FoodNutriments;
   totalEnergy: FoodEnergy;
 }

@@ -15,11 +15,12 @@
           <div class="card__content-title">
             <ion-icon class="card__content-title__foodIcon" name="food"></ion-icon>
             <span class="card__content-title__count secondary">
-              {{ meal.kcalConsumed }}
-              <span class="card__content-title__count-required tertiary">/800 ккал.</span>
+              {{ meal.totalEnergy.kcal }}
+              <span class="card__content-title__count-required tertiary">/1000 ккал.</span>
             </span>
           </div>
-          <div class="card__content-bar" echarts [options]="todayMealsKcalProgressBarSettings"></div>
+          @let mealsKcalProgressBarSettings = todayMealsKcalProgressBarSettings()[$index];
+          <div class="card__content-bar" echarts [options]="mealsKcalProgressBarSettings"></div>
         </ion-card-content>
       </ion-card>
     </swiper-slide>

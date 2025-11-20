@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using DAL.Chats;
 using DAL.ExerciseDiaries;
 using DAL.FoodDiaries;
 using DAL.Statistics.Weight;
@@ -18,6 +19,7 @@ internal class UserEntity
     public ICollection<FoodDiaryEntity> FoodDiaries { get; set; }
     public ICollection<ExerciseDiaryEntity> ExerciseDiaries { get; set; }
     public ICollection<WeightRecordEntity> WeightHistory { get; set; }
+    public ICollection<ChatEntity> Chats { get; set; }
 }
 
 public enum UserGenderEntity

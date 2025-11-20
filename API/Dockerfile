@@ -1,8 +1,16 @@
-﻿FROM mcr.microsoft.com/dotnet/aspnet:9.0 AS base
+﻿# Используем отдельный stage для сертификатов для лучшего кэширования
+FROM mcr.microsoft.com/dotnet/aspnet:9.0 AS certs-base
+RUN apt-get update && \
+    apt-get install -y curl && \
+    curl -k "https://gu-st.ru/content/Other/doc/russian_trusted_root_ca.cer" >> /etc/ssl/certs/ca-certificates.crt
+
+FROM mcr.microsoft.com/dotnet/aspnet:9.0 AS base
 USER $APP_UID
 WORKDIR /app
 EXPOSE 8080
 EXPOSE 8081
+# Копируем обновленные сертификаты из certs-base
+COPY --from=certs-base /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/ca-certificates.crt
 
 # Запускать из родительской папки всех солюшенов (Докер не может работать с папками выше самого себя)
 FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build

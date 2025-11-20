@@ -1,6 +1,7 @@
 ﻿using System.Reflection;
 using DAL.Accounts.Admins;
 using DAL.Accounts.Users;
+using DAL.Chats;
 using DAL.ExerciseDiaries;
 using DAL.Exercises;
 using DAL.FoodDiaries;
@@ -38,4 +39,6 @@ public class DataContext(
     internal DbSet<ExerciseDiaryEntity> ExerciseDiaries => Set<ExerciseDiaryEntity>();
     internal DbSet<StaticFileEntity> StaticFiles => Set<StaticFileEntity>();
     internal DbSet<WeightRecordEntity> WeightRecords => Set<WeightRecordEntity>();
+    internal DbSet<ChatEntity> Chats => Set<ChatEntity>();
+    internal DbSet<ChatMessageEntity> ChatMessages => Set<ChatMessageEntity>();
 }

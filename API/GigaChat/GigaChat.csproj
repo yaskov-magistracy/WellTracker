@@ -7,12 +7,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.9" />
-      <PackageReference Include="Swashbuckle.AspNetCore" Version="9.0.4" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <ProjectReference Include="..\GigaChat\GigaChat.csproj" />
+      <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
     </ItemGroup>
 
 </Project>

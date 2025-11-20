@@ -34,7 +34,7 @@ jobs:
           cd deploy
 
           sudo echo -e \
-            "POSTGRES_USER = ${{ secrets.POSTGRES_USER }}\nPOSTGRES_PASSWORD = ${{ secrets.POSTGRES_PASSWORD }}"\
+            "POSTGRES_USER = ${{ secrets.POSTGRES_USER }}\nPOSTGRES_PASSWORD = ${{ secrets.POSTGRES_PASSWORD }}\nGIGACHAT_AUTHORIZATION_KEY = ${{ secrets.GIGACHAT_AUTHORIZATION_KEY }}\nGIGACHAT_SCOPE = ${{ secrets.GIGACHAT_SCOPE }}"\
             > docker-env-secrets
           sudo sh copy-env.sh
 

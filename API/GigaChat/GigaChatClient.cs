@@ -1,0 +1,56 @@
+﻿using System.Net.Http.Json;
+using System.Text;
+using GigaChat.Completions.Request;
+using GigaChat.Completions.Response;
+using GigaChat.Oauth;
+using Newtonsoft.Json;
+
+namespace GigaChat;
+
+public interface IGigaChatClient
+{
+    Task<GigaChatCompletionsResponse> Completions(GigaChatCompletionsRequest request);
+}
+
+public class GigaChatClient(
+    string AuthorizationKey, 
+    GigaChatScope Scope
+) : IGigaChatClient
+{
+    private readonly GigaChatOauthProvider oauthProvider = new(AuthorizationKey, Scope);
+    private readonly HttpClient httpClient = new();
+    private const string Model = "GigaChat-2";
+    private const string BaseUrl = "https://gigachat.devices.sberbank.ru/api/v1";
+
+    public async Task<GigaChatCompletionsResponse> Completions(GigaChatCompletionsRequest request)
+        => await Post<GigaChatCompletionsResponse>(
+            "/chat/completions", 
+            new StringContent(JsonConvert.SerializeObject(request), Encoding.UTF8, "application/json"));
+    
+    
+    private Task<T> Get<T>(string urlPostfix)
+        => SendRequest<T>(HttpMethod.Get, urlPostfix);
+
+    private Task<T> Post<T>(string urlPostfix, HttpContent? content)
+        => SendRequest<T>(HttpMethod.Post, urlPostfix, content);
+
+    private async Task<TResponse> SendRequest<TResponse>(
+        HttpMethod method,
+        string urlPostfix,
+        HttpContent? body = null)
+    {
+        var accessToken = await oauthProvider.GetAccessToken();
+        var request = new HttpRequestMessage(method, $"{BaseUrl}{urlPostfix}");
+        request.Headers.Add("Authorization", $"Bearer {accessToken}");
+        request.Headers.Add("Accept", "application/json");
+        request.Content = body;
+        
+        var response = await httpClient.SendAsync(request);
+        response.EnsureSuccessStatusCode();
+        var result = await response.Content.ReadFromJsonAsync<TResponse>();
+        if (result is null)
+            throw new Exception($"Invalid response. Url: {urlPostfix}");
+        
+        return result;
+    }
+}

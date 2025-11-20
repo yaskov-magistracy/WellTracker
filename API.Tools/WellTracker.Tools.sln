@@ -8,6 +8,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FoodsParserV2", "FoodsParse
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "..\API\Domain\Domain.csproj", "{F298ED87-B642-436C-A5A9-28C3E9304A98}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExercisesParser", "ExercisesParser\ExercisesParser.csproj", "{2A65F126-18AB-4211-8A73-7AB5EF62576B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,5 +32,9 @@ Global
 		{F298ED87-B642-436C-A5A9-28C3E9304A98}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F298ED87-B642-436C-A5A9-28C3E9304A98}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F298ED87-B642-436C-A5A9-28C3E9304A98}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2A65F126-18AB-4211-8A73-7AB5EF62576B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2A65F126-18AB-4211-8A73-7AB5EF62576B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2A65F126-18AB-4211-8A73-7AB5EF62576B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2A65F126-18AB-4211-8A73-7AB5EF62576B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

@@ -51,8 +51,8 @@ public class UsersRepository(
             user.Weight = updateEntity.Weight.Value;
         if (updateEntity.Height != null)
             user.Height = updateEntity.Height.Value;
-        if (updateEntity.Target != null)
-            user.Target = UsersMapper.ToEntity(updateEntity.Target.Value);
+        if (updateEntity.TargetWeight != null)
+            user.TargetWeight = updateEntity.TargetWeight.Value;
         
         await dataContext.SaveChangesAsync();
         return UsersMapper.ToDomain(user);

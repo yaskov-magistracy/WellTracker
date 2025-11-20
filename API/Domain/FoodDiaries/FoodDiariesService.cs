@@ -1,4 +1,5 @@
-﻿using Domain.FoodDiaries.DTO;
+﻿using Domain.Advices;
+using Domain.FoodDiaries.DTO;
 using Infrastructure.Results;
 
 namespace Domain.FoodDiaries;
@@ -10,7 +11,8 @@ public interface IFoodDiariesService
 }
 
 public class FoodDiariesService(
-    IFoodDiariesRepository foodDiariesRepository
+    IFoodDiariesRepository foodDiariesRepository,
+    IAdvicesService advicesService
 ) : IFoodDiariesService
 {
 
@@ -19,6 +21,9 @@ public class FoodDiariesService(
         var foodDiary = await foodDiariesRepository.GetByDate(userId, date);
         if (foodDiary == null)
             return Results.NotFound<FoodDiary>("");
+
+        var (targetEnergy, targetNutriments) = await advicesService.GetTargets(userId);
+        foodDiary = foodDiary with {TargetNutriments = targetNutriments, TargetEnergy = targetEnergy};
         
         return Results.Ok(foodDiary);
     }

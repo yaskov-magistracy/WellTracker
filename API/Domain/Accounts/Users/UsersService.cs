@@ -1,5 +1,6 @@
 ﻿using Domain.Accounts.DTO;
 using Domain.Accounts.Users.DTO;
+using Domain.Statistics.Weight;
 using Infrastructure.Results;
 
 namespace Domain.Accounts.Users;
@@ -16,7 +17,8 @@ public interface IUsersService
 
 public class UsersService(
     IUsersRepository usersRepository,
-    IPasswordHasher passwordHasher
+    IPasswordHasher passwordHasher,
+    IWeightRecordsRepository weightRecordsRepository
 ) : IUsersService
 {
     public async Task<Result<User>> Login(AccountLoginRequest request)
@@ -61,7 +63,8 @@ public class UsersService(
             request.Gender,
             request.Weight,
             request.Height,
-            request.Target));
+            request.TargetWeight));
+        await weightRecordsRepository.AddOrUpdate(newUser.Id, request.Weight, DateOnly.FromDateTime(DateTime.UtcNow));
         return Results.Ok(newUser);
     }
 
@@ -89,6 +92,10 @@ public class UsersService(
         if (existed == null)
             return Results.NotFound<User>("Пользователя с таким логином не существует");
 
+        if (request.Weight != null)
+        {
+            await weightRecordsRepository.AddOrUpdate(userId, request.Weight.Value, DateOnly.FromDateTime(DateTime.UtcNow));
+        }
         var updated = await usersRepository.Update(
             existed.Id,
             request);

@@ -19,7 +19,24 @@ public class FoodDiariesRepository(
             ? FoodDiariesMapper.ToDomain(entity)
             : null;
     }
-    
+
+    public async Task<FoodDiary[]> GetByRange(Guid userId, DateOnly from, DateOnly to)
+    {
+        var result = new List<FoodDiary>();
+        var curDate = from;
+        while (curDate <= to)
+        {
+            var foodDiary = await GetByDate(userId, curDate);
+            curDate = curDate.AddDays(1);
+            if (foodDiary == null)
+                continue;
+            
+            result.Add(foodDiary);
+        }
+
+        return result.ToArray();
+    }
+
     public async Task<bool> Exists(Guid userId, DateOnly date)
     {
         var entity = await GetByDateInternal(userId, date);
@@ -52,38 +69,63 @@ public class FoodDiariesRepository(
     {
         var foodsByIds = await GetFoods(updateEntity);
         if (updateEntity.Breakfast != null)
-            entity.Breakfast = FoodDiariesMapper.ToEntity(updateEntity.Breakfast, foodsByIds);
+            entity.Breakfast = BuildMeal(updateEntity.Breakfast, foodsByIds);
         if (updateEntity.Lunch != null)
-            entity.Lunch = FoodDiariesMapper.ToEntity(updateEntity.Lunch, foodsByIds);
+            entity.Lunch = BuildMeal(updateEntity.Lunch, foodsByIds);
         if (updateEntity.Snack != null)
-            entity.Snack = FoodDiariesMapper.ToEntity(updateEntity.Snack, foodsByIds);
+            entity.Snack = BuildMeal(updateEntity.Snack, foodsByIds);
         if (updateEntity.Dinner != null)
-            entity.Dinner = FoodDiariesMapper.ToEntity(updateEntity.Dinner, foodsByIds);
+            entity.Dinner = BuildMeal(updateEntity.Dinner, foodsByIds);
 
-        UpdateTotalInfo(entity);
+        CountTotalInfo(entity);
     }
 
-    private void UpdateTotalInfo(FoodDiaryEntity entity)
+    private MealEntity BuildMeal(ICollection<EatenFoodUpdateEntity> newEatenFoods, Dictionary<Guid, FoodEntity> foodsByIds)
+    {
+        var eatenFoods = newEatenFoods.Select(e => new EatenFoodEntity()
+        {
+            Food = foodsByIds[e.FoodId],
+            Grams = e.Grams,
+        }).ToArray();
+        
+        return new()
+        {
+            EatenFoods = eatenFoods,
+            TotalNutriments = new()
+            {
+                Protein = eatenFoods.Sum(e => e.Food.Nutriments.Protein * (e.Grams / 100f)),
+                Fat = eatenFoods.Sum(e => e.Food.Nutriments.Fat * (e.Grams / 100f)),
+                Carbohydrates = eatenFoods.Sum(e => e.Food.Nutriments.Carbohydrates * (e.Grams / 100f)),
+            },
+            TotalEnergy = new()
+            {
+                Kcal = eatenFoods.Sum(e => e.Food.Energy.Kcal * (e.Grams / 100f)),
+                Kj = eatenFoods.Sum(e => e.Food.Energy.Kj * (e.Grams / 100f)),
+            }
+        };
+    }
+
+    private void CountTotalInfo(FoodDiaryEntity entity)
     {
         entity.TotalEnergy = new();
         entity.TotalNutriments = new();
         
-        Add(entity, entity.Breakfast);
-        Add(entity, entity.Lunch);
-        Add(entity, entity.Snack);
-        Add(entity, entity.Dinner);
+        Add(entity.Breakfast);
+        Add(entity.Lunch);
+        Add(entity.Snack);
+        Add(entity.Dinner);
         
-        void Add(FoodDiaryEntity entity, ICollection<MealEntity> meals)
+        void Add(MealEntity? meal)
         {
-            foreach (var meal in meals)
-            {
-                var coef = ((float) meal.Grams / 100);
-                entity.TotalEnergy.Kcal += meal.Food.Energy.Kcal * coef;
-                entity.TotalEnergy.Kj += meal.Food.Energy.Kj * coef;
-                entity.TotalNutriments.Protein += meal.Food.Nutriments.Protein * coef;
-                entity.TotalNutriments.Fat += meal.Food.Nutriments.Fat * coef;
-                entity.TotalNutriments.Сarbohydrates += meal.Food.Nutriments.Сarbohydrates * coef;
-            }
+            if (meal == null)
+                return;
+
+            entity.TotalNutriments.Protein += meal.TotalNutriments.Protein;
+            entity.TotalNutriments.Fat += meal.TotalNutriments.Fat;
+            entity.TotalNutriments.Carbohydrates += meal.TotalNutriments.Carbohydrates;
+            
+            entity.TotalEnergy.Kcal += meal.TotalEnergy.Kcal;
+            entity.TotalEnergy.Kj += meal.TotalEnergy.Kj;
         }
     }
 

@@ -1,0 +1,103 @@
+<ion-header [translucent]="true">
+  <ion-toolbar [color]="'primary'">
+    <ion-title>
+      Регистрация
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div class="wrapper">
+    <ion-card class="card">
+      <ion-card-content>
+        <swiper-container class="swiper" auto-height="true"
+                          #swiperElement>
+          <swiper-slide class="swiper-no-swiping">
+            <form class="form" [formGroup]="signUpFirstStepForm">
+              <ion-input class="form__input"
+                         mode="md"
+                         [fill]="'outline'"
+                         [label]="'Логин'"
+                         [labelPlacement]="'stacked'"
+                         [formControlName]="'login'"
+              ></ion-input>
+              <ion-input class="form__input"
+                         mode="md"
+                         [type]="'password'"
+                         [fill]="'outline'"
+                         [label]="'Пароль'"
+                         [labelPlacement]="'stacked'"
+                         [formControlName]="'password'"
+              >
+                <ion-input-password-toggle slot="end"></ion-input-password-toggle>
+              </ion-input>
+
+              <ion-button class="form__submitBtn"
+                          [disabled]="signUpFirstStepForm.invalid"
+                          (click)="swiperElement.swiper.slideNext()"
+              >Далее</ion-button>
+
+              <ion-button class="form__loginBtn"
+                          [routerLink]="['/auth', 'login']"
+                          [color]="'medium'"
+                          [fill]="'clear'"
+                          [size]="'small'"
+              >Вход</ion-button>
+            </form>
+          </swiper-slide>
+          <swiper-slide class="swiper-no-swiping">
+            <form class="form" [formGroup]="signUpSecondStepForm">
+              <ion-input class="form__input"
+                         mode="md"
+                         [fill]="'outline'"
+                         [label]="'Вес'"
+                         [labelPlacement]="'stacked'"
+                         [formControlName]="'weight'"
+              ></ion-input>
+              <ion-input class="form__input"
+                         mode="md"
+                         [type]="'number'"
+                         [fill]="'outline'"
+                         [label]="'Рост'"
+                         [labelPlacement]="'stacked'"
+                         [formControlName]="'height'"
+              >
+              </ion-input>
+
+              <ion-select
+                class="form__select"
+                mode="md"
+                [fill]="'outline'"
+                [label]="'Пол'"
+                [labelPlacement]="'stacked'"
+                [formControlName]="'gender'"
+              >
+                <ion-select-option [value]="UserGenderEnum.Male">Мужской</ion-select-option>
+                <ion-select-option [value]="UserGenderEnum.Female">Женский</ion-select-option>
+              </ion-select>
+
+              <ion-select
+                class="form__select"
+                mode="md"
+                [fill]="'outline'"
+                [label]="'Цель'"
+                [labelPlacement]="'stacked'"
+                [formControlName]="'target'"
+              >
+                <ion-select-option [value]="UserTargetEnum.KeepWeight">Поддержание веса</ion-select-option>
+                <ion-select-option [value]="UserTargetEnum.LossWeight">Сбросить вес</ion-select-option>
+                <ion-select-option [value]="UserTargetEnum.GainWeight">Набрать вес</ion-select-option>
+              </ion-select>
+
+              <ion-button class="form__submitBtn"
+                          [disabled]="signUpSecondStepForm.invalid"
+                          (click)="signUp()"
+              >Завершить регистрацию</ion-button>
+            </form>
+          </swiper-slide>
+        </swiper-container>
+      </ion-card-content>
+    </ion-card>
+
+  </div>
+</ion-content>

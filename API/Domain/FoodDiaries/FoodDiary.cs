@@ -6,15 +6,23 @@ public record FoodDiary(
     Guid Id,
     Guid UserId,
     DateOnly Date,
-    ICollection<Meal> Breakfast,
-    ICollection<Meal> Lunch,
-    ICollection<Meal> Snack,
-    ICollection<Meal> Dinner,
+    Meal? Breakfast,
+    Meal? Lunch,
+    Meal? Snack,
+    Meal? Dinner,
+    FoodNutriments TotalNutriments,
+    FoodEnergy TotalEnergy,
+    FoodNutriments TargetNutriments,
+    FoodEnergy TargetEnergy
+);
+
+public record Meal(
+    ICollection<EatenFood> EatenFoods,
     FoodNutriments TotalNutriments,
     FoodEnergy TotalEnergy
 );
 
-public record Meal(
+public record EatenFood(
     Food Food,
     int Grams
 );

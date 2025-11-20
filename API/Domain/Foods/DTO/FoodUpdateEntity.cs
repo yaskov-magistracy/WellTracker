@@ -14,7 +14,7 @@ public record FoodUpdateEntity(
 public record FoodNutrimentsUpdateEntity(
     float? Protein,
     float? Fat,
-    float? Сarbohydrates)
+    float? Carbohydrates)
 {
 }
 

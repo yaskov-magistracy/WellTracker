@@ -20,7 +20,7 @@ internal static class FoodsMapper
         {
             Protein = createEntity.Protein,
             Fat = createEntity.Fat,
-            Сarbohydrates = createEntity.Сarbohydrates,
+            Carbohydrates = createEntity.Carbohydrates,
         };
 
     private static FoodEnergyEntity ToEntity(FoodEnergyCreateEntity createEntity)
@@ -34,7 +34,7 @@ internal static class FoodsMapper
         => new(entity.Id, entity.Name, entity.BrandName, entity.GramsInPortion, ToDomain(entity.Nutriments), ToDomain(entity.Energy));
 
     public static FoodNutriments ToDomain(FoodNutrimentsEntity entity)
-        => new(entity.Protein, entity.Fat, entity.Сarbohydrates);
+        => new(entity.Protein, entity.Fat, entity.Carbohydrates);
 
     public static FoodEnergy ToDomain(FoodEnergyEntity entity)
         => new(entity.Kcal, entity.Kj);

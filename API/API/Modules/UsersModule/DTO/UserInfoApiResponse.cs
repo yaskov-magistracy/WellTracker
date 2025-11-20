@@ -6,5 +6,5 @@ public record UserInfoApiResponse(
     UserGender Gender,
     float Weight,
     int Height,
-    UserTarget Target
+    float TargetWeight
 );

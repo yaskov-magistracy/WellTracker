@@ -1,13 +1,9 @@
 ﻿namespace Domain.FoodDiaries.DTO;
 
 public record FoodDiaryUpdateEntity(
-    ICollection<MealUpdateEntity>? Breakfast,
-    ICollection<MealUpdateEntity>? Lunch,
-    ICollection<MealUpdateEntity>? Snack,
-    ICollection<MealUpdateEntity>? Dinner
+    ICollection<EatenFoodUpdateEntity>? Breakfast,
+    ICollection<EatenFoodUpdateEntity>? Lunch,
+    ICollection<EatenFoodUpdateEntity>? Snack,
+    ICollection<EatenFoodUpdateEntity>? Dinner
 );
 
-public record MealUpdateEntity(
-    Guid FoodId,
-    int Grams
-);

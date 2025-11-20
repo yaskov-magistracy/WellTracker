@@ -30,7 +30,7 @@
                 "output": "./svg"
               }
             ],
-            "styles": ["src/global.scss", "src/theme/variables.scss"],
+            "styles": ["src/global.scss"],
             "scripts": []
           },
           "configurations": {
@@ -112,7 +112,7 @@
                 "output": "./svg"
               }
             ],
-            "styles": ["src/global.scss", "src/theme/variables.scss"],
+            "styles": ["src/global.scss"],
             "scripts": []
           },
           "configurations": {
@@ -141,7 +141,9 @@
   },
   "schematics": {
     "@ionic/angular-toolkit:component": {
-      "styleext": "scss"
+      "styleext": "scss",
+      "change-detection": "OnPush",
+      "skipTests": true
     },
     "@ionic/angular-toolkit:page": {
       "styleext": "scss"

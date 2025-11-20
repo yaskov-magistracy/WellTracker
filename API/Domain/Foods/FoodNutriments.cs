@@ -3,6 +3,10 @@
 public record FoodNutriments(
     float Protein,
     float Fat,
-    float Сarbohydrates)
+    float Carbohydrates)
 {
+    public bool IsNormal()
+    {
+        return Protein != 0 && Fat != 0 && Carbohydrates != 0;
+    }
 }

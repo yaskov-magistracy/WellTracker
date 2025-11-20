@@ -1,0 +1,14 @@
+
+@mixin textStyles() {
+  h1, h2, h3, h4, h5, h6, p, span, small, b {
+    &.primary {
+      color: var(--ion-text-color);
+    }
+    &.secondary {
+      color: var(--ion-text-color-step-100);
+    }
+    &.tertiary {
+      color: var(--ion-text-color-step-500);
+    }
+  }
+}

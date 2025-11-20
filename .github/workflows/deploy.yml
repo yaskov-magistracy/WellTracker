@@ -36,7 +36,9 @@ jobs:
           sudo echo -e \
             "POSTGRES_USER = ${{ secrets.POSTGRES_USER }}\n"\
             "POSTGRES_PASSWORD = ${{ secrets.POSTGRES_PASSWORD }}\n"\
-            "TELEGRAM_BOT_TOKEN = ${{ secrets.TELEGRAM_BOT_TOKEN }}"\
+            "TELEGRAM_BOT_TOKEN = ${{ secrets.TELEGRAM_BOT_TOKEN }}\n"\
+            "GIGACHAT_AUTHORIZATION_KEY = ${{ secrets.GIGACHAT_AUTHORIZATION_KEY }}\n"\
+            "GIGACHAT_SCOPE = ${{ secrets.GIGACHAT_SCOPE }}"\
             > docker-env-secrets
           sudo sh copy-env.sh
 

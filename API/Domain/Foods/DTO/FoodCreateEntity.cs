@@ -12,7 +12,7 @@ public record FoodCreateEntity(
 public record FoodNutrimentsCreateEntity(
     float Protein,
     float Fat,
-    float Сarbohydrates)
+    float Carbohydrates)
 {
 }
 

@@ -1,0 +1,12 @@
+:host {
+  .wrapper {
+    &__title {
+      margin-left: var(--ion-card-left-margin);
+    }
+    &__swiper {
+      &-card {
+        margin-top: 0;
+      }
+    }
+  }
+}

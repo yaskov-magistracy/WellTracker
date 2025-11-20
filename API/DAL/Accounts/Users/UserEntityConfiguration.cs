@@ -22,5 +22,19 @@ internal class UserEntityConfiguration : IEntityTypeConfiguration<UserEntity>
             .HasMany(e => e.FoodDiaries)
             .WithOne(e => e.User)
             .HasForeignKey(e => e.UserId);
+        
+        builder
+            .HasMany(e => e.ExerciseDiaries)
+            .WithOne(e => e.User)
+            .HasForeignKey(e => e.UserId);
+        
+        builder
+            .HasMany(e => e.WeightHistory)
+            .WithOne(e => e.User)
+            .HasForeignKey(e => e.UserId);
+        
+        builder.HasMany(e => e.Chats)
+            .WithOne(e => e.User)
+            .HasForeignKey(e => e.UserId);
     }
 }

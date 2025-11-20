@@ -38,7 +38,6 @@ public static class EntityTypeBuilderExtensions
         this EntityTypeBuilder<TEntity> builder,
         Expression<Func<TEntity, TProperty>> propertyExpression
     ) where TEntity : class
-        where TProperty : IEnumerable
     {
         return builder
             .Property(propertyExpression)

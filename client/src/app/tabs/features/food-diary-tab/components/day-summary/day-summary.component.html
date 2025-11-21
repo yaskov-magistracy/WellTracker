@@ -1,0 +1,10 @@
+@let daySummary = daySummary$ | async;
+@if (daySummary) {
+  <app-kcal-nutriments-day-summary
+    [kcalNutrimentsSummary]="daySummary.kcalNutrimentsSummary">
+  </app-kcal-nutriments-day-summary>
+  <app-meals-day-summary
+    [mealsSummary]="daySummary.mealsSummary"
+  ></app-meals-day-summary>
+}
+

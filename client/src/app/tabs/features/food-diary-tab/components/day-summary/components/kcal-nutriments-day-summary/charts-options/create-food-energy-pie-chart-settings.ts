@@ -1,14 +1,16 @@
 import {EChartsCoreOption} from "echarts/core";
 import {ConsumedEnergyNutrientInfo} from "./types/EnergyNutrientOption";
+import {roundNumber} from "../../../../../../../../shared/utils/round-number";
 
 export function createFoodEnergyPieChartSettings(kcalInfo: ConsumedEnergyNutrientInfo): EChartsCoreOption {
+  const { required, consumed } = kcalInfo;
   const documentElementComputedStyle = window.getComputedStyle(document.documentElement);
-  const left = kcalInfo.required - kcalInfo.consumed;
+  const left = Math.max(required - consumed, 0);
   const mainTextColor = documentElementComputedStyle.getPropertyValue('--ion-text-color-step-100');
   const secondaryTextColor = documentElementComputedStyle.getPropertyValue('--ion-text-color-step-500');
   return {
     title: {
-      text: `${left}`,
+      text: `${roundNumber(left)}`,
       top: 'center',
       left: 'center',
       textVerticalAlign: 'top',

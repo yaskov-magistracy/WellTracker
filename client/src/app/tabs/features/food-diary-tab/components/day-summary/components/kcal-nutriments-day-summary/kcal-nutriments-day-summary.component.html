@@ -3,14 +3,14 @@
     <div class="piesWrapper">
       <section class="kcalSection">
         <span class="kcalSection__text">
-          <span class="secondary">{{ kcalConsumed() }}</span><br>
+          <span class="secondary">{{ kcalNutrimentsSummary().totalEnergy.kcal }}</span><br>
           <span class="kcalSection__text-end tertiary">съедено</span>
         </span>
         <div class="kcalSection__pie" echarts
              [options]="kcalPieOptions()"
         ></div>
         <span class="kcalSection__text">
-          <span class="secondary">{{ kcalBurnt() }}</span><br>
+          <span class="secondary">{{ kcalNutrimentsSummary().totalEnergy.kcalBurnt }}</span><br>
           <span class="kcalSection__text-end">сожжено</span>
         </span>      </section>
       <section class="nutrientsSection">

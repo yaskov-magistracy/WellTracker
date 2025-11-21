@@ -1,14 +1,14 @@
 import {ChangeDetectionStrategy, Component, computed, CUSTOM_ELEMENTS_SCHEMA, input, OnInit} from '@angular/core';
 import {IonButton, IonCard, IonCardContent, IonCardHeader, IonCardTitle, IonIcon} from "@ionic/angular/standalone";
-import {FoodDiary} from "../../types/FoodDiary";
-import {diaryToMealArrayView} from "../../utils/diary-to-meal-array-view";
 import {createFoodEnergyProgressBarSettings} from "./charts-options/create-food-energy-progress-bar-settings";
 import {NgxEchartsDirective} from "ngx-echarts";
+import {MealsSummary} from "../../types/MealsSummary";
+import {RoundNumberPipe} from "../../../../../../../shared/pipes/round.number.pipe";
 
 @Component({
-  selector: 'app-today-meals',
-  templateUrl: './today-meals.component.html',
-  styleUrls: ['./today-meals.component.scss'],
+  selector: 'app-meals-day-summary',
+  templateUrl: './meals-day-summary.component.html',
+  styleUrls: ['./meals-day-summary.component.scss'],
   imports: [
     IonCard,
     IonCardContent,
@@ -17,18 +17,19 @@ import {NgxEchartsDirective} from "ngx-echarts";
     IonIcon,
     NgxEchartsDirective,
     IonButton,
+    RoundNumberPipe,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class TodayMealsComponent {
+export class MealsDaySummaryComponent {
 
-  diary = input.required<FoodDiary>();
-  mealsArray = computed(() => diaryToMealArrayView(this.diary()));
+  mealsSummary = input.required<MealsSummary>();
+  mealsSummaryArray = computed(() => Object.values(this.mealsSummary()));
 
   todayMealsKcalProgressBarSettings = computed(() => {
-    const mealsArray = this.mealsArray();
-    return mealsArray.map(meal => createFoodEnergyProgressBarSettings({
+    const mealsSummaryArray = this.mealsSummaryArray();
+    return mealsSummaryArray.map(meal => createFoodEnergyProgressBarSettings({
       consumed: meal.totalEnergy.kcal,
       required: 1000
     }))

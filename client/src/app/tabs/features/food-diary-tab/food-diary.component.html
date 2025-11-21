@@ -1,13 +1,10 @@
-
-@let todayFoodDiary = todayFoodDiary$ | async;
-
-  <ion-header [translucent]="true">
+<ion-header [translucent]="true">
     <ion-toolbar [color]="'primary'">
       <ion-buttons slot="start">
         <ion-menu-button></ion-menu-button>
       </ion-buttons>
       <ion-title>
-        WellTracker
+        Дневник питания
       </ion-title>
     </ion-toolbar>
   </ion-header>
@@ -15,25 +12,8 @@
   <ion-content [fullscreen]="true">
     <section class="kcalAndNutrientsSection">
       <h2 class="kcalAndNutrientsSection__title">Итоги дня</h2>
-      @if (todayFoodDiary) {
-        <app-kcal-summary
-          [kcalRequired]="3708"
-          [kcalConsumed]="todayFoodDiary.totalEnergy.kcal"
-          [kcalBurnt]="908"
-          [fatRequired]="130"
-          [fatConsumed]="todayFoodDiary.totalNutriments.fat"
-          [proteinRequired]="80"
-          [proteinConsumed]="todayFoodDiary.totalNutriments.protein"
-          [carbsRequired]="450"
-          [carbsConsumed]="todayFoodDiary.totalNutriments.carbohydrates"
-        ></app-kcal-summary>
-        <app-today-meals [diary]="todayFoodDiary"></app-today-meals>
-      } @else {
-        Loading
-      }
-
+      <app-day-summary></app-day-summary>
       <app-diary-statistic></app-diary-statistic>
-
       <app-weight-table></app-weight-table>
     </section>
 

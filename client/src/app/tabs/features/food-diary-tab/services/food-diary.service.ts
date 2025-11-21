@@ -1,17 +1,14 @@
 import {inject, Injectable} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
-import {FoodDiary} from "../types/FoodDiary";
+import {FoodDiaryApiService} from "../dal/food-diary.api.service";
 
 @Injectable({
   providedIn: 'root'
 })
 export class FoodDiaryService {
 
-  private _httpClient = inject(HttpClient);
-
-  private _apiPath = 'FoodsDiary';
+  private foodDiaryApiS = inject(FoodDiaryApiService);
 
   getFoodDiaryByDate$(date: string) {
-    return this._httpClient.get<FoodDiary>(`/api/${this._apiPath}/${date}`);
+    return this.foodDiaryApiS.getFoodDiaryByDate$(date);
   }
 }

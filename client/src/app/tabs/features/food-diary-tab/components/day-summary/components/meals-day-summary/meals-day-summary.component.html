@@ -1,5 +1,5 @@
 <swiper-container pagination="true">
-  @for (meal of mealsArray(); track $index) {
+  @for (meal of mealsSummaryArray(); track $index) {
     <swiper-slide>
       <ion-card class="card">
         <ion-card-header>
@@ -15,7 +15,7 @@
           <div class="card__content-title">
             <ion-icon class="card__content-title__foodIcon" name="food"></ion-icon>
             <span class="card__content-title__count secondary">
-              {{ meal.totalEnergy.kcal }}
+              {{ meal.totalEnergy.kcal | roundNumber }}
               <span class="card__content-title__count-required tertiary">/1000 ккал.</span>
             </span>
           </div>

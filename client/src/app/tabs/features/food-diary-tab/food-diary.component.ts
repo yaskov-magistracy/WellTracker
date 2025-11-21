@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, inject, signal} from '@angular/core';
+import {ChangeDetectionStrategy, Component} from '@angular/core';
 import {
   IonButtons,
   IonContent,
@@ -6,13 +6,9 @@ import {
   IonTitle,
   IonToolbar
 } from "@ionic/angular/standalone";
-import {KcalSummaryComponent} from "./components/kcal-summary/kcal-summary.component";
-import {TodayMealsComponent} from "./components/today-meals/today-meals.component";
-import {diaryMock} from "./mocks/diary";
 import {DiaryStatisticComponent} from "./components/diary-statistic/diary-statistic.component";
 import {WeightTableComponent} from "./components/weight-table/weight-table.component";
-import {FoodDiaryService} from "./services/food-diary.service";
-import {AsyncPipe} from "@angular/common";
+import {DaySummaryComponent} from "./components/day-summary/day-summary.component";
 
 @Component({
   selector: 'app-main-tab',
@@ -23,21 +19,13 @@ import {AsyncPipe} from "@angular/common";
     IonToolbar,
     IonTitle,
     IonContent,
-    KcalSummaryComponent,
+    DaySummaryComponent,
     IonButtons,
     IonMenuButton,
-    TodayMealsComponent,
     DiaryStatisticComponent,
-    WeightTableComponent,
-    AsyncPipe
+    WeightTableComponent
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export default class FoodDiaryComponent {
-
-  private _foodDiaryS = inject(FoodDiaryService);
-
-  todayFoodDiary$ = this._foodDiaryS.getFoodDiaryByDate$(new Date().toLocaleDateString());
-
-  protected readonly diaryMock = diaryMock;
 }

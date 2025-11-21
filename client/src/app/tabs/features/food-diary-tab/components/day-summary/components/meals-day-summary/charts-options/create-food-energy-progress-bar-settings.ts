@@ -1,5 +1,5 @@
 import {EChartsCoreOption} from "echarts/core";
-import {ConsumedEnergyNutrientInfo} from "../../kcal-summary/charts-options/types/EnergyNutrientOption";
+import {ConsumedEnergyNutrientInfo} from "../../kcal-nutriments-day-summary/charts-options/types/EnergyNutrientOption";
 
 export function createFoodEnergyProgressBarSettings(kcalInfo: ConsumedEnergyNutrientInfo): EChartsCoreOption {
   const  { required, consumed } = kcalInfo;

@@ -1,5 +1,6 @@
 import {EChartsCoreOption} from "echarts/core";
 import {ConsumedEnergyNutrientInfo} from "./types/EnergyNutrientOption";
+import {roundNumber} from "../../../../../../../../shared/utils/round-number";
 
 export function createNutrientsPieChartSettings(fatInfo: ConsumedEnergyNutrientInfo,
                                                 proteinInfo: ConsumedEnergyNutrientInfo,
@@ -56,12 +57,13 @@ const createNutrientPieSeries = (nutrientInfo: ConsumedEnergyNutrientInfo,
 const createNutrientLabel = (nutrientInfo: ConsumedEnergyNutrientInfo,
                              mainTextColor: string, secondaryTextColor: string
 ) => {
+  const { consumed, required } = nutrientInfo;
   return {
     fontSize: '16',
     position: 'center',
     formatter: [
-      `{a|${nutrientInfo.consumed}}`,
-      `{b|/${nutrientInfo.required}гр.}`
+      `{a|${roundNumber(consumed)}}`,
+      `{b|/${roundNumber(required)}гр.}`
     ].join('\n'),
     rich: {
       a: {

@@ -19,8 +19,7 @@ public class FoodDiariesService(
     public async Task<Result<FoodDiary>> GetByDate(Guid userId, DateOnly date)
     {
         var foodDiary = await foodDiariesRepository.GetByDate(userId, date);
-        if (foodDiary == null)
-            return Results.NotFound<FoodDiary>("");
+        foodDiary ??= new FoodDiary(Guid.Empty, userId, date, null,null,null,null,null,null,null,null);
 
         var (targetEnergy, targetNutriments) = await advicesService.GetTargets(userId);
         foodDiary = foodDiary with {TargetNutriments = targetNutriments, TargetEnergy = targetEnergy};

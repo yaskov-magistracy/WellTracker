@@ -1,0 +1,20 @@
+:host {
+  .card {
+    margin-top: 0;
+    &__chart {
+      height: 300px;
+    }
+    &__advice {
+      text-align: center;
+    }
+    &__summary {
+      display: flex;
+      justify-content: space-between;
+      font-size: 16px;
+      margin-top: 20px;
+      &-title {
+        text-align: center;
+      }
+    }
+  }
+}

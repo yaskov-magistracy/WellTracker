@@ -1,0 +1,20 @@
+<ion-header [translucent]="true">
+    <ion-toolbar [color]="'primary'">
+      <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+      <ion-title>
+        Дневник питания
+      </ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content [fullscreen]="true">
+    <section class="kcalAndNutrientsSection">
+      <app-day-summary></app-day-summary>
+      <app-diary-statistic></app-diary-statistic>
+      <app-weight-table></app-weight-table>
+    </section>
+
+  </ion-content>
+

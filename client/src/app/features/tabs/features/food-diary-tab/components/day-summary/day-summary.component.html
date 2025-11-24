@@ -1,0 +1,14 @@
+@let daySummary = daySummary$ | async;
+<div class="wrapper">
+  <h2 class="wrapper__title">Итоги дня</h2>
+  @if (daySummary) {
+    <app-kcal-nutriments-day-summary
+      [kcalNutrimentsSummary]="daySummary.kcalNutrimentsSummary">
+    </app-kcal-nutriments-day-summary>
+    <app-meals-day-summary
+      [mealsSummary]="daySummary.mealsSummary"
+    ></app-meals-day-summary>
+  }
+</div>
+
+

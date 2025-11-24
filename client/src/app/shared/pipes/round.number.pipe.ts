@@ -6,7 +6,7 @@ import {roundNumber} from "../utils/round-number";
 })
 export class RoundNumberPipe implements PipeTransform {
 
-  transform(value: number, precision = 2, asNumber = true) {
+  transform(value: number, precision = 1, asNumber = true) {
     return roundNumber(value, precision, asNumber);
   }
 }

@@ -1,12 +1,10 @@
 import {FoodStatisticRecord} from "./FoodStatisticRecord";
-import {FoodEnergy} from "../../../../types/food/FoodEnergy";
-import {FoodNutriments} from "../../../../types/food/FoodNutriments";
+import {FoodEnergyNutriments} from "../../../../types/food/FoodEnergyNutriments";
 
 export type FoodStatistic = {
   "records": FoodStatisticRecord[];
-  "averageEnergy": FoodEnergy,
-  "targetEnergy": FoodEnergy;
-  totalNutriments: FoodNutriments;
-  targetNutriments: FoodNutriments;
+  average: FoodEnergyNutriments,
+  target: FoodEnergyNutriments;
+  total: FoodEnergyNutriments;
   "advices": string[];
 };

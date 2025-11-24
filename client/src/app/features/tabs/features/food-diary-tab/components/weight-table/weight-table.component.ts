@@ -2,8 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import {
   IonCard,
   IonCardContent,
-  IonCardHeader,
-  IonCardTitle,
   IonCol,
   IonGrid,
   IonIcon,
@@ -16,8 +14,6 @@ import {
   styleUrls: ['./weight-table.component.scss'],
   imports: [
     IonCard,
-    IonCardTitle,
-    IonCardHeader,
     IonCardContent,
     IonRow,
     IonGrid,

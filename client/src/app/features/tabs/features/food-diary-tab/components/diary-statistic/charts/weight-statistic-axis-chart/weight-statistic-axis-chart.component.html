@@ -16,6 +16,7 @@
       ) {
       <div echarts
            [options]="weightLineChartOptions()!"
+           (chartInit)="chartInit.emit()"
            [loading]="isLoading"
       ></div>
     } @else {

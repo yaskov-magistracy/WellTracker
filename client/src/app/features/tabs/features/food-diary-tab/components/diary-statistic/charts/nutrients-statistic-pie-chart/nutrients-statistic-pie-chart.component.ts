@@ -6,9 +6,6 @@ import {
 } from "./chart-options/create-nutrients-statistic-pie-chart-options";
 import {DiaryStatisticService} from "../../services/diary-statistic.service";
 import {rxResource} from "@angular/core/rxjs-interop";
-import {
-  createKcalStatisticBarChartOptions
-} from "../kcal-statistic-bar-chart/chart-options/create-kcal-statistic-bar-chart-options";
 import { DateRangeEnum } from "src/app/core/enums/DateRange";
 
 @Component({

@@ -19,8 +19,7 @@ import {RoundNumberPipe} from "../../../../../../../../shared/pipes/round.number
     NgxEchartsDirective,
     IonSelect,
     IonSelectOption,
-    RoundNumberPipe,
-    IonText
+    RoundNumberPipe
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })

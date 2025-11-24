@@ -5,15 +5,15 @@ import {DateRange} from "../../types/DateRange";
 export function getDateRangeByEnumValue(dateRangeEnumValue: DateRangeEnum): DateRange {
 
   const today = new Date();
-  const fromDate = formatDate(today);
-  let toDate: string;
+  const toDate = formatDate(today);
+  let fromDate: string;
 
   if (dateRangeEnumValue === DateRangeEnum.Week) {
-    toDate = formatDate(new Date(new Date().setDate(today.getDate() - 7)));
+    fromDate = formatDate(new Date(new Date().setDate(today.getDate() - 7)));
   } else if (dateRangeEnumValue === DateRangeEnum.Month) {
-    toDate = formatDate(new Date(new Date().setDate(today.getDate() - 30)));
+    fromDate = formatDate(new Date(new Date().setDate(today.getDate() - 30)));
   } else {
-    toDate = formatDate(new Date(new Date().setDate(today.getDate() - 90)));
+    fromDate = formatDate(new Date(new Date().setDate(today.getDate() - 90)));
   }
   return [fromDate, toDate];
 }

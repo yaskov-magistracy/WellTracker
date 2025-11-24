@@ -1,8 +1,13 @@
 <div class="wrapper">
   <h2 class="wrapper__title">Статистика</h2>
-  <swiper-container class="wrapper__swiper" pagination="true" auto-height="true">
+  <swiper-container class="wrapper__swiper" #swiperContainer
+                    pagination="true"
+                    auto-height="true"
+  >
     <swiper-slide class="wrapper__swiper-slide">
-      <app-weight-statistic-axis-chart></app-weight-statistic-axis-chart>
+      <app-weight-statistic-axis-chart
+        (chartInit)="swiperContainer.swiper.updateAutoHeight()"
+      ></app-weight-statistic-axis-chart>
     </swiper-slide>
     <swiper-slide class="wrapper__swiper-slide">
       <app-kcal-statistic-bar-chart></app-kcal-statistic-bar-chart>

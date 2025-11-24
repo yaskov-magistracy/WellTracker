@@ -1,29 +1,17 @@
 import { EChartsCoreOption } from "echarts/core";
 import {FoodStatistic} from "../../../types/food/FoodStatistic";
+import {formatDate} from "../../../../../../../../../core/utils/dates/format-date";
+import {roundNumber} from "../../../../../../../../../shared/utils/round-number";
 
 
 export function createKcalStatisticBarChartOptions(foodStatistic: FoodStatistic): EChartsCoreOption {
   const documentElementComputedStyle = window.getComputedStyle(document.documentElement);
   const mainTextColor = documentElementComputedStyle.getPropertyValue('--ion-text-color-step-100');
   const secondaryTextColor = documentElementComputedStyle.getPropertyValue('--ion-text-color-step-500');
+  const bgColor = documentElementComputedStyle.getPropertyValue('--ion-background-color');
 
-  const now = new Date();
-  const daysCount = 30;
-  const calorieData = [];
-  for (let i = daysCount - 1; i >= 0; i--) {
-    const date = new Date(now);
-    date.setDate(now.getDate() - i);
-    const formattedDate = date.toLocaleDateString('ru-RU', {
-      day: '2-digit',
-      month: '2-digit',
-    });
-    // Генерация случайных калорий в диапазоне 1800–2800
-    const calories = Math.round(2200 + (Math.random() - 0.5) * 800);
-    calorieData.push({ date: formattedDate, value: calories });
-  }
-
-  const dates = foodStatistic.records.map(record => record.date);
-  const values = foodStatistic.records.map(record => record.energy);
+  const dates = foodStatistic.records.map(record => formatDate(new Date(record.date)));
+  const values = foodStatistic.records.map(record => roundNumber(record.energy.kcal));
 
   return {
     title: {
@@ -69,6 +57,17 @@ export function createKcalStatisticBarChartOptions(foodStatistic: FoodStatistic)
         bottom: 5
       },
     ],
+    tooltip: {
+      trigger: 'item', // срабатывает при наведении на точку
+      formatter: function (params: any) {
+        return `Дата: <b>${params.name}</b><br> Вес: <b>${params.value} ккал.</b>`;
+      },
+      backgroundColor: bgColor,
+      textStyle: {
+        color: mainTextColor,
+      },
+      borderColor: secondaryTextColor,
+    },
     series: [
       {
         name: 'Ккал',

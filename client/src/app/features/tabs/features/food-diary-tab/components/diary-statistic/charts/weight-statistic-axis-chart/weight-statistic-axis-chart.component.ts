@@ -1,11 +1,10 @@
-import {ChangeDetectionStrategy, Component, computed, inject, signal} from '@angular/core';
+import {ChangeDetectionStrategy, Component, computed, EventEmitter, inject, output, signal} from '@angular/core';
 import {IonCard, IonCardContent, IonSelect, IonSelectOption} from "@ionic/angular/standalone";
 import {NgxEchartsDirective} from "ngx-echarts";
 import {createWeightStatisticLineOptions} from "./chart-options/create-weight-statistic-axis-settings";
 import {DiaryStatisticService} from "../../services/diary-statistic.service";
 import {DateRangeEnum} from "../../../../../../../../core/enums/DateRange";
 import {rxResource} from "@angular/core/rxjs-interop";
-import {of} from "rxjs";
 import {RoundNumberPipe} from "../../../../../../../../shared/pipes/round.number.pipe";
 
 @Component({
@@ -25,6 +24,8 @@ import {RoundNumberPipe} from "../../../../../../../../shared/pipes/round.number
 export class WeightStatisticAxisChartComponent {
 
   #diaryStatisticS = inject(DiaryStatisticService);
+
+  chartInit = output();
 
   protected currentDateRange = signal<DateRangeEnum>(DateRangeEnum.Week);
 

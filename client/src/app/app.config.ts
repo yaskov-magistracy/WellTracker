@@ -7,10 +7,18 @@ import * as echarts from 'echarts/core';
 import {BarChart, LineChart, PieChart} from "echarts/charts";
 import {CanvasRenderer} from "echarts/renderers";
 import {provideEchartsCore} from "ngx-echarts";
-import {DataZoomComponent, GraphicComponent, GridComponent, LegendComponent, TitleComponent} from "echarts/components";
+import {
+  DataZoomComponent,
+  GraphicComponent,
+  GridComponent,
+  LegendComponent,
+  TitleComponent,
+  TooltipComponent
+} from "echarts/components";
 import {provideHttpClient} from "@angular/common/http";
 
-echarts.use([PieChart, BarChart, LineChart, GridComponent, CanvasRenderer, GraphicComponent, LegendComponent, TitleComponent, DataZoomComponent]);
+echarts.use([PieChart, BarChart, LineChart, GridComponent, CanvasRenderer, GraphicComponent,
+  LegendComponent, TitleComponent, DataZoomComponent, TooltipComponent]);
 
 export const appConfig: ApplicationConfig = {
   providers: [

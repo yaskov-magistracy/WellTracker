@@ -25,13 +25,13 @@
       <span class="card__summary-title secondary">
         Среднее факт.
         <br>
-        @let averageKcal = foodStatistic?.averageEnergy?.kcal;
+        @let averageKcal = foodStatistic?.average?.energy?.kcal;
         <span class="primary"><b>{{ averageKcal ? (averageKcal | roundNumber) : '—' }} ккал.</b></span>
       </span>
       <span class="card__summary-title secondary">
         Среднее рек.
         <br>
-        @let targetKcal = foodStatistic?.targetEnergy?.kcal;
+        @let targetKcal = foodStatistic?.target?.energy?.kcal;
         <span class="primary"><b>{{ targetKcal ? (targetKcal | roundNumber) : '—' }} ккал.</b></span>      </span>
     </section>
   </ion-card-content>

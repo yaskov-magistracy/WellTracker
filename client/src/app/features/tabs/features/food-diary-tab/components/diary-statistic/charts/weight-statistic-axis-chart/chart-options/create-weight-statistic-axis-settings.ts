@@ -1,17 +1,19 @@
 import { EChartsCoreOption } from "echarts/core";
 import {WeightStatistic} from "../../../types/weight/WeightStatistic";
 import {getAllDatesFromRecords} from "../../../../../../../../../core/utils/dates/get-all-dates-from-record";
+import {roundNumber} from "../../../../../../../../../shared/utils/round-number";
 
 export function createWeightStatisticLineOptions(weightStatistic: WeightStatistic): EChartsCoreOption {
 
   const documentElementComputedStyle = window.getComputedStyle(document.documentElement);
   const mainTextColor = documentElementComputedStyle.getPropertyValue('--ion-text-color-step-100');
   const secondaryTextColor = documentElementComputedStyle.getPropertyValue('--ion-text-color-step-500');
+  const bgColor = documentElementComputedStyle.getPropertyValue('--ion-background-color');
 
   const dates = getAllDatesFromRecords(weightStatistic.statistics.records);
   const values = weightStatistic.statistics.records.map(record => {
     const datesInterval = getAllDatesFromRecords([record]);
-    return new Array(datesInterval.length).fill(record.weight) as number[];
+    return new Array(datesInterval.length).fill(roundNumber(record.weight)) as number[];
   }).flat();
 
   return {
@@ -57,6 +59,17 @@ export function createWeightStatisticLineOptions(weightStatistic: WeightStatisti
         bottom: 5,
       },
     ],
+    tooltip: {
+      trigger: 'item', // срабатывает при наведении на точку
+      formatter: function (params: any) {
+        return `Дата: <b>${params.name}</b><br> Вес: <b>${params.value} кг.</b>`;
+      },
+      backgroundColor: bgColor,
+      textStyle: {
+        color: mainTextColor,
+      },
+      borderColor: secondaryTextColor,
+    },
     series: [
       {
         name: 'Вес',

@@ -11,8 +11,8 @@
       <ion-select-option>{{ DateRangeEnum.ThreeMonths }}</ion-select-option>
     </ion-select>
     @if (
-      isLoading
-      || true
+      isLoading ||
+      foodStatisticResource.hasValue()
       ) {
       <div echarts class="card__chart"
            [options]="nutrientsStatisticPieChartOptions()!"

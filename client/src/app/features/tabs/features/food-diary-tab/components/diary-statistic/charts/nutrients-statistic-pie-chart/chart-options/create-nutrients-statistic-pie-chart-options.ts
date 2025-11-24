@@ -1,5 +1,6 @@
 import { EChartsCoreOption } from "echarts/core";
 import {FoodStatistic} from "../../../types/food/FoodStatistic";
+import {roundNumber} from "../../../../../../../../../shared/utils/round-number";
 
 export function createNutrientsStatisticPieChartOptions(foodStatistic: FoodStatistic): EChartsCoreOption {
   const documentElementComputedStyle = window.getComputedStyle(document.documentElement);
@@ -9,9 +10,9 @@ export function createNutrientsStatisticPieChartOptions(foodStatistic: FoodStati
   const mainTextColor = documentElementComputedStyle.getPropertyValue('--ion-text-color-step-100');
   const secondaryTextColor = documentElementComputedStyle.getPropertyValue('--ion-text-color-step-500');
 
-  const protein = { value: foodStatistic.totalNutriments.protein, goal: foodStatistic.targetNutriments.protein };
-  const fats = { value: foodStatistic.totalNutriments.fat, goal: foodStatistic.targetNutriments.fat };
-  const carbs = { value: foodStatistic.totalNutriments.carbohydrates, goal: foodStatistic.targetNutriments.carbohydrates };
+  const protein = { value: roundNumber(foodStatistic.total.nutriments.protein), goal: roundNumber(foodStatistic.target.nutriments.protein) };
+  const fats = { value: roundNumber(foodStatistic.total.nutriments.fat), goal: roundNumber(foodStatistic.target.nutriments.fat) };
+  const carbs = { value: roundNumber(foodStatistic.total.nutriments.carbohydrates), goal: roundNumber(foodStatistic.target.nutriments.carbohydrates) };
 
   return {
     title: {

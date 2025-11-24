@@ -21,13 +21,19 @@ public class NutrimentsStatisticsService(
         var records = (await foodDiariesRepository.GetByRange(userId, from, to))
             .Select(e => new NutrimentsRecord(e.Date, e.TotalEnergy, e.TotalNutriments))
             .ToArray();
-        var averageEnergy = records.Average(e => e.Energy);
-        var (targetEnergy, advices) = await advicesService.GetTargetAndAdvice(userId, records);
+        var total = new FoodValue(
+            records.Sum(e => e.Nutriments),
+            records.Sum(e => e.Energy));
+        var average = new FoodValue(
+            records.Average(e => e.Nutriments),
+            records.Average(e => e.Energy));
+        var (target, advices) = await advicesService.GetTargetsAndAdvice(userId, records);
 
         return new NutrimentsStatistics(
             records,
-            averageEnergy,
-            targetEnergy,
+            total,
+            average,
+            target,
             advices);
     }
 }

@@ -21,8 +21,8 @@ public class FoodDiariesService(
         var foodDiary = await foodDiariesRepository.GetByDate(userId, date);
         foodDiary ??= new FoodDiary(Guid.Empty, userId, date, null,null,null,null,null,null,null,null);
 
-        var (targetEnergy, targetNutriments) = await advicesService.GetTargets(userId);
-        foodDiary = foodDiary with {TargetNutriments = targetNutriments, TargetEnergy = targetEnergy};
+        var targets = await advicesService.GetTargets(userId);
+        foodDiary = foodDiary with {TargetNutriments = targets.Nutriments, TargetEnergy = targets.Energy};
         
         return Results.Ok(foodDiary);
     }

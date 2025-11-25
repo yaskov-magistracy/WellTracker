@@ -6,10 +6,11 @@ import {
 } from "./chart-options/create-kcal-statistic-bar-chart-options";
 import {DateRangeEnum} from "../../../../../../../../core/enums/DateRange";
 import {DiaryStatisticService} from "../../services/diary-statistic.service";
-import {rxResource, takeUntilDestroyed} from "@angular/core/rxjs-interop";
+import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
 import {RoundNumberPipe} from "../../../../../../../../shared/pipes/round.number.pipe";
 import {IDiaryStatisticComponent} from "../../types/IDiaryStatisticComponent";
 import {FoodDiaryTabService} from "../../../../services/food-diary-tab.service";
+import {errorRxResource} from "../../../../../../../../core/error-handling/errorRxResource";
 
 @Component({
   selector: 'app-kcal-statistic-bar-chart',
@@ -33,7 +34,7 @@ export class KcalStatisticBarChartComponent implements OnInit, IDiaryStatisticCo
 
   protected currentDateRange = signal<DateRangeEnum>(DateRangeEnum.Week);
 
-  foodStatisticResource = rxResource({
+  foodStatisticResource = errorRxResource({
     params: () => this.currentDateRange(),
     stream: ({ params: dateRange }) => this.#diaryStatisticS.getFoodStatistic$(dateRange)
   })

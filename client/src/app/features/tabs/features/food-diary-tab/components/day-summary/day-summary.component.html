@@ -1,7 +1,9 @@
 <div class="wrapper">
   <h2 class="wrapper__title">Итоги дня</h2>
   @if (daySummary.isLoading()) {
-    Loading...
+    <section class="wrapper__loadingSection">
+      <ion-spinner class="wrapper__loadingSection-spinner"></ion-spinner>
+    </section>
   } @else if (daySummary.hasValue()) {
     <app-kcal-nutriments-day-summary
       [kcalNutrimentsSummary]="daySummary.value().kcalNutrimentsSummary">

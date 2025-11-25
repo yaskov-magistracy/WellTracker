@@ -1,4 +1,4 @@
-import {ApplicationConfig, provideZonelessChangeDetection} from "@angular/core";
+import {ApplicationConfig, ErrorHandler, provideZonelessChangeDetection} from "@angular/core";
 import {PreloadAllModules, provideRouter, RouteReuseStrategy, withDebugTracing, withPreloading} from "@angular/router";
 import {IonicRouteStrategy} from "@ionic/angular/standalone";
 import {provideIonicAngular} from "@ionic/angular/standalone";
@@ -16,6 +16,8 @@ import {
   TooltipComponent
 } from "echarts/components";
 import {provideHttpClient} from "@angular/common/http";
+import {CustomErrorHandler} from "./core/error-handling/custom-error-handler";
+import {provideRxjsOnUnhandledError} from "./core/providers/rxjs-onUnhandledError.provider";
 
 echarts.use([PieChart, BarChart, LineChart, GridComponent, CanvasRenderer, GraphicComponent,
   LegendComponent, TitleComponent, DataZoomComponent, TooltipComponent]);
@@ -23,6 +25,8 @@ echarts.use([PieChart, BarChart, LineChart, GridComponent, CanvasRenderer, Graph
 export const appConfig: ApplicationConfig = {
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    { provide: ErrorHandler, useClass: CustomErrorHandler },
+    provideRxjsOnUnhandledError(),
     provideIonicAngular(),
     provideZonelessChangeDetection(),
     provideEchartsCore({ echarts }),

@@ -4,10 +4,11 @@ import {NgxEchartsDirective} from "ngx-echarts";
 import {createWeightStatisticLineOptions} from "./chart-options/create-weight-statistic-axis-settings";
 import {DiaryStatisticService} from "../../services/diary-statistic.service";
 import {DateRangeEnum} from "../../../../../../../../core/enums/DateRange";
-import {rxResource, takeUntilDestroyed} from "@angular/core/rxjs-interop";
+import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
 import {RoundNumberPipe} from "../../../../../../../../shared/pipes/round.number.pipe";
 import {IDiaryStatisticComponent} from "../../types/IDiaryStatisticComponent";
 import {FoodDiaryTabService} from "../../../../services/food-diary-tab.service";
+import {errorRxResource} from "../../../../../../../../core/error-handling/errorRxResource";
 
 @Component({
   selector: 'app-weight-statistic-axis-chart',
@@ -33,7 +34,7 @@ export class WeightStatisticAxisChartComponent implements OnInit, IDiaryStatisti
 
   protected currentDateRange = signal<DateRangeEnum>(DateRangeEnum.Week);
 
-  weightStatisticResource = rxResource({
+  weightStatisticResource = errorRxResource({
     params: () => this.currentDateRange(),
     stream: ({ params: dateRange }) => this.#diaryStatisticS.getWeightStatistic$(dateRange)
   })

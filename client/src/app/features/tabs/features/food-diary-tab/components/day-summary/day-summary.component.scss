@@ -3,5 +3,14 @@
     &__title {
       margin-left: var(--ion-card-left-margin);
     }
+    &__loadingSection {
+      position: relative;
+      height: 200px;
+      &-spinner {
+        position: absolute;
+        height: 100%;
+        width: 100%;
+      }
+    }
   }
 }

@@ -1,12 +1,10 @@
-import {computed, inject, Injectable, signal} from '@angular/core';
-import {Observable, shareReplay, tap} from "rxjs";
+import {computed, inject, Injectable} from '@angular/core';
+import {tap} from "rxjs";
 import {AccountApiService} from "./API/account.api.service";
 import {AccountLoginRequestDTO} from "./API/DTO/request/AccountLoginRequestDTO";
-import {SessionInfoResponseDTO} from "./API/DTO/response/SessionInfoResponseDTO";
 import {SessionInfo} from "./types/SessionInfo";
 import {AccountRegisterRequestDTO} from "./API/DTO/request/AccountRegisterRequestDTO";
-import {httpResource} from "@angular/common/http";
-import {rxResource} from "@angular/core/rxjs-interop";
+import {errorRxResource} from "../error-handling/errorRxResource";
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +13,7 @@ export class AccountService {
 
   #accountApiS = inject(AccountApiService);
 
-  #sessionInfo = rxResource<SessionInfo | null, unknown>(
+  #sessionInfo = errorRxResource<SessionInfo | null, unknown>(
     { stream: () => this.#session$() }
   );
   sessionInfo = this.#sessionInfo.asReadonly();

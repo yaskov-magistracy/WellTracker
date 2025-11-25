@@ -5,10 +5,11 @@ import {
   createNutrientsStatisticPieChartOptions,
 } from "./chart-options/create-nutrients-statistic-pie-chart-options";
 import {DiaryStatisticService} from "../../services/diary-statistic.service";
-import {rxResource, takeUntilDestroyed} from "@angular/core/rxjs-interop";
+import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
 import { DateRangeEnum } from "src/app/core/enums/DateRange";
 import {IDiaryStatisticComponent} from "../../types/IDiaryStatisticComponent";
 import {FoodDiaryTabService} from "../../../../services/food-diary-tab.service";
+import {errorRxResource} from "../../../../../../../../core/error-handling/errorRxResource";
 
 @Component({
   selector: 'app-nutrient-statistic-pie-chart',
@@ -32,7 +33,7 @@ export class NutrientStatisticPieChartComponent implements OnInit, IDiaryStatist
 
   protected currentDateRange = signal<DateRangeEnum>(DateRangeEnum.Week);
 
-  foodStatisticResource = rxResource({
+  foodStatisticResource = errorRxResource({
     params: () => this.currentDateRange(),
     stream: ({ params: dateRange }) => this.#diaryStatisticS.getFoodStatistic$(dateRange)
   })

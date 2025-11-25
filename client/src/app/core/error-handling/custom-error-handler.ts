@@ -1,5 +1,5 @@
 import {ErrorHandler, inject, Injectable} from '@angular/core';
-import {ToastController} from "@ionic/angular";
+import { ToastController } from '@ionic/angular/standalone'
 import { HttpErrorResponse } from '@angular/common/http';
 
 @Injectable({
@@ -22,5 +22,5 @@ export class CustomErrorHandler implements ErrorHandler {
       color: 'danger'
     });
     await toast.present();
-    }
+  }
 }

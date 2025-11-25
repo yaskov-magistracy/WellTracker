@@ -12,12 +12,16 @@ export const routes: Routes = [
         path: 'tabs',
         loadComponent: () => import('./features/tabs/shell/tabs.page'),
         loadChildren: () => import('./features/tabs/shell/tabs.routes')
-      },
+      }
     ]
   },
   {
     path: 'auth',
     loadChildren: () => import('./features/auth/shell/auth.routes'),
     canActivate: [isUnauthorizedGuard],
+  },
+  {
+    path: '**',
+    redirectTo: ''
   }
 ]

@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component} from '@angular/core';
+import {ChangeDetectionStrategy, Component, inject} from '@angular/core';
 import {
   IonButtons,
   IonContent,
@@ -9,6 +9,8 @@ import {
 import {DiaryStatisticComponent} from "./components/diary-statistic/diary-statistic.component";
 import {WeightTableComponent} from "./components/weight-table/weight-table.component";
 import {DaySummaryComponent} from "./components/day-summary/day-summary.component";
+import {ViewWillEnter} from "@ionic/angular";
+import {FoodDiaryTabService} from "./services/food-diary-tab.service";
 
 @Component({
   selector: 'app-main-tab',
@@ -27,5 +29,11 @@ import {DaySummaryComponent} from "./components/day-summary/day-summary.componen
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export default class FoodDiaryComponent {
+export default class FoodDiaryComponent implements ViewWillEnter {
+
+  #foodDiaryTabS = inject(FoodDiaryTabService);
+
+  ionViewWillEnter() {
+    this.#foodDiaryTabS.foodDiaryTabActivated$.next();
+  }
 }

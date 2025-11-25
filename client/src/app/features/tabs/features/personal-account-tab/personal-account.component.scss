@@ -1,0 +1,10 @@
+:host {
+  .wrapper {
+    &__buttons {
+      &-btn {
+        height: 30px;
+        min-height: auto;
+      }
+    }
+  }
+}

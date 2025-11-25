@@ -47,13 +47,7 @@
           </swiper-slide>
           <swiper-slide class="swiper-no-swiping">
             <form class="form" [formGroup]="signUpSecondStepForm">
-              <ion-input class="form__input"
-                         mode="md"
-                         [fill]="'outline'"
-                         [label]="'Вес'"
-                         [labelPlacement]="'stacked'"
-                         [formControlName]="'weight'"
-              ></ion-input>
+
               <ion-input class="form__input"
                          mode="md"
                          [type]="'number'"
@@ -61,8 +55,27 @@
                          [label]="'Рост'"
                          [labelPlacement]="'stacked'"
                          [formControlName]="'height'"
+                         [inputmode]="'numeric'"
               >
               </ion-input>
+
+              <ion-input class="form__input"
+                         mode="md"
+                         [fill]="'outline'"
+                         [label]="'Вес'"
+                         [labelPlacement]="'stacked'"
+                         [formControlName]="'weight'"
+                         [inputmode]="'numeric'"
+              ></ion-input>
+
+              <ion-input class="form__input"
+                         mode="md"
+                         [fill]="'outline'"
+                         [label]="'Целевой вес'"
+                         [labelPlacement]="'stacked'"
+                         [formControlName]="'targetWeight'"
+                         [inputmode]="'numeric'"
+              ></ion-input>
 
               <ion-select
                 class="form__select"
@@ -72,21 +85,8 @@
                 [labelPlacement]="'stacked'"
                 [formControlName]="'gender'"
               >
-                <ion-select-option [value]="UserGenderEnum.Male">Мужской</ion-select-option>
-                <ion-select-option [value]="UserGenderEnum.Female">Женский</ion-select-option>
-              </ion-select>
-
-              <ion-select
-                class="form__select"
-                mode="md"
-                [fill]="'outline'"
-                [label]="'Цель'"
-                [labelPlacement]="'stacked'"
-                [formControlName]="'target'"
-              >
-                <ion-select-option [value]="UserTargetEnum.KeepWeight">Поддержание веса</ion-select-option>
-                <ion-select-option [value]="UserTargetEnum.LossWeight">Сбросить вес</ion-select-option>
-                <ion-select-option [value]="UserTargetEnum.GainWeight">Набрать вес</ion-select-option>
+                <ion-select-option [value]="GenderEnum.Male">Мужской</ion-select-option>
+                <ion-select-option [value]="GenderEnum.Female">Женский</ion-select-option>
               </ion-select>
 
               <ion-button class="form__submitBtn"

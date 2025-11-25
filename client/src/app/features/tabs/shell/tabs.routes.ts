@@ -9,5 +9,9 @@ export default [
   {
     path: 'food-diary',
     loadComponent: () => import('../features/food-diary-tab/food-diary.component')
+  },
+  {
+    path: 'personal-account',
+    loadComponent: () => import('../features/personal-account-tab/personal-account.component')
   }
 ] satisfies Routes;

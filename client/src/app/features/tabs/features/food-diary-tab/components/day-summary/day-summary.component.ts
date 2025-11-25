@@ -20,6 +20,7 @@ import {MealsDaySummaryComponent} from "./components/meals-day-summary/meals-day
 export class DaySummaryComponent {
 
   #daySummaryS = inject(DaySummaryService);
-  protected daySummary$ = this.#daySummaryS.getDaySummary$();
+
+  daySummary = this.#daySummaryS.daySummary;
 }
 

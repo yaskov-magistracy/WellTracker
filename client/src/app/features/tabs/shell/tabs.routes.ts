@@ -11,7 +11,7 @@ export default [
     loadComponent: () => import('../features/food-diary-tab/food-diary.component')
   },
   {
-    path: 'personal-account',
-    loadComponent: () => import('../features/personal-account-tab/personal-account.component')
+    path: 'user-profile',
+    loadComponent: () => import('../features/user-profile-tab/user-profile-tab.component')
   }
 ] satisfies Routes;

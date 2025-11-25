@@ -4,6 +4,7 @@ import {Observable} from "rxjs";
 import {SessionInfoResponseDTO} from "./DTO/response/SessionInfoResponseDTO";
 import {AccountLoginRequestDTO} from "./DTO/request/AccountLoginRequestDTO";
 import {AccountRegisterRequestDTO} from "./DTO/request/AccountRegisterRequestDTO";
+import {AccountChangePasswordRequestDTO} from "./DTO/request/AccountChangePasswordRequestDTO";
 
 @Injectable({
   providedIn: 'root'
@@ -20,6 +21,10 @@ export class AccountApiService {
 
   register$(accountRegisterInfo: AccountRegisterRequestDTO) {
     return this.#httpClient.post(`/api/${this.#apiPath}/register/user`, accountRegisterInfo);
+  }
+
+  changePassword$(changePasswordDTO: AccountChangePasswordRequestDTO) {
+    return this.#httpClient.post(`/api/${this.#apiPath}/change-password`, changePasswordDTO);
   }
 
   session$() {

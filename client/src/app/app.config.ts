@@ -27,7 +27,7 @@ export const appConfig: ApplicationConfig = {
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     { provide: ErrorHandler, useClass: CustomErrorHandler },
     provideRxjsOnUnhandledError(),
-    provideIonicAngular(),
+    provideIonicAngular({ useSetInputAPI: true }),
     provideZonelessChangeDetection(),
     provideEchartsCore({ echarts }),
     provideHttpClient(),

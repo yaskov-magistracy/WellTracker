@@ -1,0 +1,14 @@
+
+:host {
+  .wrapper {
+    &__title {
+      margin-left: 16px;
+    }
+    &__buttons {
+      &-btn {
+        height: 30px;
+        min-height: auto;
+      }
+    }
+  }
+}

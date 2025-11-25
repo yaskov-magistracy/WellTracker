@@ -3,14 +3,35 @@
     &__title {
       display: flex;
       justify-content: space-between;
-      &-name {
-        font-size: 22px;
-        font-weight: 500;
-      }
-      &-editBtn {
+      &-mealIconAndMealName {
+        display: flex;
+        gap: 10px;
+        &__name {
+          font-size: 20px;
+          font-weight: 500;
+        }
         &__icon {
-          width: 24px;
-          height: 24px;
+          position: relative;
+          bottom: 5px;
+        }
+      }
+      &-calories {
+        display: flex;
+        gap: 5px;
+        position: relative;
+        bottom: 5px;
+        &__caloriesCount {
+          display: inline-block;
+          text-align: right;
+          b {
+            font-size: 18px;
+          }
+        }
+        &__addBtn {
+          min-height: unset;
+          &::part(native) {
+            padding: 0;
+          }
         }
       }
     }

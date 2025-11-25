@@ -30,6 +30,15 @@ export class AccountService {
     return this.#accountApiS.register$(accountRegisterInfo);
   }
 
+  changePassword$(oldPassword: string, newPassword: string) {
+    return this.#accountApiS.changePassword$({
+      newPassword,
+      oldPassword
+    }).pipe(
+      tap(() => this.#sessionInfo.set(null))
+    );
+  }
+
   logout$() {
     return this.#accountApiS.logout$()
       .pipe(

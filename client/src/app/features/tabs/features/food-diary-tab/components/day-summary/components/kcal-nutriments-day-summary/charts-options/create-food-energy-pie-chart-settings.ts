@@ -28,9 +28,12 @@ export function createFoodEnergyPieChartSettings(kcalInfo: ConsumedEnergyNutrien
     series: [
       {
         type: 'pie',
-        radius: ['100%', '70%'],
+        radius: ['100%', '80%'],
         label: {
           show: false
+        },
+        emphasis: {
+          disabled: true
         },
         data: [
           { name: 'consumed', value: kcalInfo.consumed, itemStyle: { color: '#0163aa' } },

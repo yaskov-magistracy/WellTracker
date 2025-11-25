@@ -44,10 +44,10 @@ export class DaySummaryApiService {
             totalEnergy: { ...todayFoodDiary.totalEnergy , kcalBurnt: todayExerciseDiary.target.info.totalKcalBurnt }
           },
           mealsSummary: {
-            breakfast: { name: 'Завтрак', ...todayFoodDiary.breakfast },
-            lunch: { name: 'Обед', ...todayFoodDiary.lunch },
-            snack: { name: 'Перекус', ...todayFoodDiary.snack },
-            dinner: { name: 'Ужин', ...todayFoodDiary.dinner }
+            breakfast: { name: 'Завтрак', iconName: 'breakfast', ...todayFoodDiary.breakfast },
+            lunch: { name: 'Обед', iconName: 'lunch', ...todayFoodDiary.lunch },
+            snack: { name: 'Перекус', iconName: 'snack', ...todayFoodDiary.snack },
+            dinner: { name: 'Ужин', iconName: 'dinner', ...todayFoodDiary.dinner }
           }
         }) as DaySummary)
       );

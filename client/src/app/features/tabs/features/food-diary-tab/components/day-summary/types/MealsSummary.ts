@@ -1,8 +1,8 @@
-import {FoodMealWithName} from "./FoodMealWithName";
+import {FoodMealExtended} from "./FoodMealExtended";
 
 export type MealsSummary = {
-  breakfast: FoodMealWithName;
-  lunch: FoodMealWithName;
-  snack: FoodMealWithName;
-  dinner: FoodMealWithName;
+  breakfast: FoodMealExtended;
+  lunch: FoodMealExtended;
+  snack: FoodMealExtended;
+  dinner: FoodMealExtended;
 }

@@ -5,7 +5,13 @@
       justify-content: space-between;
       &-name {
         font-size: 22px;
-        font-weight: 600;
+        font-weight: 500;
+      }
+      &-editBtn {
+        &__icon {
+          width: 24px;
+          height: 24px;
+        }
       }
     }
     &__content {

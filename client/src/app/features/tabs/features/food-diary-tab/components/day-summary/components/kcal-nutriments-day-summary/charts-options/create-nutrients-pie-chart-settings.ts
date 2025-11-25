@@ -44,7 +44,10 @@ const createNutrientPieSeries = (nutrientInfo: ConsumedEnergyNutrientInfo,
 ) => {
   return {
     type: 'pie',
-    radius: ['70%', '50%'],
+    radius: ['70%', '55%'],
+    emphasis: {
+      disabled: true
+    },
     label: createNutrientLabel(nutrientInfo, mainTextColor, secondaryTextColor),
     center,
     data: [

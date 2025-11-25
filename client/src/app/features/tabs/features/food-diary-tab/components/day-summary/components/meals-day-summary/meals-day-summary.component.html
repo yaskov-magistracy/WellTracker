@@ -5,15 +5,22 @@
         <ion-card-header>
           <div class="card__title">
             <ion-card-title class="card__title-name">{{ meal.name }}</ion-card-title>
-            <ion-button [color]="'secondary'" [fill]="'clear'">
-              <ion-icon slot="icon-only" name="create-outline"></ion-icon>
+            <ion-button class="card__title-editBtn"
+              [color]="'secondary'"
+              [fill]="'clear'"
+              [size]="'small'"
+            >
+              <ion-icon
+                class="card__title-editBtn__icon"
+                name="create-outline"
+              ></ion-icon>
             </ion-button>
           </div>
 
         </ion-card-header>
         <ion-card-content class="card__content">
           <div class="card__content-title">
-            <ion-icon class="card__content-title__foodIcon" name="food"></ion-icon>
+            <ion-icon class="card__content-title__foodIcon" [name]="meal.iconName"></ion-icon>
             <span class="card__content-title__count secondary">
               {{ meal.totalEnergy.kcal | roundNumber }}
               <span class="card__content-title__count-required tertiary">/1000 ккал.</span>

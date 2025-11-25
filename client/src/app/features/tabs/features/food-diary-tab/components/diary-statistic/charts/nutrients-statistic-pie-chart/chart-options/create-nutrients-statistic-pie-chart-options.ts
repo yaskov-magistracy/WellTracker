@@ -8,7 +8,6 @@ export function createNutrientsStatisticPieChartOptions(foodStatistic: FoodStati
   const proteinColor = documentElementComputedStyle.getPropertyValue('--protein');
   const carbColor = documentElementComputedStyle.getPropertyValue('--carb');
   const mainTextColor = documentElementComputedStyle.getPropertyValue('--ion-text-color-step-100');
-  const secondaryTextColor = documentElementComputedStyle.getPropertyValue('--ion-text-color-step-500');
 
   const protein = { value: roundNumber(foodStatistic.total.nutriments.protein), goal: roundNumber(foodStatistic.target.nutriments.protein) };
   const fats = { value: roundNumber(foodStatistic.total.nutriments.fat), goal: roundNumber(foodStatistic.target.nutriments.fat) };
@@ -48,6 +47,9 @@ export function createNutrientsStatisticPieChartOptions(foodStatistic: FoodStati
           color: "#fff",
           rotate: 'tangential'
         },
+        emphasis: {
+          disabled: true
+        },
         data: [
           { value: protein.goal, name: 'Белки', itemStyle: { color: proteinColor } },
           { value: fats.goal, name: 'Жиры', itemStyle: { color: fatColor } },
@@ -69,6 +71,9 @@ export function createNutrientsStatisticPieChartOptions(foodStatistic: FoodStati
           fontWeight: 600,
           color: "#fff",
           rotate: 'tangential'
+        },
+        emphasis: {
+          disabled: true
         },
         data: [
           { value: protein.value, name: 'Белки', itemStyle: { color: proteinColor } },

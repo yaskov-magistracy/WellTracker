@@ -1,0 +1,51 @@
+:host {
+  .card {
+    &__title {
+      display: flex;
+      justify-content: space-between;
+      &-mealIconAndMealName {
+        display: flex;
+        gap: 10px;
+        &__name {
+          font-size: 20px;
+          font-weight: 500;
+        }
+        &__icon {
+          position: relative;
+          bottom: 5px;
+        }
+      }
+      &-calories {
+        display: flex;
+        gap: 5px;
+        position: relative;
+        bottom: 5px;
+        &__caloriesCount {
+          display: inline-block;
+          text-align: right;
+          b {
+            font-size: 18px;
+          }
+        }
+        &__addBtn {
+          min-height: unset;
+          &::part(native) {
+            padding: 0;
+          }
+        }
+      }
+    }
+    &__content {
+      background-color: var(--ion-background-color-step-200);
+      padding-top: 10px;
+      padding-bottom: 10px;
+      &-wrapper {
+        display: flex;
+        gap: 10px;
+        &__protein { color: var(--protein); }
+        &__fat { color: var(--fat); }
+        &__carbs { color: var(--carb); }
+      }
+    }
+  }
+}

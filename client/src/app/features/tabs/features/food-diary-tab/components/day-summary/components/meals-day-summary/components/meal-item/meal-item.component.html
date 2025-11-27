@@ -1,0 +1,37 @@
+<ion-card class="card">
+  <ion-card-header>
+    <div class="card__title">
+      <div class="card__title-mealIconAndMealName">
+        <ion-icon
+          class="card__title-mealIconAndMealName__icon"
+          [size]="'large'"
+          [name]="meal().iconName"
+        ></ion-icon>
+        <ion-card-title class="card__title-mealIconAndMealName__name">{{ meal().name }}</ion-card-title>
+      </div>
+      <div class="card__title-calories">
+              <span class="card__title-calories__caloriesCount">
+                <ion-text [color]="'dark'">
+                  <b>{{ meal().totalEnergy.kcal | roundNumber }}</b>
+                  <br>
+                  Калорий
+                </ion-text>
+              </span>
+        <ion-button class="card__title-calories__addBtn"
+                    [fill]="'clear'"
+                    [size]="'large'"
+        >
+          <ion-icon name="add-circle-outline"></ion-icon>
+        </ion-button>
+      </div>
+
+    </div>
+  </ion-card-header>
+  <ion-card-content class="card__content">
+    <div class="card__content-wrapper">
+      <span class="card__content-wrapper__protein">Б: {{ meal().totalNutriments.protein }}г.</span>
+      <span class="card__content-wrapper__fat">Ж: {{ meal().totalNutriments.fat }}г.</span>
+      <span class="card__content-wrapper__carbs">У: {{ meal().totalNutriments.carbohydrates }}г.</span>
+    </div>
+  </ion-card-content>
+</ion-card>

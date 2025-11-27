@@ -12,6 +12,7 @@ import {createFoodEnergyProgressBarSettings} from "./charts-options/create-food-
 import {NgxEchartsDirective} from "ngx-echarts";
 import {MealsSummary} from "../../types/MealsSummary";
 import {RoundNumberPipe} from "../../../../../../../../shared/pipes/round.number.pipe";
+import {MealItemComponent} from "./components/meal-item/meal-item.component";
 
 @Component({
   selector: 'app-meals-day-summary',
@@ -27,6 +28,7 @@ import {RoundNumberPipe} from "../../../../../../../../shared/pipes/round.number
     IonButton,
     RoundNumberPipe,
     IonText,
+    MealItemComponent,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   schemas: [CUSTOM_ELEMENTS_SCHEMA]

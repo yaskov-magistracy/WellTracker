@@ -10,9 +10,8 @@ import {
 } from "@ionic/angular/standalone";
 import {FormBuilder, ReactiveFormsModule, Validators} from "@angular/forms";
 import {Router, RouterLink} from "@angular/router";
-import {UserTargetEnum} from "../../types/UserTargetEnum";
-import {UserGenderEnum} from "../../types/UserGenderEnum";
-import {AccountService} from "../../data-access/account.service";
+import {AccountService} from "../../../../core/account/account.service";
+import {GenderEnum} from "../../../../core/enums/GenderEnum";
 
 @Component({
   selector: 'app-signup',
@@ -50,8 +49,8 @@ export default class SignupPage {
   protected signUpSecondStepForm = this.fb.group({
     height: this.fb.control(0, { validators: [Validators.required, Validators.min(100)], nonNullable: true }),
     weight: this.fb.control(0, { validators: [Validators.required, Validators.min(30)], nonNullable: true }),
-    gender: this.fb.control(UserGenderEnum.Male, { validators: [Validators.required], nonNullable: true }),
-    target: this.fb.control(UserTargetEnum.KeepWeight, { validators: [Validators.required], nonNullable: true }),
+    gender: this.fb.control(GenderEnum.Male, { validators: [Validators.required], nonNullable: true }),
+    targetWeight: this.fb.control(0, { validators: [Validators.required, Validators.min(30)], nonNullable: true }),
   });
 
   protected signUp() {
@@ -62,6 +61,5 @@ export default class SignupPage {
       .subscribe(() => this.router.navigate(['/', 'auth', 'login']));
   }
 
-  protected readonly UserGenderEnum = UserGenderEnum;
-  protected readonly UserTargetEnum = UserTargetEnum;
+  protected readonly GenderEnum = GenderEnum;
 }

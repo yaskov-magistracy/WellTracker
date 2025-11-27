@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, CUSTOM_ELEMENTS_SCHEMA, inject} from '@angular/core';
+import {ChangeDetectionStrategy, Component, CUSTOM_ELEMENTS_SCHEMA, inject, viewChild} from '@angular/core';
 import {
   WeightStatisticAxisChartComponent
 } from "./charts/weight-statistic-axis-chart/weight-statistic-axis-chart.component";
@@ -6,7 +6,7 @@ import {KcalStatisticBarChartComponent} from "./charts/kcal-statistic-bar-chart/
 import {
   NutrientStatisticPieChartComponent
 } from "./charts/nutrients-statistic-pie-chart/nutrients-statistic-pie-chart.component";
-import {DiaryStatisticService} from "./services/diary-statistic.service";
+import {ViewWillEnter} from "@ionic/angular";
 @Component({
   selector: 'app-diary-statistic',
   templateUrl: './diary-statistic.component.html',

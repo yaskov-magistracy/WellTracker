@@ -1,0 +1,48 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-title>Профиль</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" [color]="'light'">
+  <div class="wrapper">
+    <h2 class="wrapper__title">Настройки</h2>
+    <ion-list [inset]="true">
+      <ion-nav-link [component]="UserProfileBuildInfoComponent">
+        <ion-item [button]="true">
+          <ion-icon
+            name="scale-outline"
+            [color]="'medium'"
+            slot="start"></ion-icon>
+          <ion-label>Параметры</ion-label>
+        </ion-item>
+      </ion-nav-link>
+      <ion-nav-link [component]="UserProfilePrivacyComponent">
+        <ion-item [button]="true">
+          <ion-icon
+            name="lock-closed-outline"
+            [color]="'medium'"
+            slot="start"></ion-icon>
+          <ion-label>Безопасность</ion-label>
+        </ion-item>
+      </ion-nav-link>
+    </ion-list>
+    <section class="wrapper__buttons">
+      <ion-button class="wrapper__buttons-btn"
+                  id="signOutBtn"
+                  [expand]="'block'"
+                  [color]="'danger'"
+                  [fill]="'clear'">
+        Выйти из аккаунта
+      </ion-button>
+    </section>
+  </div>
+</ion-content>
+
+<ion-action-sheet
+  header="Подтверждение выхода"
+  subHeader="Вы уверены, что хотите выйти?"
+  trigger="signOutBtn"
+  [buttons]="logoutActionSheetConstant"
+  (didDismiss)="logout($event)">
+</ion-action-sheet>

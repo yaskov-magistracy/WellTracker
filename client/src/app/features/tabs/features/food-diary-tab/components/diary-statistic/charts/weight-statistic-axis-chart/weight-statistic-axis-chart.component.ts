@@ -1,11 +1,14 @@
-import {ChangeDetectionStrategy, Component, computed, EventEmitter, inject, output, signal} from '@angular/core';
+import {ChangeDetectionStrategy, Component, computed, DestroyRef, inject, OnInit, output, signal} from '@angular/core';
 import {IonCard, IonCardContent, IonSelect, IonSelectOption} from "@ionic/angular/standalone";
 import {NgxEchartsDirective} from "ngx-echarts";
 import {createWeightStatisticLineOptions} from "./chart-options/create-weight-statistic-axis-settings";
 import {DiaryStatisticService} from "../../services/diary-statistic.service";
 import {DateRangeEnum} from "../../../../../../../../core/enums/DateRange";
-import {rxResource} from "@angular/core/rxjs-interop";
+import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
 import {RoundNumberPipe} from "../../../../../../../../shared/pipes/round.number.pipe";
+import {IDiaryStatisticComponent} from "../../types/IDiaryStatisticComponent";
+import {FoodDiaryTabService} from "../../../../services/food-diary-tab.service";
+import {errorRxResource} from "../../../../../../../../core/error-handling/errorRxResource";
 
 @Component({
   selector: 'app-weight-statistic-axis-chart',
@@ -21,15 +24,17 @@ import {RoundNumberPipe} from "../../../../../../../../shared/pipes/round.number
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class WeightStatisticAxisChartComponent {
+export class WeightStatisticAxisChartComponent implements OnInit, IDiaryStatisticComponent {
 
   #diaryStatisticS = inject(DiaryStatisticService);
+  #foodDiaryTabS = inject(FoodDiaryTabService);
+  #destroyRef = inject(DestroyRef);
 
   chartInit = output();
 
   protected currentDateRange = signal<DateRangeEnum>(DateRangeEnum.Week);
 
-  protected weightStatisticResource = rxResource({
+  weightStatisticResource = errorRxResource({
     params: () => this.currentDateRange(),
     stream: ({ params: dateRange }) => this.#diaryStatisticS.getWeightStatistic$(dateRange)
   })
@@ -41,6 +46,17 @@ export class WeightStatisticAxisChartComponent {
       null;
   });
 
+  ngOnInit() {
+    this.listenFoodDiaryTabActivated();
+  }
+
+  listenFoodDiaryTabActivated() {
+    this.#foodDiaryTabS.foodDiaryTabActivated$
+      .pipe(
+        takeUntilDestroyed(this.#destroyRef)
+      )
+      .subscribe(() => this.weightStatisticResource.reload());
+  }
 
   protected readonly DateRangeEnum = DateRangeEnum;
 }

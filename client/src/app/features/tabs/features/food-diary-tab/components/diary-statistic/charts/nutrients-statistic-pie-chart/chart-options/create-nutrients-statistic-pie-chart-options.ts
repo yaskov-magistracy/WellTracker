@@ -41,7 +41,7 @@ export function createNutrientsStatisticPieChartOptions(foodStatistic: FoodStati
         label: {
           show: true,
           position: "inside",
-          formatter: "{c}гр.",
+          formatter: "{c}г.",
           fontSize: 16,
           fontWeight: 600,
           color: "#fff",
@@ -66,7 +66,7 @@ export function createNutrientsStatisticPieChartOptions(foodStatistic: FoodStati
         label: {
           show: true,
           position: "inside",
-          formatter: "{c}гр.",
+          formatter: "{c}г.",
           fontSize: 16,
           fontWeight: 600,
           color: "#fff",

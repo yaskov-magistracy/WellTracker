@@ -66,7 +66,7 @@ const createNutrientLabel = (nutrientInfo: ConsumedEnergyNutrientInfo,
     position: 'center',
     formatter: [
       `{a|${roundNumber(consumed)}}`,
-      `{b|/${roundNumber(required)}гр.}`
+      `{b|/${roundNumber(required)}г.}`
     ].join('\n'),
     rich: {
       a: {

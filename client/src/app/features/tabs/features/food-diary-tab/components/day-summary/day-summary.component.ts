@@ -5,6 +5,7 @@ import {
   KcalNutrimentsDaySummaryComponent
 } from "./components/kcal-nutriments-day-summary/kcal-nutriments-day-summary.component";
 import {MealsDaySummaryComponent} from "./components/meals-day-summary/meals-day-summary.component";
+import {IonSpinner} from "@ionic/angular/standalone";
 
 @Component({
   selector: 'app-day-summary',
@@ -13,13 +14,15 @@ import {MealsDaySummaryComponent} from "./components/meals-day-summary/meals-day
   imports: [
     AsyncPipe,
     KcalNutrimentsDaySummaryComponent,
-    MealsDaySummaryComponent
+    MealsDaySummaryComponent,
+    IonSpinner
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DaySummaryComponent {
 
   #daySummaryS = inject(DaySummaryService);
-  protected daySummary$ = this.#daySummaryS.getDaySummary$();
+
+  daySummary = this.#daySummaryS.daySummary;
 }
 

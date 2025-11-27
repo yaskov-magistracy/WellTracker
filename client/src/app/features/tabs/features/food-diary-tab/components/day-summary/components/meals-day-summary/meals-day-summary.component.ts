@@ -1,9 +1,18 @@
 import {ChangeDetectionStrategy, Component, computed, CUSTOM_ELEMENTS_SCHEMA, input} from '@angular/core';
-import {IonButton, IonCard, IonCardContent, IonCardHeader, IonCardTitle, IonIcon} from "@ionic/angular/standalone";
+import {
+  IonButton,
+  IonCard,
+  IonCardContent,
+  IonCardHeader,
+  IonCardTitle,
+  IonIcon,
+  IonText
+} from "@ionic/angular/standalone";
 import {createFoodEnergyProgressBarSettings} from "./charts-options/create-food-energy-progress-bar-settings";
 import {NgxEchartsDirective} from "ngx-echarts";
 import {MealsSummary} from "../../types/MealsSummary";
 import {RoundNumberPipe} from "../../../../../../../../shared/pipes/round.number.pipe";
+import {MealItemComponent} from "./components/meal-item/meal-item.component";
 
 @Component({
   selector: 'app-meals-day-summary',
@@ -18,6 +27,8 @@ import {RoundNumberPipe} from "../../../../../../../../shared/pipes/round.number
     NgxEchartsDirective,
     IonButton,
     RoundNumberPipe,
+    IonText,
+    MealItemComponent,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   schemas: [CUSTOM_ELEMENTS_SCHEMA]

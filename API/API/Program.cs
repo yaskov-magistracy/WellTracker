@@ -29,6 +29,7 @@ builder.Services.AddControllers(opt =>
 CookieAuth.Configure(builder.Services);
 
 builder.Services.AddDbContext<DataContext>();
+Dependencies.Register(builder.Services);
 builder.Services.RegisterModules();
 
 

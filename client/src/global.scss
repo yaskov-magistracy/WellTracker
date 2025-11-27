@@ -2,6 +2,7 @@
 @use "styles/modules/text.module" as textModule;
 @use "styles/modules/ion-card.module" as ionCardModule;
 @use "styles/modules/swiper.module" as swiperModule;
+@use "styles/modules/ion-action-sheet.module" as ionActionSheetModule;
 
 @import "@ionic/angular/css/core.css";
 
@@ -34,4 +35,5 @@
   @include textModule.textStyles;
   @include ionCardModule.ionCardStyles();
   @include swiperModule.swiperStyles();
+  @include ionActionSheetModule.ionActionSheetStyles();
 }

@@ -1,0 +1,30 @@
+@let isLoading = foodStatisticResource.isLoading();
+@let foodStatistic = foodStatisticResource.value();
+
+<ion-card class="card">
+  <ion-card-content>
+    <ion-select label="Промежуток" label-placement="floating"
+                [value]="currentDateRange()"
+                (ionChange)="currentDateRange.set($event.detail.value)">
+      <ion-select-option>{{ DateRangeEnum.Week }}</ion-select-option>
+      <ion-select-option>{{ DateRangeEnum.Month }}</ion-select-option>
+      <ion-select-option>{{ DateRangeEnum.ThreeMonths }}</ion-select-option>
+    </ion-select>
+    @if (
+      isLoading ||
+      foodStatisticResource.hasValue()
+      ) {
+      <div echarts class="card__chart"
+           [options]="nutrientsStatisticPieChartOptions()!"
+           [loading]="isLoading"
+      ></div>
+      @for (advice of foodStatistic?.advices ?? []; track $index) {
+        <ion-text [color]="'warning'">
+          <p class="card__advice">{{ advice }}</p>
+        </ion-text>
+      }
+    } @else {
+      Ничего не найдено
+    }
+  </ion-card-content>
+</ion-card>

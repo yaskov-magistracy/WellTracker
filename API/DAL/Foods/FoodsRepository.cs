@@ -15,6 +15,8 @@ public class FoodsRepository(
         var query = Foods
             .AsQueryable();
 
+        if (request.ExcludedIds?.Any() is true)
+            query = query.Where(e => !request.ExcludedIds.Contains(e.Id));
         if (!string.IsNullOrWhiteSpace(request.SearchText))
             query = query.Where(e => e.SearchVector.Matches(request.SearchText));
 

@@ -1,0 +1,23 @@
+<ion-card class="kcalCard">
+  <ion-card-content>
+    <div class="piesWrapper">
+      <section class="kcalSection">
+        <span class="kcalSection__text">
+          <span class="secondary">{{ kcalNutrimentsSummary().totalEnergy.kcal }}</span><br>
+          <span class="kcalSection__text-end tertiary">съедено</span>
+        </span>
+        <div class="kcalSection__pie" echarts
+             [options]="kcalPieOptions()"
+        ></div>
+        <span class="kcalSection__text">
+          <span class="secondary">{{ kcalNutrimentsSummary().totalEnergy.kcalBurnt }}</span><br>
+          <span class="kcalSection__text-end">сожжено</span>
+        </span>      </section>
+      <section class="nutrientsSection">
+        <div class="nutrientsSection__pie" echarts
+             [options]="nutrientsPieOptions()"
+        ></div>
+      </section>
+    </div>
+  </ion-card-content>
+</ion-card>

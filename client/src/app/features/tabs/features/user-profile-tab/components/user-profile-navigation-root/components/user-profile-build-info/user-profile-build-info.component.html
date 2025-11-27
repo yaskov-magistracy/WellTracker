@@ -1,0 +1,73 @@
+<ion-header [translucent]="true">
+  <ion-toolbar [color]="'primary'">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Параметры</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" [color]="'light'">
+  <div class="wrapper">
+    <ion-list [formGroup]="userBuildFormGroup"
+              [inset]="true"
+    >
+      <ion-item>
+        <ion-icon name="ruler" slot="start"></ion-icon>
+        <ion-input [formControlName]="'height'"
+                   [type]="'number'"
+                   [labelPlacement]="'stacked'"
+        >
+          <div slot="label"><ion-text [color]="'medium'">Рост</ion-text></div>
+          <div slot="end"><ion-text [color]="'medium'">см.</ion-text></div>
+        </ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-icon aria-hidden="true" name="weight" slot="start"></ion-icon>
+        <ion-input [formControlName]="'weight'"
+                   [labelPlacement]="'stacked'"
+                   [type]="'number'"
+                   [inputmode]="'numeric'"
+        >
+          <div slot="label"><ion-text [color]="'medium'">Вес</ion-text></div>
+          <div slot="end"><ion-text [color]="'medium'">кг.</ion-text></div>
+        </ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-icon aria-hidden="true" name="target" slot="start"></ion-icon>
+        <ion-input [formControlName]="'targetWeight'"
+                   [type]="'number'"
+                   [labelPlacement]="'stacked'"
+        >
+          <div slot="label"><ion-text [color]="'medium'">Целевой вес</ion-text></div>
+          <div slot="end"><ion-text [color]="'medium'">кг.</ion-text></div>
+        </ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-icon aria-hidden="true" name="gender" slot="start"></ion-icon>
+        <ion-select
+          [labelPlacement]="'stacked'"
+          [formControlName]="'gender'"
+        >
+          <div slot="label"><ion-text [color]="'medium'">Пол</ion-text></div>
+          <ion-select-option [value]="GenderEnum.Male">Мужской</ion-select-option>
+          <ion-select-option [value]="GenderEnum.Female">Женский</ion-select-option>
+        </ion-select>
+      </ion-item>
+    </ion-list>
+    <section class="wrapper__buttons">
+      <ion-button class="wrapper__buttons-btn"
+                  [expand]="'block'"
+                  [fill]="'clear'"
+                  [disabled]="saveBtnDisabled()"
+                  (click)="saveChanges()"
+      >
+        Сохранить
+      </ion-button>
+    </section>
+  </div>
+</ion-content>
+

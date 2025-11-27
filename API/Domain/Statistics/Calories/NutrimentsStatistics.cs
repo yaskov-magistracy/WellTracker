@@ -4,8 +4,9 @@ namespace Domain.Statistics.Calories;
 
 public record NutrimentsStatistics(
     ICollection<NutrimentsRecord> Records,
-    FoodEnergy AverageEnergy,
-    FoodEnergy TargetEnergy,
+    FoodValue Total,
+    FoodValue Average,
+    FoodValue Target,
     string[] Advices
     )
 {

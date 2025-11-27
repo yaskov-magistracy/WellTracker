@@ -1,0 +1,7 @@
+<swiper-container pagination="true">
+  @for (meal of mealsSummaryArray(); track $index) {
+    <swiper-slide>
+      <app-meal-item [meal]="meal"></app-meal-item>
+    </swiper-slide>
+  }
+</swiper-container>

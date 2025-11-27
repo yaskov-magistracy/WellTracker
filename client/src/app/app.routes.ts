@@ -1,6 +1,6 @@
 import {Routes} from "@angular/router";
-import {isAuthorizedGuard} from "./shared/guards/is-authorized-guard";
-import {isUnauthorizedGuard} from "./shared/guards/is-unauthorized-guard";
+import {isAuthorizedGuard} from "./core/guards/is-authorized-guard";
+import {isUnauthorizedGuard} from "./core/guards/is-unauthorized-guard";
 
 export const routes: Routes = [
   {
@@ -10,14 +10,18 @@ export const routes: Routes = [
       { path: '', redirectTo: 'tabs', pathMatch: 'full' },
       {
         path: 'tabs',
-        loadComponent: () => import('./tabs/shell/tabs.page'),
-        loadChildren: () => import('./tabs/shell/tabs.routes')
-      },
+        loadComponent: () => import('./features/tabs/shell/tabs.page'),
+        loadChildren: () => import('./features/tabs/shell/tabs.routes')
+      }
     ]
   },
   {
     path: 'auth',
-    loadChildren: () => import('./auth/shell/auth.routes'),
+    loadChildren: () => import('./features/auth/shell/auth.routes'),
     canActivate: [isUnauthorizedGuard],
+  },
+  {
+    path: '**',
+    redirectTo: ''
   }
 ]

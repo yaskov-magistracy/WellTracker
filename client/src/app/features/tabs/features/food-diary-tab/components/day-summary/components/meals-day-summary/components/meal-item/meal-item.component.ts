@@ -1,15 +1,16 @@
-import {ChangeDetectionStrategy, Component, input, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, Component, inject, input, OnInit} from '@angular/core';
 import {
   IonButton,
   IonCard,
   IonCardContent,
   IonCardHeader,
-  IonCardTitle,
-  IonIcon,
-  IonText
+  IonCardTitle, IonContent,
+  IonIcon, IonModal, IonNav,
+  IonText, ModalController
 } from "@ionic/angular/standalone";
 import {RoundNumberPipe} from "../../../../../../../../../../shared/pipes/round.number.pipe";
 import {FoodMealExtended} from "../../../../types/FoodMealExtended";
+import {MealFoodItemsListComponent} from "./components/meal-food-items-list/meal-food-items-list.component";
 
 @Component({
   selector: 'app-meal-item',
@@ -23,12 +24,18 @@ import {FoodMealExtended} from "../../../../types/FoodMealExtended";
     IonCardTitle,
     IonButton,
     RoundNumberPipe,
-    IonCardContent
+    IonCardContent,
+    IonModal,
+    IonNav,
+    IonContent
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MealItemComponent {
 
+  #modalCtrl = inject(ModalController);
+
   meal = input.required<FoodMealExtended>();
 
+  protected readonly MealFoodItemsListComponent = MealFoodItemsListComponent;
 }

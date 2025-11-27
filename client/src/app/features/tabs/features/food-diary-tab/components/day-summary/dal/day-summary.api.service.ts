@@ -8,6 +8,7 @@ import {emptyFoodEnergy} from "../../../mocks/empty-food-energy";
 import {emptyFoodNutriments} from "../../../mocks/empty-food-nutriments";
 import {emptyFoodMeal} from "../../../mocks/empty-food-meal";
 import {formatDate} from "../../../../../../../core/utils/dates/format-date";
+import {Food} from "../../../types/food/Food";
 
 @Injectable({
   providedIn: 'root'
@@ -25,10 +26,10 @@ export class DaySummaryApiService {
             ...foodDiary,
             totalEnergy: foodDiary.totalEnergy ?? emptyFoodEnergy,
             totalNutriments: foodDiary.totalNutriments ?? emptyFoodNutriments,
-            breakfast: foodDiary.lunch ?? emptyFoodMeal,
+            breakfast: foodDiary.breakfast ?? emptyFoodMeal,
             lunch: foodDiary.lunch ?? emptyFoodMeal,
-            snack: foodDiary.lunch ?? emptyFoodMeal,
-            dinner: foodDiary.lunch ?? emptyFoodMeal
+            snack: foodDiary.snack ?? emptyFoodMeal,
+            dinner: foodDiary.dinner ?? emptyFoodMeal
           }))
         )
       ,
@@ -44,12 +45,16 @@ export class DaySummaryApiService {
             totalEnergy: { ...todayFoodDiary.totalEnergy , kcalBurnt: todayExerciseDiary.target.info.totalKcalBurnt }
           },
           mealsSummary: {
-            breakfast: { name: 'Завтрак', iconName: 'breakfast', ...todayFoodDiary.breakfast },
-            lunch: { name: 'Обед', iconName: 'lunch', ...todayFoodDiary.lunch },
-            snack: { name: 'Перекус', iconName: 'snack', ...todayFoodDiary.snack },
-            dinner: { name: 'Ужин', iconName: 'dinner', ...todayFoodDiary.dinner }
-          }
+            breakfast: { fieldName: 'breakfast', name: 'Завтрак', iconName: 'breakfast', ...todayFoodDiary.breakfast },
+            lunch: { fieldName: 'lunch', name: 'Обед', iconName: 'lunch', ...todayFoodDiary.lunch },
+            snack: { fieldName: 'snack', name: 'Перекус', iconName: 'snack', ...todayFoodDiary.snack },
+            dinner: { fieldName: 'dinner', name: 'Ужин', iconName: 'dinner', ...todayFoodDiary.dinner }
+          },
+          foodDiary: todayFoodDiary
         }) as DaySummary)
       );
+  }
+
+  addProductToMeal$(product: Food, mealType: 'breakfast' | 'lunch' | 'snack' | 'dinner') {
   }
 }

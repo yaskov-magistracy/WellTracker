@@ -6,9 +6,17 @@
 }
 
 @mixin nutrients-color() {
-  --fat: rgba(227, 148, 21, 0.87);
-  --protein: rgba(13, 194, 244, 0.69);
-  --carb: rgba(16, 227, 207, 0.7);
+  --fat: #B76E00E5;
+  --protein: #0070A4CC;
+  --carb: #00937ECC;
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --fat: #E39415DD;
+      --protein: #0DC2F4AF;
+      --carb: #10E3CFB2;
+    }
+  }
 }
 
 @mixin text-color() {

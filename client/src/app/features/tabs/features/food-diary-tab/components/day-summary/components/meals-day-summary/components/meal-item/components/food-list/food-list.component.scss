@@ -1,0 +1,64 @@
+:host {
+  .wrapper {
+    &__foodList {
+      &-label {
+        &__nutriments {
+          &-protein {
+            color: var(--protein);
+          }
+          &-fat {
+            color: var(--fat);
+          }
+          &-carbs {
+            color: var(--carb);
+          }
+        }
+      }
+    }
+  }
+}
+
+ion-note {
+  font-size: 14px;
+  vertical-align: sub;
+}
+
+.modal {
+  --height: auto;
+  --backdrop-opacity: var(--ion-backdrop-opacity, 0.4) !important;
+  &::part(content) {
+    height: auto;
+    position: absolute;
+    bottom: 0;
+  }
+  &__wrapper {
+    &-nameWrapper {
+      margin-left: var(--ion-card-left-margin);
+    }
+    &-fieldsList {
+      &__item {
+        p {
+          font-weight: 600;
+        }
+      }
+      &__nutrimentsItem {
+        &-nutriments {
+          display: flex;
+          justify-content: space-between;
+          gap: 5px;
+          &__protein {
+            color: var(--protein);
+          }
+          &__fat {
+            color: var(--fat);
+          }
+          &__carb {
+            color: var(--carb);
+          }
+        }
+      }
+    }
+  }
+}
+
+

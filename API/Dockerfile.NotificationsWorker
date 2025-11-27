@@ -8,11 +8,13 @@ WORKDIR /src
 COPY ["Infrastructure/Infrastructure.csproj", "Infrastructure/"]
 COPY ["Domain/Domain.csproj", "Domain/"]
 COPY ["DAL/DAL.csproj", "DAL/"]
+COPY ["GigaChat/GigaChat.csproj", "GigaChat/"]
 COPY ["NotificationsWorker/NotificationsWorker.csproj", "NotificationsWorker/"]
 RUN dotnet restore "NotificationsWorker/NotificationsWorker.csproj"
 COPY ./Infrastructure ./Infrastructure
 COPY ./Domain ./Domain
 COPY ./DAL ./DAL
+COPY ./GigaChat ./GigaChat
 COPY ./NotificationsWorker ./NotificationsWorker
 WORKDIR "/src/NotificationsWorker"
 RUN dotnet build "./NotificationsWorker.csproj" -c $BUILD_CONFIGURATION -o /app/build

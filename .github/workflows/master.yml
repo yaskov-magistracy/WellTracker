@@ -46,7 +46,7 @@ jobs:
 
     - name: Docker login
       env:
-        DOCKER_LOGIN: ${{ env.BACKEND_TG_WORKER_IMAGE }}
+        DOCKER_LOGIN: ${{ env.BACKEND_TG_WORKER_DOCKER_LOGIN }}
         DOCKER_PASSWORD: ${{ secrets.BACKEND_TG_WORKER_DOCKER_PASSWORD }}
       run:
         docker login -u $DOCKER_LOGIN -p $DOCKER_PASSWORD

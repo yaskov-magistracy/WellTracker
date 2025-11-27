@@ -22,7 +22,6 @@
     <ItemGroup>
       <ProjectReference Include="..\DAL\DAL.csproj" />
       <ProjectReference Include="..\Domain\Domain.csproj" />
-      <ProjectReference Include="..\TelegramBot\TelegramBot.csproj" />
     </ItemGroup>
 
 </Project>

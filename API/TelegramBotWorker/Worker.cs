@@ -1,26 +1,30 @@
-﻿using Telegram.Bot;
+using Telegram.Bot;
 using Telegram.Bot.Exceptions;
 using Telegram.Bot.Polling;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
 using Telegram.Bot.Types.ReplyMarkups;
-using TelegramBot.Commands;
+using TelegramBotWorker.Commands;
 
-namespace TelegramBot;
+namespace TelegramBotWorker;
 
-public class TelegramDaemon
+public class Worker(
+    TelegramBotClient tgClient, 
+    IEnumerable<ITgCommand> tgCommands
+) : BackgroundService
 {
-    private readonly Dictionary<string, ITgCommand> textToCommands;
-    
-    public TelegramDaemon(
-        TelegramBotClient client, 
-        IEnumerable<ITgCommand> tgCommands)
+    private readonly Dictionary<string, ITgCommand> textToCommands = tgCommands
+        .SelectMany(command => command
+            .GetCommands()
+            .Select(key => new {key, command}))
+        .ToDictionary(x => x.key, x => x.command);
+
+    protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
-        textToCommands = tgCommands
-            .SelectMany(command => command
-                .GetCommands()
-                .Select(key => new {key, command}))
-            .ToDictionary(x => x.key, x => x.command);
+        // while (!stoppingToken.IsCancellationRequested)
+        // {
+        //     
+        // } TODO
         var receiverOptions = new ReceiverOptions
         {
             AllowedUpdates = new[] 
@@ -31,7 +35,7 @@ public class TelegramDaemon
         };
         
         using var cts = new CancellationTokenSource();
-        client.StartReceiving(UpdateHandler, ErrorHandler, receiverOptions, cts.Token);
+        tgClient.StartReceiving(UpdateHandler, ErrorHandler, receiverOptions, cts.Token);
     }
     
     private async Task UpdateHandler(ITelegramBotClient client, Update update, CancellationToken cancellationToken)

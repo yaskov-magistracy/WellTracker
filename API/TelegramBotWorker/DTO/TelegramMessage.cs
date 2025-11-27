@@ -1,7 +1,7 @@
 ﻿using Telegram.Bot.Types.Enums;
 using Telegram.Bot.Types.ReplyMarkups;
 
-namespace TelegramBot.DTO;
+namespace TelegramBotWorker.DTO;
 
 public record TelegramMessage(
 long ChatId ,

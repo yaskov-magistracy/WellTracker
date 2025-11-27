@@ -1,2 +1,4 @@
 BACKEND_IMAGE = fnatikjk/welltracker-backend:last
+BACKEND_TG_WORKER_IMAGE = fnatikjk2/welltracker-tg-worker:last
+BACKEND_NOTIFICATIONS_WORKER_IMAGE = fnatikjk3/welltracker-notifications-worker:last
 FRONTEND_IMAGE = iceneo/welltracker-frontend:last

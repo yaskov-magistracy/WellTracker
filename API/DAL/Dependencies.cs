@@ -29,6 +29,7 @@ using Domain.Statistics.Weight;
 using GigaChat;
 using Infrastructure.Config;
 using Microsoft.Extensions.DependencyInjection;
+using Telegram.Bot;
 
 namespace DAL;
 
@@ -36,6 +37,12 @@ public class Dependencies
 {
     public static void Register(IServiceCollection services)
     {
+        services.AddSingleton<Config>();
+        services.AddDbContext<DataContext>();
+        
+        services.AddSingleton<TelegramBotClient>(s 
+            => new TelegramBotClient(s.GetRequiredService<Config>().Telegram.Token));
+
         services.AddSingleton<IPasswordHasher, PasswordHasher>();
         services.AddScoped<IUsersService, UsersService>();
         services.AddScoped<IAdminsService, AdminsService>();

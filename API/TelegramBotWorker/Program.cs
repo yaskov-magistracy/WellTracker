@@ -4,9 +4,7 @@ using TelegramBotWorker;
 using TelegramBotWorker.Commands;
 
 var builder = Host.CreateApplicationBuilder(args);
-builder.Services.AddSingleton<Config>();
-builder.Services.AddSingleton<TelegramBotClientSettings>(s => new(s.GetRequiredService<Config>().Telegram.Token));
-builder.Services.AddSingleton<TelegramBotClient>(s => new TelegramBotClient(s.GetRequiredService<Config>().Telegram.Token));
+DAL.Dependencies.Register(builder.Services);
 RegisterTgCommands(builder.Services);
 builder.Services.AddHostedService<Worker>();
 

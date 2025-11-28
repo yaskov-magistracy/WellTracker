@@ -10,7 +10,7 @@ export function createKcalStatisticBarChartOptions(foodStatistic: FoodStatistic)
   const secondaryTextColor = documentElementComputedStyle.getPropertyValue('--ion-text-color-step-500');
   const bgColor = documentElementComputedStyle.getPropertyValue('--ion-background-color');
 
-  const dates = foodStatistic.records.map(record => formatDate(new Date(record.date)));
+  const dates = foodStatistic.records.map(record => formatDate(new Date(record.date), true));
   const values = foodStatistic.records.map(record => roundNumber(record.energy.kcal));
 
   return {

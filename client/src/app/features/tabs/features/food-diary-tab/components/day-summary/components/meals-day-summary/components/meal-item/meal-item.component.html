@@ -30,9 +30,9 @@
   </ion-card-header>
   <ion-card-content class="card__content">
     <div class="card__content-wrapper">
-      <span class="card__content-wrapper__protein">Б: {{ meal().totalNutriments.protein }}г,</span>
-      <span class="card__content-wrapper__fat">Ж: {{ meal().totalNutriments.fat }}г,</span>
-      <span class="card__content-wrapper__carbs">У: {{ meal().totalNutriments.carbohydrates }}г,</span>
+      <span class="card__content-wrapper__protein">Б: {{ meal().totalNutriments.protein | roundNumber }}г,</span>
+      <span class="card__content-wrapper__fat">Ж: {{ meal().totalNutriments.fat | roundNumber }}г,</span>
+      <span class="card__content-wrapper__carbs">У: {{ meal().totalNutriments.carbohydrates | roundNumber }}г,</span>
     </div>
   </ion-card-content>
 </ion-card>

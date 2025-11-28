@@ -10,9 +10,9 @@ export function createWeightStatisticLineOptions(weightStatistic: WeightStatisti
   const secondaryTextColor = documentElementComputedStyle.getPropertyValue('--ion-text-color-step-500');
   const bgColor = documentElementComputedStyle.getPropertyValue('--ion-background-color');
 
-  const dates = getAllDatesFromRecords(weightStatistic.statistics.records);
+  const dates = getAllDatesFromRecords(weightStatistic.statistics.records, true);
   const values = weightStatistic.statistics.records.map(record => {
-    const datesInterval = getAllDatesFromRecords([record]);
+    const datesInterval = getAllDatesFromRecords([record], true);
     return new Array(datesInterval.length).fill(roundNumber(record.weight)) as number[];
   }).flat();
 
@@ -39,7 +39,10 @@ export function createWeightStatisticLineOptions(weightStatistic: WeightStatisti
       data: dates,
       axisLine: { lineStyle: { color: secondaryTextColor } },
       axisTick: { show: false },
-      axisLabel: { color: secondaryTextColor },
+      axisLabel: {
+        color: secondaryTextColor,
+        formatter: (val: string) => val.slice(0, 5),
+      },
     },
     yAxis: {
       type: 'value',

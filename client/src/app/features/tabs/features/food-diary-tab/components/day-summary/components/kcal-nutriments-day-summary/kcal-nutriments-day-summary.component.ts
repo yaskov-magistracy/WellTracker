@@ -4,16 +4,18 @@ import {NgxEchartsDirective} from "ngx-echarts";
 import {KcalNutrimentsSummary} from "../../types/KcalNutrimentsSummary";
 import {createFoodEnergyPieChartSettings} from "./charts-options/create-food-energy-pie-chart-settings";
 import {createNutrientsPieChartSettings} from "./charts-options/create-nutrients-pie-chart-settings";
+import {RoundNumberPipe} from "../../../../../../../../shared/pipes/round.number.pipe";
 
 @Component({
   selector: 'app-kcal-nutriments-day-summary',
   templateUrl: './kcal-nutriments-day-summary.component.html',
   styleUrls: ['./kcal-nutriments-day-summary.component.scss'],
   imports: [
-        IonCard,
-        IonCardContent,
-        NgxEchartsDirective
-    ],
+    IonCard,
+    IonCardContent,
+    NgxEchartsDirective,
+    RoundNumberPipe
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class KcalNutrimentsDaySummaryComponent {

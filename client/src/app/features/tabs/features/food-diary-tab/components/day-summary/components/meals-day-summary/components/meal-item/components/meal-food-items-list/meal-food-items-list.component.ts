@@ -11,17 +11,12 @@ import {
 import {FoodMealExtended} from "../../../../../../types/FoodMealExtended";
 import {FoodListComponent} from "../food-list/food-list.component";
 import {RoundNumberPipe} from "../../../../../../../../../../../../shared/pipes/round.number.pipe";
-import {
-  logoutActionSheetConstant
-} from "../../../../../../../../../user-profile-tab/components/user-profile-navigation-root/constants/logout-action-sheet.constant";
-import type {OverlayEventDetail} from "@ionic/core";
-import {FoodDiaryService} from "../../../../../../../../services/food-diary.service";
 import {DaySummaryService} from "../../../../../../services/day-summary.service";
 import {deleteFoodActionSheetConstant} from "./constants/deleteFoodActionSheet.constant";
-import {Food} from "../../../../../../../../types/food/Food";
 import {FormControl, ReactiveFormsModule, Validators} from "@angular/forms";
 import {FoodNutriments} from "../../../../../../../../types/food/FoodNutriments";
 import {toSignal} from "@angular/core/rxjs-interop";
+import {EatenFood} from "../../../../../../../../types/food/EatenFood";
 
 @Component({
   selector: 'app-meal-food-items-list',
@@ -61,9 +56,9 @@ export class MealFoodItemsListComponent {
 
   meal = input.required<FoodMealExtended>();
   foodList = computed(() => this.meal().eatenFoods);
-  readonly selectedFood = signal<Food | null>(null);
+  readonly selectedEatenFood = signal<EatenFood | null>(null);
   readonly gramsOrPortionsControl = new FormControl<number>(
-    100,
+    0,
     { validators: [Validators.required, Validators.min(1)], nonNullable: true }
   );
   readonly usePortionsInput = signal(false);
@@ -82,24 +77,29 @@ export class MealFoodItemsListComponent {
 
   protected readonly FoodListComponent = FoodListComponent;
 
-  protected async selectFoodForChange(product: Food) {
-    this.selectedFood.set(product);
+  protected async selectFoodForChange(product: EatenFood) {
+    this.selectedEatenFood.set(product);
+    this.gramsOrPortionsControl.setValue(this.selectedEatenFood()!.grams);
     await this.modal().present();
   }
 
   protected changePortionsValue(usePortionsInput: boolean) {
     this.usePortionsInput.set(usePortionsInput);
-    if (usePortionsInput) { this.gramsOrPortionsControl.setValue(1); }
-    else {
-      if (usePortionsInput) { this.gramsOrPortionsControl.setValue(100); }
+    if (usePortionsInput) {
+      this.gramsOrPortionsControl.setValue(
+        this.selectedEatenFood()!.grams /
+        this.selectedEatenFood()!.food.gramsInPortion
+      );
+    } else {
+      this.gramsOrPortionsControl.setValue(this.selectedEatenFood()!.grams);
     }
   }
 
   protected changeProduct() {
     this.#daySummaryS.changeProductInMeal$({
-      foodId: this.selectedFood()!.id,
+      foodId: this.selectedEatenFood()!.food.id,
       grams: this.usePortionsInput() ?
-        this.gramsOrPortionsControl.value * this.selectedFood()!.gramsInPortion :
+        this.gramsOrPortionsControl.value * this.selectedEatenFood()!.food.gramsInPortion :
         this.gramsOrPortionsControl.value
     }, this.meal().fieldName)
       .subscribe();
@@ -128,13 +128,13 @@ export class MealFoodItemsListComponent {
       { initialValue: this.gramsOrPortionsControl.value }
     );
     return computed(() => {
-      const selectedFood = this.selectedFood();
+      const selectedFood = this.selectedEatenFood();
       const usePortionsInput = this.usePortionsInput();
       const gramsOrPortionsValue = gramsOrPortionsValueSignal();
       if (!selectedFood) { return 0; }
-      const nutrimentsIn100GValue = selectedFood.nutriments[nutriment];
+      const nutrimentsIn100GValue = selectedFood.food.nutriments[nutriment];
       const foodGrams = usePortionsInput ?
-        selectedFood.gramsInPortion * gramsOrPortionsValue :
+        selectedFood.food.gramsInPortion * gramsOrPortionsValue :
         gramsOrPortionsValue;
       return nutrimentsIn100GValue / 100 * foodGrams;
     })
@@ -146,13 +146,13 @@ export class MealFoodItemsListComponent {
       { initialValue: this.gramsOrPortionsControl.value }
     );
     return computed(() => {
-      const selectedFood = this.selectedFood();
+      const selectedFood = this.selectedEatenFood();
       const usePortionsInput = this.usePortionsInput();
       const gramsOrPortionsValue = gramsOrPortionsValueSignal();
       if (!selectedFood) { return 0; }
-      const kcalIn100GValue = selectedFood.energy.kcal;
+      const kcalIn100GValue = selectedFood.food.energy.kcal;
       const foodGrams = usePortionsInput ?
-        selectedFood.gramsInPortion * gramsOrPortionsValue :
+        selectedFood.food.gramsInPortion * gramsOrPortionsValue :
         gramsOrPortionsValue;
       return kcalIn100GValue / 100 * foodGrams;
     })

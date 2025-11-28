@@ -7,6 +7,7 @@ import {FoodMealType} from "../types/food/FoodMealType";
 import {UpdateFoodDTO} from "../dal/DTO/requests/UpdateFoodDiaryRequestDTO";
 import {FoodMapper} from "../../../../../core/food/food.mapper";
 import {FoodDiaryMapper} from "./food-diary.mapper";
+import {formatDate} from "../../../../../core/utils/dates/format-date";
 
 @Injectable({
   providedIn: 'root'
@@ -27,7 +28,7 @@ export class FoodDiaryService {
       mealType,
       [...meals[mealType], food]
     );
-    return this.#foodDiaryApiS.updateFoodDiary$(updatedMeals, diaryToAddFoodTo.date);
+    return this.#foodDiaryApiS.updateFoodDiary$(updatedMeals, formatDate(diaryToAddFoodTo.date));
   }
 
   changeFoodInDiaryMeal$(food: UpdateFoodDTO, mealType: FoodMealType, diaryToAddFoodTo: FoodDiary) {
@@ -40,7 +41,7 @@ export class FoodDiaryService {
         return food;
       })
     );
-    return this.#foodDiaryApiS.updateFoodDiary$(updatedMeals, diaryToAddFoodTo.date);
+    return this.#foodDiaryApiS.updateFoodDiary$(updatedMeals, formatDate(diaryToAddFoodTo.date));
   }
 
   deleteFoodFromDiaryMeal$(foodId: string, mealType: FoodMealType, diaryToAddFoodTo: FoodDiary) {
@@ -50,6 +51,6 @@ export class FoodDiaryService {
       mealType,
       meals[mealType].filter(f => f.foodId !== foodId)
     );
-    return this.#foodDiaryApiS.updateFoodDiary$(updatedMeals, diaryToAddFoodTo.date);
+    return this.#foodDiaryApiS.updateFoodDiary$(updatedMeals, formatDate(diaryToAddFoodTo.date));
   }
 }

@@ -1,16 +1,16 @@
 <div class="wrapper">
   <h2 class="wrapper__title">Итоги дня</h2>
-  @if (daySummary.isLoading()) {
-    <section class="wrapper__loadingSection">
-      <ion-spinner class="wrapper__loadingSection-spinner"></ion-spinner>
-    </section>
-  } @else if (daySummary.hasValue()) {
+  @if (daySummary.hasValue()) {
     <app-kcal-nutriments-day-summary
       [kcalNutrimentsSummary]="daySummary.value().kcalNutrimentsSummary">
     </app-kcal-nutriments-day-summary>
     <app-meals-day-summary
       [mealsSummary]="daySummary.value().mealsSummary"
     ></app-meals-day-summary>
+  } @else if (daySummary.isLoading()) {
+    <section class="wrapper__loadingSection">
+      <ion-spinner class="wrapper__loadingSection-spinner"></ion-spinner>
+    </section>
   } @else {
     Ничего не найдено
   }

@@ -29,6 +29,7 @@ import {RoundNumberPipe} from "../../../../../../../../../../../../shared/pipes/
 import {FormControl, ReactiveFormsModule, Validators} from "@angular/forms";
 import {FoodNutriments} from "../../../../../../../../types/food/FoodNutriments";
 import {DaySummaryService} from "../../../../../../services/day-summary.service";
+import {isEqual} from "lodash-es";
 
 @Component({
   selector: 'app-food-list',
@@ -112,18 +113,24 @@ export class FoodListComponent {
   });
 
   foodList = linkedSignal<
-    { food: Food[], searchText: string }, Food[]>({
+    { food: Food[], searchText: string, excludedIds: string[] }, Food[]>({
     source: () => ({
       food: this.#foodResource.value()!,
-      searchText: this.searchText()
+      searchText: this.searchText(),
+      excludedIds: this.#excludedIds()
     }),
     computation: (source, previous) => {
       if (
         (!source.food && previous?.value) &&
-        source.searchText === previous.source.searchText
+        source.searchText === previous.source.searchText &&
+        isEqual(source.excludedIds, previous.source.excludedIds)
       ) { return previous.value; }
       const previousFoodItems = previous?.value ?? [];
-      const newFoodItems = source.searchText !== previous?.source.searchText ?
+      const newFoodItems =
+        (
+          source.searchText !== previous?.source.searchText ||
+          !isEqual(source.excludedIds, previous.source.excludedIds)
+        ) ?
         source.food :
         [...previousFoodItems, ...source.food];
       return newFoodItems ?? [];
@@ -173,6 +180,8 @@ export class FoodListComponent {
     }, this.meal().fieldName)
       .subscribe(async () => {
         this.#excludedIds.update(excludedIds => [...excludedIds, product.id]);
+        this.#skip.set(0);
+        await this.modal().dismiss();
         const toast = await this.#toastController.create({
           message: 'Продукт успешно добавлен',
           duration: 1500,

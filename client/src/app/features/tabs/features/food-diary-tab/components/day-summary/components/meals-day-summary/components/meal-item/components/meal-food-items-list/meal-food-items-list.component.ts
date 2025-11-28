@@ -17,6 +17,7 @@ import {FormControl, ReactiveFormsModule, Validators} from "@angular/forms";
 import {FoodNutriments} from "../../../../../../../../types/food/FoodNutriments";
 import {toSignal} from "@angular/core/rxjs-interop";
 import {EatenFood} from "../../../../../../../../types/food/EatenFood";
+import {FoodMealType} from "../../../../../../../../types/food/FoodMealType";
 
 @Component({
   selector: 'app-meal-food-items-list',
@@ -54,7 +55,9 @@ export class MealFoodItemsListComponent {
 
   modal = viewChild.required(IonModal);
 
-  meal = input.required<FoodMealExtended>();
+  mealType = input.required<FoodMealType>();
+  meal = computed(() => this.#daySummaryS.dayMeals()![this.mealType()])
+
   foodList = computed(() => this.meal().eatenFoods);
   readonly selectedEatenFood = signal<EatenFood | null>(null);
   readonly gramsOrPortionsControl = new FormControl<number>(
@@ -102,7 +105,9 @@ export class MealFoodItemsListComponent {
         this.gramsOrPortionsControl.value * this.selectedEatenFood()!.food.gramsInPortion :
         this.gramsOrPortionsControl.value
     }, this.meal().fieldName)
-      .subscribe();
+      .subscribe(async () => {
+        await this.modal().dismiss()
+      });
   }
 
   protected async deleteProduct(productId: string) {

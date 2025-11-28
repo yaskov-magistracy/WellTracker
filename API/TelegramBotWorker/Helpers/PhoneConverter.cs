@@ -1,4 +1,4 @@
-﻿namespace TelegramBot.Helpers;
+﻿namespace TelegramBotWorker.Helpers;
 
 public class PhoneConverter
 {

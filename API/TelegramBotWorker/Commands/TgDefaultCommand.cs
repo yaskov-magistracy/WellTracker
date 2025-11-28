@@ -1,7 +1,7 @@
 ﻿using Telegram.Bot.Types;
-using TelegramBot.DTO;
+using TelegramBotWorker.DTO;
 
-namespace TelegramBot.Commands;
+namespace TelegramBotWorker.Commands;
 
 public class TgDefaultCommand(
 ) : ITgCommand

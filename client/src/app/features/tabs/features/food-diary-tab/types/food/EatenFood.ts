@@ -1,3 +1,3 @@
 import {Food} from "./Food";
 
-export type EatenFood = Food & { grams: number };
+export type EatenFood = { food: Food, grams: number; };

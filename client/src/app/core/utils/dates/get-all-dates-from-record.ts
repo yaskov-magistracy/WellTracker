@@ -1,5 +1,6 @@
+import {formatDate} from "./format-date";
 
-export function getAllDatesFromRecords(records: Array<{ from: string, to: string }>, formatted = true): string[] {
+export function getAllDatesFromRecords(records: Array<{ from: string, to: string }>, localeFormat = false): string[] {
   const allDates: string[] = [];
 
   records.forEach(record => {
@@ -8,13 +9,7 @@ export function getAllDatesFromRecords(records: Array<{ from: string, to: string
     const currentDate = new Date(fromDate);
 
     while (currentDate <= toDate) {
-      if (formatted) {
-        const day = currentDate.getDate().toString().padStart(2, '0');
-        const month = (currentDate.getMonth() + 1).toString().padStart(2, '0');
-        allDates.push(`${day}.${month}`);
-      } else {
-        allDates.push(currentDate.toISOString().split('T')[0]); // "2025-11-10"
-      }
+      allDates.push(formatDate(currentDate, localeFormat));
       currentDate.setDate(currentDate.getDate() + 1);
     }
   });

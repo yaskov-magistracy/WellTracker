@@ -14,8 +14,14 @@ internal class FoodEntityConfiguration : IEntityTypeConfiguration<FoodEntity>
         
         builder.OwnsOne(e => e.Energy);
 
-        builder.HasFullTextSearchIndex(
-                e => e.SearchVector,
-                e => new {e.Name, e.BrandName});
+        builder.HasGeneratedTsVectorColumn(
+                p => p.SearchVector,
+                "russian",  // Text search config
+                p => new { p.Name, p.BrandName })  // Included properties
+            .HasIndex(p => p.SearchVector)
+            .HasMethod("GIN"); 
+        // builder.HasFullTextSearchIndex(
+        //         e => e.SearchVector,
+        //         e => new {e.Name, e.BrandName});
     }
 }

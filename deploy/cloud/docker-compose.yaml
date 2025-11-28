@@ -35,6 +35,36 @@ services:
     networks:
       - my-network
 
+  tg-worker:
+    image: ${BACKEND_TG_WORKER_IMAGE}
+    container_name: tg-worker
+    environment:
+      - "APP_NAME=WellTacker-tg-worker"
+      - "APP_ENVIRONMENT=PRODUCTION"
+      - "DATABASE_CONNECTION_STRING=host=postgres;Port=5432;Database=WellTacker;User Id=${POSTGRES_USER};Password=${POSTGRES_PASSWORD};"
+      - "TELEGRAM_BOT_TOKEN=${TELEGRAM_BOT_TOKEN}"
+      - "GIGACHAT_AUTHORIZATION_KEY=${GIGACHAT_AUTHORIZATION_KEY}"
+      - "GIGACHAT_SCOPE=${GIGACHAT_SCOPE}"
+    depends_on:
+      - postgres
+    networks:
+      - my-network
+
+  notifications-worker:
+    image: ${BACKEND_NOTIFICATIONS_WORKER_IMAGE}
+    container_name: notifications-worker
+    environment:
+      - "APP_NAME=WellTacker-notifications-worker"
+      - "APP_ENVIRONMENT=PRODUCTION"
+      - "DATABASE_CONNECTION_STRING=host=postgres;Port=5432;Database=WellTacker;User Id=${POSTGRES_USER};Password=${POSTGRES_PASSWORD};"
+      - "TELEGRAM_BOT_TOKEN=${TELEGRAM_BOT_TOKEN}"
+      - "GIGACHAT_AUTHORIZATION_KEY=${GIGACHAT_AUTHORIZATION_KEY}"
+      - "GIGACHAT_SCOPE=${GIGACHAT_SCOPE}"
+    depends_on:
+      - postgres
+    networks:
+      - my-network
+
   front:
     image: ${FRONTEND_IMAGE}
     volumes:

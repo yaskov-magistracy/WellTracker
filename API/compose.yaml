@@ -1,0 +1,7 @@
+﻿services:
+  notificationsworker:
+    image: notificationsworker
+    build:
+      context: .
+      dockerfile: NotificationsWorker/Dockerfile
+

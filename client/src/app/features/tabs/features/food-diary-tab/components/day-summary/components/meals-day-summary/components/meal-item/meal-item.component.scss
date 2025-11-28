@@ -45,6 +45,9 @@
         &__protein { color: var(--protein); }
         &__fat { color: var(--fat); }
         &__carbs { color: var(--carb); }
+        &__protein, &__fat, &__carbs {
+          font-weight: 500;
+        }
       }
     }
   }

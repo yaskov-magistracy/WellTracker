@@ -18,6 +18,7 @@
                 </ion-text>
               </span>
         <ion-button class="card__title-calories__addBtn"
+                    [id]="'open-modal-' + meal().name"
                     [fill]="'clear'"
                     [size]="'large'"
         >
@@ -29,9 +30,22 @@
   </ion-card-header>
   <ion-card-content class="card__content">
     <div class="card__content-wrapper">
-      <span class="card__content-wrapper__protein">Б: {{ meal().totalNutriments.protein }}г.</span>
-      <span class="card__content-wrapper__fat">Ж: {{ meal().totalNutriments.fat }}г.</span>
-      <span class="card__content-wrapper__carbs">У: {{ meal().totalNutriments.carbohydrates }}г.</span>
+      <span class="card__content-wrapper__protein">Б: {{ meal().totalNutriments.protein | roundNumber }}г,</span>
+      <span class="card__content-wrapper__fat">Ж: {{ meal().totalNutriments.fat | roundNumber }}г,</span>
+      <span class="card__content-wrapper__carbs">У: {{ meal().totalNutriments.carbohydrates | roundNumber }}г,</span>
     </div>
   </ion-card-content>
 </ion-card>
+
+<ion-modal [trigger]="'open-modal-' + meal().name"
+           (willDismiss)="foodDiaryTabActivated$.next()"
+>
+  <ng-template>
+    <ion-content class="ion-padding">
+      <ion-nav
+        [root]="MealFoodItemsListComponent"
+        [rootParams]="{mealType: this.meal().fieldName}"
+      ></ion-nav>
+    </ion-content>
+  </ng-template>
+</ion-modal>

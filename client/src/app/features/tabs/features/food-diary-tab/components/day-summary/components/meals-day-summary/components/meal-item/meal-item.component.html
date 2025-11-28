@@ -37,12 +37,14 @@
   </ion-card-content>
 </ion-card>
 
-<ion-modal [trigger]="'open-modal-' + meal().name">
+<ion-modal [trigger]="'open-modal-' + meal().name"
+           (willDismiss)="foodDiaryTabActivated$.next()"
+>
   <ng-template>
     <ion-content class="ion-padding">
       <ion-nav
         [root]="MealFoodItemsListComponent"
-        [rootParams]="{meal: this.meal()}"
+        [rootParams]="{mealType: this.meal().fieldName}"
       ></ion-nav>
     </ion-content>
   </ng-template>

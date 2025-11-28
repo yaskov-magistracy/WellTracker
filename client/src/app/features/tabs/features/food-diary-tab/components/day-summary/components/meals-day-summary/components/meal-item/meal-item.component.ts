@@ -11,6 +11,7 @@ import {
 import {RoundNumberPipe} from "../../../../../../../../../../shared/pipes/round.number.pipe";
 import {FoodMealExtended} from "../../../../types/FoodMealExtended";
 import {MealFoodItemsListComponent} from "./components/meal-food-items-list/meal-food-items-list.component";
+import {FoodDiaryTabService} from "../../../../../../services/food-diary-tab.service";
 
 @Component({
   selector: 'app-meal-item',
@@ -33,9 +34,12 @@ import {MealFoodItemsListComponent} from "./components/meal-food-items-list/meal
 })
 export class MealItemComponent {
 
+  #foodDiaryTabS = inject(FoodDiaryTabService);
   #modalCtrl = inject(ModalController);
 
   meal = input.required<FoodMealExtended>();
+
+  foodDiaryTabActivated$ = this.#foodDiaryTabS.foodDiaryTabActivated$;
 
   protected readonly MealFoodItemsListComponent = MealFoodItemsListComponent;
 }

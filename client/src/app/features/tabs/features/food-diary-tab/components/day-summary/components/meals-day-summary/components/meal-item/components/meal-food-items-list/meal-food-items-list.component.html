@@ -9,20 +9,20 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <ion-nav-link
-    [component]="FoodListComponent"
-    [componentProps]="{ meal: this.meal() }"
-  >
-    <ion-fab
-      [horizontal]="'center'"
-      [vertical]="'bottom'"
-      slot="fixed">
+<ion-content [fixedSlotPlacement]="'before'">
+  <ion-fab
+    [horizontal]="'center'"
+    [vertical]="'bottom'"
+    slot="fixed">
+    <ion-nav-link
+      [component]="FoodListComponent"
+      [componentProps]="{ meal: this.meal() }"
+    >
       <ion-fab-button>
         <ion-icon name="add"></ion-icon>
       </ion-fab-button>
-    </ion-fab>
-  </ion-nav-link>
+    </ion-nav-link>
+  </ion-fab>
   <ion-list class="foodList" [class.centered]="!foodList().length">
     @for (foodItem of foodList(); track foodItem.food.id) {
       <ion-item class="foodList__item" class="wrapper__foodList">

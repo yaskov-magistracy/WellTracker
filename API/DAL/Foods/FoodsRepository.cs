@@ -15,10 +15,10 @@ public class FoodsRepository(
         var query = Foods
             .AsQueryable();
 
-        if (request.ExcludedIds?.Any() is true)
+        if (request.ExcludedIds?.Count > 0)
             query = query.Where(e => !request.ExcludedIds.Contains(e.Id));
         if (!string.IsNullOrWhiteSpace(request.SearchText))
-            query = query.Where(e => e.SearchVector.Matches(request.SearchText));
+            query = query.Where(e => e.SearchVector.Matches(EF.Functions.ToTsQuery("russian", request.SearchText)));
 
         return new(
             query.Skip(request.Skip).Take(request.Take).AsEnumerable().Select(FoodsMapper.ToDomain).ToArray(),

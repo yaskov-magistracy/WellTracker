@@ -63,7 +63,8 @@ public class UsersService(
             request.Gender,
             request.Weight,
             request.Height,
-            request.TargetWeight));
+            request.TargetWeight,
+            request.TgChatId));
         await weightRecordsRepository.AddOrUpdate(newUser.Id, request.Weight, DateOnly.FromDateTime(DateTime.UtcNow));
         return Results.Ok(newUser);
     }

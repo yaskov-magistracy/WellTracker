@@ -15,6 +15,7 @@ internal class UserEntity
     public float Weight { get; set; }
     public int Height { get; set; }
     public float TargetWeight { get; set; }
+    public long? TgChatId { get; set; }
     
     public ICollection<FoodDiaryEntity> FoodDiaries { get; set; }
     public ICollection<ExerciseDiaryEntity> ExerciseDiaries { get; set; }

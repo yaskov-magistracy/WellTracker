@@ -16,5 +16,6 @@ internal static class UsersMapper
             Weight = request.Weight,
             Height = request.Height,
             TargetWeight = request.TargetWeight,
+            TgChatId = request.TgChatId
         };
 }

@@ -6,5 +6,6 @@ public record UserCreateRequest(
     UserGender Gender,
     float Weight,
     int Height,
-    float TargetWeight
+    float TargetWeight,
+    long? TgChatId
 );

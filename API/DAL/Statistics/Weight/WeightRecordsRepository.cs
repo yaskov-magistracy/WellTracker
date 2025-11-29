@@ -42,4 +42,23 @@ public class WeightRecordsRepository(
             .Select(WeightRecordsMapper.ToDomain)
             .ToArray();
     }
+
+    public async Task<WeightDeviation?> GetDeviationToCurrent(Guid userId, DateOnly fromDate)
+    {
+        var record = await WeightRecords
+            .AsNoTracking()
+            .Where(e => e.UserId == userId)
+            .Where(e => e.Date <= fromDate)
+            .OrderByDescending(e => e.Date)
+            .FirstOrDefaultAsync();
+        if (record == null)
+            return null;
+        
+        var user = await dataContext.Users.AsNoTracking().FirstAsync(u => u.Id == record.UserId);
+        var deviationAbsolute = user.Weight - record.Weight;
+        return new(user.Weight,
+            user.TargetWeight,
+            deviationAbsolute,
+            deviationAbsolute / record.Weight * 100f);
+    }
 }

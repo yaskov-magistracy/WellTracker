@@ -10,6 +10,7 @@ public interface IChatsService
     Task<Result<ICollection<Chat>>> GetChats(Guid userId);
     Task<Result<Chat>> CreateChat(Guid userId, string message);
     Task<Result<SendMessageResponse>> SendMessage(Guid chatId, string message);
+    Task<Result<SendMessageResponse>> SendDeterminedMessage(Guid chatId, string userMessage, string botMessage);
     Task<Result<SearchChatMessagesResponse>> SearchChatMessages(SearchChatMessagesRequest request);
 }
 
@@ -55,6 +56,14 @@ public class ChatsService(
             true);
         
         return Results.Ok(new SendMessageResponse(sentMessage, botMessage));
+    }
+    
+    public async Task<Result<SendMessageResponse>> SendDeterminedMessage(Guid chatId, string userMessage, string botMessage)
+    {
+        var userSentMessage = await chatsRepository.SendMessage(chatId, userMessage, false);
+        var botSentMessage = await chatsRepository.SendMessage(chatId, botMessage, true);
+        
+        return Results.Ok(new SendMessageResponse(userSentMessage, botSentMessage));
     }
 
     private async Task<IList<GigaChatCompletionsRequestMessage>> GetChatContext(Guid chatId)

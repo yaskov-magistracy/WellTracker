@@ -3,6 +3,6 @@
 namespace Domain.Advices.DTO;
 
 public record Report(
-    string Test)
+    string Text)
 {
 }

@@ -89,5 +89,8 @@ public class Dependencies
         
         services.AddScoped<IUsersService, UsersService>();
         services.AddScoped<IUsersRepository, UsersRepository>();
+
+        services.AddScoped<IReportsGigaChatRequestGenerator, ReportsGigaChatRequestGenerator>();
+        services.AddScoped<IReportsService, ReportsService>();
     }
 }

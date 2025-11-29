@@ -6,5 +6,6 @@ public record UserInfoApiResponse(
     UserGender Gender,
     float Weight,
     int Height,
-    float TargetWeight
+    float TargetWeight,
+    long? TgChatId
 );

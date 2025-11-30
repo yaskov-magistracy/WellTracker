@@ -1,4 +1,6 @@
-﻿namespace Domain.Accounts.Users.DTO;
+﻿using Infrastructure.DTO;
+
+namespace Domain.Accounts.Users.DTO;
 
 public class UserUpdateEntity
 {
@@ -7,4 +9,5 @@ public class UserUpdateEntity
     public float? Weight {get; set; }
     public int? Height {get; set; }
     public float? TargetWeight {get; set; }
+    public NullablePatch<long?>? TgChatId { get; set; }
 }

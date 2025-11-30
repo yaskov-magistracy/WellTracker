@@ -33,7 +33,7 @@ public class AdvicesService(
         );
     }
 
-    private  FoodValue GetTargets(User user)
+    private FoodValue GetTargets(User user)
     {
         var targetKcal = user.Gender == UserGender.Male
             ? (15*user.TargetWeight) + (7*user.Height)

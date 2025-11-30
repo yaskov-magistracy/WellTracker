@@ -7,7 +7,8 @@ public record User(
     UserGender Gender,
     float Weight,
     int Height,
-    float TargetWeight
+    float TargetWeight,
+    long? TgChatId
 )
 {
     public UserTargetType GetTargetType()

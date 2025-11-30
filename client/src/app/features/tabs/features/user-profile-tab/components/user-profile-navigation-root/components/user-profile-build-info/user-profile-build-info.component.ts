@@ -1,4 +1,14 @@
-import {ChangeDetectionStrategy, Component, effect, inject, Injector, input, linkedSignal, OnInit} from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  effect,
+  inject,
+  Injector,
+  input,
+  linkedSignal,
+  OnInit
+} from '@angular/core';
 import {
   IonBackButton, IonButton,
   IonButtons,
@@ -46,6 +56,7 @@ export class UserProfileBuildInfoComponent implements OnInit {
   #userS = inject(UserService);
   #fb = inject(FormBuilder);
   #injector = inject(Injector);
+  #cdr = inject(ChangeDetectorRef);
 
   protected userBuildFormGroup = this.#createUserBuildFormGroup();
   protected saveBtnDisabled = this.#createSaveBtnDisabledLinkedSignal();
@@ -54,6 +65,7 @@ export class UserProfileBuildInfoComponent implements OnInit {
 
   ngOnInit() {
     this.#listenUserChanges();
+    setTimeout(() => this.#cdr.detectChanges())
   }
 
   protected saveChanges() {

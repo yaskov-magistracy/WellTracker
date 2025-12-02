@@ -39,7 +39,6 @@ public class ReportsGigaChatRequestGenerator(
         var (_, total, _, target, _) = statistics;
         var jsonMessage = JsonConvert.SerializeObject(new GigaChatReportSystemMessage(
             user.Login,
-            user.Height,
             user.Gender.ToString(),
             isWeekly ? "Week" : "Day",
             new(weightDeviation.Current, weightDeviation.Target, weightDeviation.DeviationAbsolute, weightDeviation.DeviationRelative),
@@ -53,7 +52,6 @@ public class ReportsGigaChatRequestGenerator(
 
     private record GigaChatReportSystemMessage(
         string Name,
-        int Height,
         string GenderString,
         string Period,
         ReportParam Weight,
@@ -87,9 +85,9 @@ public class ReportsGigaChatRequestGenerator(
 
     private const string SystemJsonDescriptionMessage = @"
 Пояснения:
-`Рeight`, `пender`: базовые характеристики пользователя.
+`Рeight`, `Gender`: базовые характеристики пользователя.
 Period - определяет за какой период определяются все параметры ниже.
-Группа параметров ""Цeight"": объект, включающий четыре параметра:
+Группа параметров ""Weight"": объект, включающий четыре параметра:
 ""Сurrent"" — текущий вес пользователя.
 ""Target"" — целевой вес по плану питания.
 ""DeviationAbsolute"" — изменение веса за Period в абсолютной величине.

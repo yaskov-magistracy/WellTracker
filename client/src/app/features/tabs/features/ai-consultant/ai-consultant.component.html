@@ -6,11 +6,11 @@
   </ion-header>
   <ion-content [fullscreen]="true" [color]="'light'">
     <ion-list class="menu__chatsList" [lines]="'none'">
-      @for (chat of chatsResource.value(); track chat.id) {
+      @for (chat of chats(); track chat.id) {
         <ion-item class="menu__chatsList-chatItem" (click)="currentChat.set(chat); menu.close()">
           <a class="menu__chatsList-chatItem__button"
              [class.activeChat]="chat.id === currentChat()?.id">
-            <span class="menu__chatsList-chatItem__button-title primary">{{ chat.title }}</span>
+            <span class="menu__chatsList-chatItem__button-title primary">{{ chat.title }}...</span>
           </a>
         </ion-item>
       }
@@ -23,7 +23,7 @@
       <ion-buttons slot="start">
         <ion-menu-button></ion-menu-button>
       </ion-buttons>
-      <ion-title>{{ currentChat()?.title ?? 'Новый чат' }}</ion-title>
+      <ion-title>{{ currentChat() ? (currentChat()!.title + '...') : 'Новый чат' }}</ion-title>
       <ion-button slot="end" (click)="addNewChat()">
         <ion-icon slot="icon-only" name="chatbubble-ellipses-outline"></ion-icon>
       </ion-button>
@@ -74,28 +74,29 @@
         </ion-textarea>
         <ion-button class="wrapper__promptSection-sendBtn"
                     [size]="'small'"
-                    [disabled]="currentMessageControl.invalid"
-                    (click)="addNewChat()"
+                    [disabled]="currentMessageControl.invalid || currentMessageControl.disabled"
+                    (click)="sendMessage()"
         >
           <ion-icon slot="icon-only" name="send"></ion-icon>
         </ion-button>
       </section>
-    </div>
-    @if (showScrollDownButton()) {
-      <ion-fab
-        vertical="bottom"
-        [horizontal]="'end'"
-        slot="fixed"
-        [style.margin-bottom.px]="promptSection.clientHeight"
-        (click)="scrollToTheBottomOfMessagesList()"
-      >
-        <ion-fab-button
-          [size]="'small'"
-          [color]="'light'"
+      @if (showScrollDownButton()) {
+        <ion-fab
+          vertical="bottom"
+          [horizontal]="'end'"
+          slot="fixed"
+          [style.margin-bottom]="'calc('+ promptSection.clientHeight + 'px + var(--keyboard-offset))'"
+          (click)="scrollToTheBottomOfMessagesList()"
         >
-          <ion-icon name="arrow-down"></ion-icon>
-        </ion-fab-button>
-      </ion-fab>
-    }
+          <ion-fab-button
+            class="scrollBtn"
+            [size]="'small'"
+            [color]="'light'"
+          >
+            <ion-icon name="arrow-down"></ion-icon>
+          </ion-fab-button>
+        </ion-fab>
+      }
+    </div>
   </ion-content>
 </div>

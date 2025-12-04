@@ -10,7 +10,10 @@ export class AiConsultantService {
   #aiConsultantApiS = inject(AiConsultantApiService);
 
   getChats$() {
-    return this.#aiConsultantApiS.getChats$();
+    return this.#aiConsultantApiS.getChats$()
+      .pipe(
+        map(chats => chats.reverse())
+      );
   }
 
   createChat$(title: string) {
@@ -20,7 +23,8 @@ export class AiConsultantService {
   getChatMessages$(chatId: string, take: number, skip: number) {
     return this.#aiConsultantApiS.getChatMessages$(chatId, take, skip)
       .pipe(
-        map(res => res.items)
+        map(res => res.items.sort((f, s) =>
+          new Date(f.dateTime).getTime() - new Date(s.dateTime).getTime() ))
       );
   }
 

@@ -42,7 +42,10 @@ export class AccountService {
   logout$() {
     return this.#accountApiS.logout$()
       .pipe(
-        tap(() => this.#sessionInfo.set(null))
+        tap(() => {
+          this.#sessionInfo.set(null);
+          location.reload();
+        })
       );
   }
 

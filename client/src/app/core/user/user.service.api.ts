@@ -16,6 +16,6 @@ export class UserApiService {
   }
 
   updateUserInfo$(userId: string, newUserInfo: UserInfo) {
-    return this.#httpClient.post<UserInfo>(`/api/${this.#apiPath}/${userId}/info`, newUserInfo);
+    return this.#httpClient.post<UserInfo>(`/api/${this.#apiPath}/${userId}/info`, {...newUserInfo, tgChatId: { value: null }});
   }
 }

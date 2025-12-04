@@ -4,7 +4,7 @@
       <ion-title>Список чатов</ion-title>
     </ion-toolbar>
   </ion-header>
-  <ion-content [fullscreen]="true" [color]="'light'">
+  <ion-content [color]="'light'">
     <ion-list class="menu__chatsList" [lines]="'none'">
       @for (chat of chats(); track chat.id) {
         <ion-item class="menu__chatsList-chatItem" (click)="currentChat.set(chat); menu.close()">

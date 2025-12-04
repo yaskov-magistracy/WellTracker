@@ -4,6 +4,7 @@
   }
   .menu {
     &__chatsList {
+      padding-top: 10px;
       &-chatItem {
         &__button {
           width: 100%;
@@ -81,7 +82,7 @@
               font-size: 18px;
             }
             .wrapper__mainContent-messagesSection__messageRow-messageBubble {
-              background: #e9ecef;
+              background: var(--ion-background-color-step-300);
               border-bottom-left-radius: 4px;
             }
           }

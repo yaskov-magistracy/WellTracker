@@ -1,0 +1,104 @@
+:host {
+  .menu {
+    &__chatsList {
+      &-chatItem {
+        &__button {
+          width: 100%;
+          padding: 10px;
+          border-radius: 12px;
+          &-title {
+            font-size: 16px;
+          }
+          &.activeChat {
+            background-color: rgba(var(--ion-color-primary-rgb), 0.2);
+            span {
+              color: var(--ion-color-primary-rgb);
+            }
+          }
+        }
+      }
+    }
+  }
+  .wrapper {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    &__mainContent {
+      flex-grow: 1;
+      padding: 10px;
+      overflow: auto;
+      &-noMessagesSection {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+        &__label {
+          text-align: center;
+          &-secondary {
+            font-size: 17px;
+          }
+        }
+      }
+      &-messagesSection {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        &__messageRow {
+          display: flex;
+          &-messageBubble {
+            max-width: 75%;
+            padding: 10px 14px;
+            border-radius: 16px;
+            background: var(--ion-color-light);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            font-size: 15px;
+            line-height: 1.4;
+          }
+          &.userMessage {
+            justify-content: flex-end;
+            .wrapper__mainContent-messagesSection__messageRow-messageBubble {
+              background: var(--ion-color-primary);
+              color: white;
+              border-bottom-right-radius: 4px;
+            }
+          }
+          &.botMessage {
+            justify-content: flex-start;
+            &__avatar {
+              width: 32px;
+              height: 32px;
+              margin-right: 8px;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              background: var(--ion-color-primary);
+              color: white;
+              border-radius: 50%;
+              font-size: 18px;
+            }
+            .wrapper__mainContent-messagesSection__messageRow-messageBubble {
+              background: #e9ecef;
+              border-bottom-left-radius: 4px;
+            }
+          }
+        }
+      }
+    }
+    &__promptSection {
+      display: flex;
+      background-color: var(--ion-background-color);
+      padding: 10px;
+      border-top-right-radius: 12px;
+      border-top-left-radius: 12px;
+      &-sendBtn {
+        align-self: flex-end;
+      }
+    }
+  }
+  .botMessage__avatar {
+    margin-right: 8px;
+    display: flex;
+    justify-content: center;
+  }
+}

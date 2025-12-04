@@ -1,0 +1,101 @@
+<ion-menu contentId="main-content" class="menu" #menu>
+  <ion-header [translucent]="true">
+    <ion-toolbar [color]="'primary'">
+      <ion-title>Список чатов</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content [fullscreen]="true" [color]="'light'">
+    <ion-list class="menu__chatsList" [lines]="'none'">
+      @for (chat of chatsResource.value(); track chat.id) {
+        <ion-item class="menu__chatsList-chatItem" (click)="currentChat.set(chat); menu.close()">
+          <a class="menu__chatsList-chatItem__button"
+             [class.activeChat]="chat.id === currentChat()?.id">
+            <span class="menu__chatsList-chatItem__button-title primary">{{ chat.title }}</span>
+          </a>
+        </ion-item>
+      }
+    </ion-list>
+  </ion-content>
+</ion-menu>
+<div id="main-content" class="ion-page">
+  <ion-header [translucent]="true">
+    <ion-toolbar [color]="'primary'">
+      <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+      <ion-title>{{ currentChat()?.title ?? 'Новый чат' }}</ion-title>
+      <ion-button slot="end" (click)="addNewChat()">
+        <ion-icon slot="icon-only" name="chatbubble-ellipses-outline"></ion-icon>
+      </ion-button>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content
+               [color]="'light'">
+    <div class="wrapper">
+      <div class="wrapper__mainContent" #mainContent
+           (scroll)="onScrollMainContent()">
+        @if (!currentChatMessages().length) {
+          <section class="wrapper__mainContent-noMessagesSection">
+            <div>
+              <img src="assets/img/logo.png" height="150">
+            </div>
+            <h2 class="wrapper__mainContent-noMessagesSection__label">
+              Привет, я твой ИИ-помощник!
+              <br>
+              <span class="tertiary wrapper__mainContent-noMessagesSection__label-secondary">Чем могу помочь сегодня?</span>
+          </h2>
+          </section>
+        }
+        @else {
+          <section class="wrapper__mainContent-messagesSection">
+            @for (msg of currentChatMessages(); track msg.id) {
+              <div class="wrapper__mainContent-messagesSection__messageRow"
+                   [class.userMessage]="!msg.isBot"
+                   [class.botMessage]="msg.isBot">
+                <!-- Иконка ассистента -->
+                @if (msg.isBot) {
+                  <div class="botMessage__avatar">
+                    <img src="assets/img/logo.png" height="32" width="32">
+                  </div>
+                }
+                <div class="wrapper__mainContent-messagesSection__messageRow-messageBubble">
+                  {{ msg.message }}
+                </div>
+              </div>
+            }
+          </section>
+        }
+      </div>
+      <section class="wrapper__promptSection" #promptSection>
+        <ion-textarea
+          [placeholder]="'Отправить сообщение'"
+          [formControl]="currentMessageControl"
+        >
+        </ion-textarea>
+        <ion-button class="wrapper__promptSection-sendBtn"
+                    [size]="'small'"
+                    [disabled]="currentMessageControl.invalid"
+                    (click)="addNewChat()"
+        >
+          <ion-icon slot="icon-only" name="send"></ion-icon>
+        </ion-button>
+      </section>
+    </div>
+    @if (showScrollDownButton()) {
+      <ion-fab
+        vertical="bottom"
+        [horizontal]="'end'"
+        slot="fixed"
+        [style.margin-bottom.px]="promptSection.clientHeight"
+        (click)="scrollToTheBottomOfMessagesList()"
+      >
+        <ion-fab-button
+          [size]="'small'"
+          [color]="'light'"
+        >
+          <ion-icon name="arrow-down"></ion-icon>
+        </ion-fab-button>
+      </ion-fab>
+    }
+  </ion-content>
+</div>

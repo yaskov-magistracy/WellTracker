@@ -13,5 +13,9 @@ export default [
   {
     path: 'user-profile',
     loadComponent: () => import('../features/user-profile-tab/user-profile-tab.component')
+  },
+  {
+    path: 'ai-consultant',
+    loadComponent: () => import('../features/ai-consultant/ai-consultant.component')
   }
 ] satisfies Routes;

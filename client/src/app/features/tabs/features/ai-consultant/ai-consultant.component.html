@@ -85,7 +85,7 @@
           vertical="bottom"
           [horizontal]="'end'"
           slot="fixed"
-          [style.margin-bottom]="'calc('+ promptSection.clientHeight + 'px + var(--keyboard-offset))'"
+          [style.margin-bottom.px]="promptSection.clientHeight"
           (click)="scrollToTheBottomOfMessagesList()"
         >
           <ion-fab-button

@@ -1,4 +1,7 @@
 :host {
+  ion-content {
+    --keyboard-offset: 0 !important;
+  }
   .menu {
     &__chatsList {
       &-chatItem {

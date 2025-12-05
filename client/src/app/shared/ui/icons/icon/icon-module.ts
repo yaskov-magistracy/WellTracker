@@ -19,7 +19,8 @@ export class IconModule {
       weight: 'assets/custom-icons/weight.svg',
       target: 'assets/custom-icons/target.svg',
       gender: 'assets/custom-icons/gender.svg',
-      ruler: 'assets/custom-icons/ruler.svg'
+      ruler: 'assets/custom-icons/ruler.svg',
+      telegram: 'assets/custom-icons/telegram.svg'
     })
   }
 }

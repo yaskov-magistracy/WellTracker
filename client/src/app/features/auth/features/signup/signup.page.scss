@@ -24,5 +24,14 @@
         }
       }
     }
+    .signUpList {
+      display: flex;
+      flex-direction: column;
+    }
+    .finishRegBtn {
+      margin-top: 10px;
+      width: 90%;
+      align-self: center;
+    }
   }
 }

@@ -46,54 +46,72 @@
             </form>
           </swiper-slide>
           <swiper-slide class="swiper-no-swiping">
-            <form class="form" [formGroup]="signUpSecondStepForm">
+            <ion-list class="signUpList" [formGroup]="signUpSecondStepForm">
+              <ion-item>
+                <ion-icon name="ruler" slot="start"></ion-icon>
+                <ion-input [formControlName]="'height'"
+                           [type]="'number'"
+                           [labelPlacement]="'stacked'"
+                           [inputmode]="'numeric'"
+                >
+                  <div slot="label"><ion-text [color]="'medium'">Рост</ion-text></div>
+                  <div slot="end"><ion-text [color]="'medium'">см.</ion-text></div>
+                </ion-input>
+              </ion-item>
 
-              <ion-input class="form__input"
-                         mode="md"
-                         [type]="'number'"
-                         [fill]="'outline'"
-                         [label]="'Рост'"
-                         [labelPlacement]="'stacked'"
-                         [formControlName]="'height'"
-                         [inputmode]="'numeric'"
-              >
-              </ion-input>
+              <ion-item>
+                <ion-icon aria-hidden="true" name="weight" slot="start"></ion-icon>
+                <ion-input [formControlName]="'weight'"
+                           [labelPlacement]="'stacked'"
+                           [type]="'number'"
+                           [inputmode]="'numeric'"
+                >
+                  <div slot="label"><ion-text [color]="'medium'">Вес</ion-text></div>
+                  <div slot="end"><ion-text [color]="'medium'">кг.</ion-text></div>
+                </ion-input>
+              </ion-item>
 
-              <ion-input class="form__input"
-                         mode="md"
-                         [fill]="'outline'"
-                         [label]="'Вес'"
-                         [labelPlacement]="'stacked'"
-                         [formControlName]="'weight'"
-                         [inputmode]="'numeric'"
-              ></ion-input>
+              <ion-item>
+                <ion-icon aria-hidden="true" name="target" slot="start"></ion-icon>
+                <ion-input [formControlName]="'targetWeight'"
+                           [type]="'number'"
+                           [labelPlacement]="'stacked'"
+                           [inputmode]="'numeric'"
+                >
+                  <div slot="label"><ion-text [color]="'medium'">Целевой вес</ion-text></div>
+                  <div slot="end"><ion-text [color]="'medium'">кг.</ion-text></div>
+                </ion-input>
+              </ion-item>
 
-              <ion-input class="form__input"
-                         mode="md"
-                         [fill]="'outline'"
-                         [label]="'Целевой вес'"
-                         [labelPlacement]="'stacked'"
-                         [formControlName]="'targetWeight'"
-                         [inputmode]="'numeric'"
-              ></ion-input>
+              <ion-item>
+                <ion-icon aria-hidden="true" name="gender" slot="start"></ion-icon>
+                <ion-select
+                  [labelPlacement]="'stacked'"
+                  [formControlName]="'gender'"
+                >
+                  <div slot="label"><ion-text [color]="'medium'">Пол</ion-text></div>
+                  <ion-select-option [value]="GenderEnum.Male">Мужской</ion-select-option>
+                  <ion-select-option [value]="GenderEnum.Female">Женский</ion-select-option>
+                </ion-select>
+              </ion-item>
 
-              <ion-select
-                class="form__select"
-                mode="md"
-                [fill]="'outline'"
-                [label]="'Пол'"
-                [labelPlacement]="'stacked'"
-                [formControlName]="'gender'"
-              >
-                <ion-select-option [value]="GenderEnum.Male">Мужской</ion-select-option>
-                <ion-select-option [value]="GenderEnum.Female">Женский</ion-select-option>
-              </ion-select>
+              <ion-item>
+                <ion-icon aria-hidden="true" name="telegram" slot="start"></ion-icon>
+                <ion-input [formControlName]="'tgChatId'"
+                           [type]="'number'"
+                           [labelPlacement]="'stacked'"
+                           [inputmode]="'numeric'"
+                >
+                  <div slot="label"><ion-text [color]="'medium'">Идентификатор чата Telegram</ion-text></div>
+                  <div slot="end"><ion-text [color]="'medium'"></ion-text></div>
+                </ion-input>
+              </ion-item>
 
-              <ion-button class="form__submitBtn"
+              <ion-button class="finishRegBtn"
                           [disabled]="signUpSecondStepForm.invalid"
                           (click)="signUp()"
               >Завершить регистрацию</ion-button>
-            </form>
+            </ion-list>
           </swiper-slide>
         </swiper-container>
       </ion-card-content>

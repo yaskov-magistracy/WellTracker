@@ -2,9 +2,9 @@ import {ChangeDetectionStrategy, Component, CUSTOM_ELEMENTS_SCHEMA, inject, sign
 import {
   IonButton, IonCard, IonCardContent,
   IonContent,
-  IonHeader,
+  IonHeader, IonIcon,
   IonInput,
-  IonInputPasswordToggle, IonSelect, IonSelectOption,
+  IonInputPasswordToggle, IonItem, IonList, IonSelect, IonSelectOption, IonText,
   IonTitle,
   IonToolbar,
 } from "@ionic/angular/standalone";
@@ -31,6 +31,10 @@ import {GenderEnum} from "../../../../core/enums/GenderEnum";
     IonSelectOption,
     IonCard,
     IonCardContent,
+    IonIcon,
+    IonItem,
+    IonText,
+    IonList,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
@@ -51,6 +55,7 @@ export default class SignupPage {
     weight: this.fb.control(0, { validators: [Validators.required, Validators.min(30)], nonNullable: true }),
     gender: this.fb.control(GenderEnum.Male, { validators: [Validators.required], nonNullable: true }),
     targetWeight: this.fb.control(0, { validators: [Validators.required, Validators.min(30)], nonNullable: true }),
+    tgChatId: this.fb.control(null, { validators: [Validators.min(1)] }),
   });
 
   protected signUp() {

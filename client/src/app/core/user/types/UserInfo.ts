@@ -5,4 +5,5 @@ export type UserInfo = {
   weight: number;
   height: number;
   targetWeight: number;
+  tgChatId: number | null;
 }

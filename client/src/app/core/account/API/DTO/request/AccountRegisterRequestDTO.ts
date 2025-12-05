@@ -7,4 +7,5 @@ export type AccountRegisterRequestDTO = {
   weight: number;
   height: number;
   targetWeight: number;
+  tgChatId: number | null;
 }

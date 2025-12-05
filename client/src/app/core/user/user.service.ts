@@ -3,6 +3,7 @@ import {UserApiService} from "./user.service.api";
 import {AccountService} from "../account/account.service";
 import {UserInfo} from "./types/UserInfo";
 import {tap} from "rxjs";
+import {omit} from "lodash-es";
 
 @Injectable({
   providedIn: 'root'
@@ -24,7 +25,7 @@ export class UserService {
   }
 
   updateUserInfo$(newUserInfo: UserInfo) {
-    return this.#userApiS.updateUserInfo$(this.#accountS.userId()!, newUserInfo)
+    return this.#userApiS.updateUserInfo$(this.#accountS.userId()!, {...omit(newUserInfo, 'tgChatId'), tgChatId: { value: newUserInfo.tgChatId }})
       .pipe(
         tap(() => this.#userInfo.set(newUserInfo))
       );

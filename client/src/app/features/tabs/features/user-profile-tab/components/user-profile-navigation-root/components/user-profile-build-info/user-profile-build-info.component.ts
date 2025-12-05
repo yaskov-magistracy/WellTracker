@@ -95,7 +95,8 @@ export class UserProfileBuildInfoComponent implements OnInit {
       height: this.#fb.control(0, { validators: [Validators.required, Validators.min(100)], nonNullable: true }),
       weight: this.#fb.control(0, { validators: [Validators.required, Validators.min(30)], nonNullable: true }),
       gender: this.#fb.control(GenderEnum.Male, { validators: [Validators.required], nonNullable: true }),
-      targetWeight: this.#fb.control(0, { validators: [Validators.required, Validators.min(30)], nonNullable: true })
+      targetWeight: this.#fb.control(0, { validators: [Validators.required, Validators.min(30)], nonNullable: true }),
+      tgChatId: this.#fb.control<number | null>(null, { validators: [Validators.min(1)] })
     });
   }
 

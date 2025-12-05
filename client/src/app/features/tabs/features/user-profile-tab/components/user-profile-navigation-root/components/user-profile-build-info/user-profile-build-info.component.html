@@ -16,6 +16,7 @@
         <ion-input [formControlName]="'height'"
                    [type]="'number'"
                    [labelPlacement]="'stacked'"
+                   [inputmode]="'numeric'"
         >
           <div slot="label"><ion-text [color]="'medium'">Рост</ion-text></div>
           <div slot="end"><ion-text [color]="'medium'">см.</ion-text></div>
@@ -39,6 +40,7 @@
         <ion-input [formControlName]="'targetWeight'"
                    [type]="'number'"
                    [labelPlacement]="'stacked'"
+                   [inputmode]="'numeric'"
         >
           <div slot="label"><ion-text [color]="'medium'">Целевой вес</ion-text></div>
           <div slot="end"><ion-text [color]="'medium'">кг.</ion-text></div>
@@ -55,6 +57,17 @@
           <ion-select-option [value]="GenderEnum.Male">Мужской</ion-select-option>
           <ion-select-option [value]="GenderEnum.Female">Женский</ion-select-option>
         </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-icon aria-hidden="true" name="telegram" slot="start"></ion-icon>
+        <ion-input [formControlName]="'tgChatId'"
+                   [type]="'number'"
+                   [labelPlacement]="'stacked'"
+                   [inputmode]="'numeric'"
+        >
+          <div slot="label"><ion-text [color]="'medium'">Идентификатор чата Telegram</ion-text></div>
+          <div slot="end"><ion-text [color]="'medium'"></ion-text></div>
+        </ion-input>
       </ion-item>
     </ion-list>
     <section class="wrapper__buttons">

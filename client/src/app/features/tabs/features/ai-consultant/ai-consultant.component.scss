@@ -51,6 +51,7 @@
         &__messageRow {
           display: flex;
           &-messageBubble {
+            width: 10px;
             max-width: 75%;
             padding: 10px 14px;
             border-radius: 16px;

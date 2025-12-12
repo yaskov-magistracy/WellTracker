@@ -69,7 +69,7 @@ public class ChatsController(
         [FromRoute] Guid chatId,
         [FromBody] SendMessageRequest request)
     {
-        var response = await chatsService.SendMessage(chatId, request.Message);
+        var response = await chatsService.SendMessage(chatId, User.GetId(), request.Message);
         return response.ActionResult;
     }
 

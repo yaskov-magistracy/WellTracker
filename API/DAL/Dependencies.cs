@@ -56,6 +56,7 @@ public class Dependencies
             var config = (s.GetRequiredService<Config>()).GigaChat;
             return new GigaChatClient(config.AuthorizationKey, config.Scope);
         });
+        services.AddScoped<IChatContextProvider, ChatContextProvider>();
         services.AddScoped<IChatsService, ChatsService>();
         services.AddScoped<IChatsRepository, ChatsRepository>();
         

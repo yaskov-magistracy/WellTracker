@@ -18,6 +18,7 @@ import {
 import {provideHttpClient} from "@angular/common/http";
 import {CustomErrorHandler} from "./core/error-handling/custom-error-handler";
 import {provideRxjsOnUnhandledError} from "./core/providers/rxjs-onUnhandledError.provider";
+import {provideMarkdown} from "ngx-markdown";
 
 echarts.use([PieChart, BarChart, LineChart, GridComponent, CanvasRenderer, GraphicComponent,
   LegendComponent, TitleComponent, DataZoomComponent, TooltipComponent]);
@@ -31,6 +32,7 @@ export const appConfig: ApplicationConfig = {
     provideZonelessChangeDetection(),
     provideEchartsCore({ echarts }),
     provideHttpClient(),
-    provideRouter(routes, withPreloading(PreloadAllModules))
+    provideRouter(routes, withPreloading(PreloadAllModules)),
+    provideMarkdown()
   ]
 }

@@ -58,7 +58,11 @@
             box-shadow: 0 2px 8px rgba(0,0,0,0.08);
             font-size: 15px;
             line-height: 1.4;
-            white-space: pre-line;
+            markdown {
+              ::ng-deep p {
+                margin: 0;
+              }
+            }
           }
           &.userMessage {
             justify-content: flex-end;

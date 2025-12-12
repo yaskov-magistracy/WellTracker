@@ -27,6 +27,7 @@ import {FormControl, ReactiveFormsModule, Validators} from "@angular/forms";
 import {CustomValidatorsService} from "../../../../core/validation/custom-validators.service";
 import {Message} from "./types/Message";
 import {SendMessageInChatResponseDTO} from "./dal/DTO/responses/SendMessageInChatResponseDTO";
+import {MarkdownComponent} from "ngx-markdown";
 
 @Component({
   selector: 'app-ai-consultant',
@@ -47,7 +48,8 @@ import {SendMessageInChatResponseDTO} from "./dal/DTO/responses/SendMessageInCha
     IonIcon,
     ReactiveFormsModule,
     IonFab,
-    IonFabButton
+    IonFabButton,
+    MarkdownComponent
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })

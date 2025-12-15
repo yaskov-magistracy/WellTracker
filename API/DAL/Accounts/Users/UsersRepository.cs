@@ -1,4 +1,5 @@
-﻿using Domain.Accounts.Users;
+﻿using System.Linq.Expressions;
+using Domain.Accounts.Users;
 using Domain.Accounts.Users.DTO;
 using Microsoft.EntityFrameworkCore;
 
@@ -17,7 +18,16 @@ public class UsersRepository(
             ? UsersMapper.ToDomain(entity)
             : null;
     }
-    
+
+    public async Task<ICollection<User>> GetAll()
+    {
+        return Users
+            .AsNoTracking()
+            .AsEnumerable()
+            .Select(UsersMapper.ToDomain)
+            .ToArray();
+    }
+
     public async Task<User?> GetByLogin(string login)
     {
         var entity = await Users.AsNoTracking().FirstOrDefaultAsync(e => e.Login == login);
@@ -53,6 +63,8 @@ public class UsersRepository(
             user.Height = updateEntity.Height.Value;
         if (updateEntity.TargetWeight != null)
             user.TargetWeight = updateEntity.TargetWeight.Value;
+        if (updateEntity.TgChatId != null)
+            user.TgChatId = updateEntity.TgChatId.Value;
         
         await dataContext.SaveChangesAsync();
         return UsersMapper.ToDomain(user);

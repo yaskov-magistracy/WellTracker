@@ -1,0 +1,98 @@
+<ion-header [translucent]="true">
+  <ion-toolbar [color]="'primary'">
+    <ion-buttons slot="start">
+      <ion-back-button>
+      </ion-back-button>
+    </ion-buttons>
+    <ion-title>Список продуктов</ion-title>
+  </ion-toolbar>
+  <ion-toolbar [color]="'primary'">
+    <ion-searchbar
+      [placeholder]="'Поиск'"
+      [debounce]="200"
+      (ionInput)="updateSearchTextValue($event.target.value!)"
+    ></ion-searchbar>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="wrapper">
+    <ion-list class="wrapper__foodList">
+      @for (foodItem of foodList(); track foodItem.id) {
+        <ion-item class="wrapper__foodList"
+        (click)="selectFoodForAdd(foodItem)">
+          <ion-label class="wrapper__foodList-label">
+            <h2>{{ foodItem.name }}</h2>
+            <p>Бренд: {{ foodItem.brandName }}</p>
+            <p>{{ foodItem.energy.kcal | roundNumber}} ккал. /100г</p>
+            <p class="wrapper__foodList-label__nutriments">
+              <span class="wrapper__foodList-label__nutriments-protein">Б: {{ foodItem.nutriments.protein | roundNumber }} г</span>,
+              <span class="wrapper__foodList-label__nutriments-fat">Ж: {{ foodItem.nutriments.fat | roundNumber }} г</span>,
+              <span class="wrapper__foodList-label__nutriments-carbs">У: {{ foodItem.nutriments.carbohydrates | roundNumber }} г</span> /100г.
+            </p>
+          </ion-label>
+        </ion-item>
+      }
+
+    </ion-list>
+  </div>
+  <ion-infinite-scroll (ionInfinite)="scrollReachedEnd($event)">
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+  <ion-modal
+    class="modal"
+    [initialBreakpoint]="1"
+    [breakpoints]="[0, 1]"
+    (didDismiss)="selectedFood.set(null)"
+  >
+    <ng-template>
+        <div class="modal__wrapper">
+          <div class="modal__wrapper-nameWrapper">
+            <h2>{{ selectedFood()!.name }}</h2>
+            @if (selectedFood()?.brandName) {
+              <p class="tertiary">Бренд: {{ selectedFood()?.brandName }}</p>
+            }
+          </div>
+          <ion-list class="modal__wrapper-fieldsList">
+            <ion-item class="modal__wrapper-fieldsList__item">
+              <ion-input
+                [formControl]="gramsOrPortionsControl"
+                [label]="usePortionsInput() ? 'Порции' : 'Граммовка'"
+                [inputmode]="'numeric'"
+                type="number"
+              >
+                <p slot="end">{{usePortionsInput() ? 'шт.' : 'г.'}}</p>
+              </ion-input>
+            </ion-item>
+            <ion-item class="modal__wrapper-fieldsList__item">
+              <ion-label>Калорийность</ion-label>
+              <p>{{ totalKcalInAddedProduct() | roundNumber }} ккал.</p>
+            </ion-item>
+            <ion-item class="modal__wrapper-fieldsList__item modal__wrapper-fieldsList__nutrimentsItem">
+              <ion-label>Пищевая ценность</ion-label>
+              <div class="modal__wrapper-fieldsList__nutrimentsItem-nutriments">
+                <p class="modal__wrapper-fieldsList__nutrimentsItem-nutriments__protein">Б: {{ totalProteinInAddedProduct() | roundNumber }} г, </p>
+                <p class="modal__wrapper-fieldsList__nutrimentsItem-nutriments__fat">Ж: {{ totalFatInAddedProduct() | roundNumber }} г, </p>
+                <p class="modal__wrapper-fieldsList__nutrimentsItem-nutriments__carb">У: {{ totalCarbsInAddedProduct() | roundNumber }}г </p>
+              </div>
+            </ion-item>
+            @if (selectedFood()?.gramsInPortion) {
+              <ion-item class="modal__wrapper-fieldsList__item modal__wrapper-fieldsList__nutrimentsItem">
+                <ion-toggle
+                  [disabled]="!selectedFood()?.gramsInPortion"
+                  (ionChange)="changePortionsValue($event.detail.checked)"
+                >Ввод в порциях <ion-note>{{ selectedFood()?.gramsInPortion }}г. = 1 порция</ion-note></ion-toggle>
+              </ion-item>
+            }
+          </ion-list>
+          <ion-button
+            [disabled]="gramsOrPortionsControl.invalid"
+            [expand]="'block'"
+            (click)="addProductToMeal(selectedFood()!)"
+          >Добавить</ion-button>
+        </div>
+    </ng-template>
+  </ion-modal>
+</ion-content>
+
+

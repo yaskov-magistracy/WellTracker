@@ -1,0 +1,40 @@
+@let isLoading = weightStatisticResource.isLoading();
+@let weightStatistic = weightStatisticResource.value();
+
+<ion-card class="card">
+  <ion-card-content>
+    <ion-select label="Промежуток" label-placement="floating"
+                [value]="currentDateRange()"
+                (ionChange)="currentDateRange.set($event.detail.value)">
+      <ion-select-option>{{ DateRangeEnum.Week }}</ion-select-option>
+      <ion-select-option>{{ DateRangeEnum.Month }}</ion-select-option>
+      <ion-select-option>{{ DateRangeEnum.ThreeMonths }}</ion-select-option>
+    </ion-select>
+    @if (
+      isLoading
+      || weightStatistic?.statistics?.records?.length
+      ) {
+      <div echarts
+           [options]="weightLineChartOptions()!"
+           (chartInit)="chartInit.emit()"
+           [loading]="isLoading"
+      ></div>
+    } @else {
+      Ничего не найдено
+    }
+    <section class="card__summary">
+      <span class="card__summary-title secondary">
+        Текущий
+        <br>
+        @let currentWeight = weightStatistic?.currentWeight;
+        <span class="primary"><b>{{ currentWeight ? (currentWeight | roundNumber) : '—' }} кг.</b></span>
+      </span>
+      <span class="card__summary-title secondary">
+        Цель
+        <br>
+        @let targetWeight = weightStatistic?.targetWeight;
+        <span class="primary"><b>{{ targetWeight ? (targetWeight | roundNumber) : '—' }} кг.</b></span>
+      </span>
+    </section>
+  </ion-card-content>
+</ion-card>

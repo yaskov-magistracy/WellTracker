@@ -16,7 +16,7 @@ public class ExerciseDiaryController(
     /// Получить записи по дню
     /// </summary>
     /// <remarks>
-    /// `date` - в формате `dd.MM.yyyy` или `dd-MM-yyyy`
+    /// `date` - в формате `yyyy.MM.dd` или `yyyy-MM-dd`
     /// </remarks>>
     [AuthorizeRoles(AccountRole.User)]
     [HttpGet("{date:DateOnly}")]
@@ -30,7 +30,7 @@ public class ExerciseDiaryController(
     /// Обновить записи по дню
     /// </summary>
     /// <remarks>
-    /// `date` - в формате `dd.MM.yyyy` или `dd-MM-yyyy` <br/>
+    /// `date` - в формате `yyyy.MM.dd` или `yyyy-MM-dd` <br/>
     /// `Полностью` переписывает данные, которые передаёшь. Если передашь `null` - ничего не будет
     /// </remarks>>
     [AuthorizeRoles(AccountRole.User)]

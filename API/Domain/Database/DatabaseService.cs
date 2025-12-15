@@ -37,7 +37,7 @@ public class DatabaseService(
             // staticFilesCleaner.CleanUp(); TODO: fix `Device or resource busy : '/app/_staticFiles/'` 
             await adminsService.Register(new("admin", "admin"));
             var user = await usersService.Register(
-                new("user", "user", UserGender.Male, 91.32f, 179, 80.23f));
+                new("user", "user", UserGender.Male, 91.32f, 179, 80.23f, null));
             var prevDay = DateTime.Now.AddDays(-1);
             await weightRecordsService
                 .AddOrUpdate(user.Value.Id, user.Value.Weight - 5, DateOnly.FromDateTime(prevDay));

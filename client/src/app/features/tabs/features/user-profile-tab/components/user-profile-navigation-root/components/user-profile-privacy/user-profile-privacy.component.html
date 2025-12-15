@@ -1,0 +1,25 @@
+<ion-header [translucent]="true">
+  <ion-toolbar [color]="'primary'">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Безопасность</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" [color]="'light'">
+  <div class="wrapper">
+    <ion-list>
+      <ion-nav-link [component]="UserProfilePrivacyChangePasswordComponent">
+        <ion-item [button]="true">
+          <ion-icon
+            name="key-outline"
+            [color]="'medium'"
+            slot="start"></ion-icon>
+          <ion-label>Смена пароля</ion-label>
+        </ion-item>
+      </ion-nav-link>
+    </ion-list>
+  </div>
+</ion-content>
+

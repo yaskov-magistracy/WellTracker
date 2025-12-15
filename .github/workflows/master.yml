@@ -6,8 +6,12 @@ on:
 
 env:
   BACKEND_IMAGE: fnatikjk/welltracker-backend:last
-  FRONTEND_IMAGE: iceneo/welltracker-frontend:last
   BACKEND_DOCKER_LOGIN: fnatikjk
+  BACKEND_TG_WORKER_IMAGE: fnatikjk2/welltracker-tg-worker:last
+  BACKEND_TG_WORKER_DOCKER_LOGIN: fnatikjk2
+  BACKEND_NOTIFICATIONS_WORKER_IMAGE: fnatikjk3/welltracker-notifications-worker:last
+  BACKEND_NOTIFICATIONS_WORKER_DOCKER_LOGIN: fnatikjk3
+  FRONTEND_IMAGE: iceneo/welltracker-frontend:last
   FRONTEND_DOCKER_LOGIN: iceneo
 
 jobs:
@@ -31,6 +35,50 @@ jobs:
       run: |
         cd ./API
         docker build -f Dockerfile --force-rm -t $IMAGE_TAG .
+        docker push $IMAGE_TAG
+
+  build-tg-worker:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+
+    - name: Docker login
+      env:
+        DOCKER_LOGIN: ${{ env.BACKEND_TG_WORKER_DOCKER_LOGIN }}
+        DOCKER_PASSWORD: ${{ secrets.BACKEND_TG_WORKER_DOCKER_PASSWORD }}
+      run:
+        docker login -u $DOCKER_LOGIN -p $DOCKER_PASSWORD
+
+    - name: Build and push image
+      env:
+        IMAGE_TAG: ${{ env.BACKEND_TG_WORKER_IMAGE }}
+      run: |
+        cd ./API
+        docker build -f Dockerfile.TelegramBotWorker --force-rm -t $IMAGE_TAG .
+        docker push $IMAGE_TAG
+
+  build-notifications-worker:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+
+    - name: Docker login
+      env:
+        DOCKER_LOGIN: ${{ env.BACKEND_NOTIFICATIONS_WORKER_DOCKER_LOGIN }}
+        DOCKER_PASSWORD: ${{ secrets.BACKEND_NOTIFICATIONS_WORKER_DOCKER_PASSWORD }}
+      run:
+        docker login -u $DOCKER_LOGIN -p $DOCKER_PASSWORD
+
+    - name: Build and push image
+      env:
+        IMAGE_TAG: ${{ env.BACKEND_NOTIFICATIONS_WORKER_IMAGE }}
+      run: |
+        cd ./API
+        docker build -f Dockerfile.NotificationsWorker --force-rm -t $IMAGE_TAG .
         docker push $IMAGE_TAG
 
   build-frontend:
@@ -58,7 +106,7 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
 
-    needs: ["build-backend", "build-frontend"]
+    needs: ["build-backend", "build-tg-worker", "build-notifications-worker", "build-frontend"]
 
     steps:
     - name: Run docker compose

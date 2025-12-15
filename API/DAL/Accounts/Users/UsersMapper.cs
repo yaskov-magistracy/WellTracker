@@ -13,7 +13,8 @@ internal static class UsersMapper
             ToDomain(entity.Gender),
             entity.Weight,
             entity.Height,
-            entity.TargetWeight
+            entity.TargetWeight,
+            entity.TgChatId
         );
 
     private static UserGender ToDomain(UserGenderEntity entity) => entity switch
@@ -32,6 +33,7 @@ internal static class UsersMapper
             Weight = createEntity.Weight,
             Height = createEntity.Height,
             TargetWeight = createEntity.TargetWeight,
+            TgChatId = createEntity.TgChatId,
         };
 
     public static UserGenderEntity ToEntity(UserGender createEntity) => createEntity switch

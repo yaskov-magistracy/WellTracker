@@ -3,15 +3,11 @@ using API.Configuration.Auth;
 using API.Configuration.Swagger;
 using API.Modules;
 using DAL;
-using Infrastructure.Config;
 using Infrastructure.Configuration.Routes;
 using Infrastructure.Configuration.Routes.ModelBinding;
 using Infrastructure.Configuration.Serialization;
-using TelegramBot;
 
 var builder = WebApplication.CreateBuilder(args);
-
-builder.Services.AddSingleton<Config>();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(SwaggerConfiguration.Apply);
@@ -28,8 +24,8 @@ builder.Services.AddControllers(opt =>
     .AddJsonOptions(JsonConverters.ConfigureJson);
 CookieAuth.Configure(builder.Services);
 
-builder.Services.AddDbContext<DataContext>();
-builder.Services.RegisterModules();
+Dependencies.Register(builder.Services);
+// builder.Services.RegisterModules(); deprecated
 
 
 var app = builder.Build();
@@ -46,7 +42,5 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
-
-app.Services.GetRequiredService<TelegramDaemon>();
 
 app.Run();

@@ -1,5 +1,6 @@
 ﻿using Domain.Advices;
 using Domain.FoodDiaries.DTO;
+using Domain.Foods;
 using Infrastructure.Results;
 
 namespace Domain.FoodDiaries;
@@ -19,11 +20,10 @@ public class FoodDiariesService(
     public async Task<Result<FoodDiary>> GetByDate(Guid userId, DateOnly date)
     {
         var foodDiary = await foodDiariesRepository.GetByDate(userId, date);
-        if (foodDiary == null)
-            return Results.NotFound<FoodDiary>("");
+        foodDiary ??= new FoodDiary(Guid.Empty, userId, date, null,null,null,null,FoodNutriments.Empty(), FoodEnergy.Empty(),FoodNutriments.Empty(), FoodEnergy.Empty());
 
-        var (targetEnergy, targetNutriments) = await advicesService.GetTargets(userId);
-        foodDiary = foodDiary with {TargetNutriments = targetNutriments, TargetEnergy = targetEnergy};
+        var targets = await advicesService.GetTargets(userId);
+        foodDiary = foodDiary with {TargetNutriments = targets.Nutriments, TargetEnergy = targets.Energy};
         
         return Results.Ok(foodDiary);
     }

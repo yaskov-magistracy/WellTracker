@@ -1,0 +1,114 @@
+<ion-header [translucent]="true">
+  <ion-toolbar [color]="'primary'">
+    <ion-buttons slot="start">
+      <ion-button (click)="closeModal()">
+        <ion-icon slot="icon-only" name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>{{ meal().name }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fixedSlotPlacement]="'before'">
+  <ion-fab
+    [horizontal]="'center'"
+    [vertical]="'bottom'"
+    slot="fixed">
+    <ion-nav-link
+      [component]="FoodListComponent"
+      [componentProps]="{ meal: this.meal() }"
+    >
+      <ion-fab-button>
+        <ion-icon name="add"></ion-icon>
+      </ion-fab-button>
+    </ion-nav-link>
+  </ion-fab>
+  <ion-list class="foodList" [class.centered]="!foodList().length">
+    @for (foodItem of foodList(); track foodItem.food.id) {
+      <ion-item class="foodList__item" class="wrapper__foodList">
+        <ion-label class="wrapper__foodList-label">
+          <h2>{{ foodItem.food.name }}</h2>
+          <p>Бренд: {{ foodItem.food.brandName ?? '—' }}</p>
+          <p>{{ (foodItem.food.energy.kcal / 100 * foodItem.grams) | roundNumber}} ккал. /{{ foodItem.grams }}г.</p>
+          <p class="wrapper__foodList-label__nutriments">
+            <span class="protein">Б: {{ (foodItem.food.nutriments.protein / 100 * foodItem.grams) | roundNumber }} г</span>,
+            <span class="fat">Ж: {{ (foodItem.food.nutriments.fat / 100 * foodItem.grams) | roundNumber }} г</span>,
+            <span class="carbs">У: {{ (foodItem.food.nutriments.carbohydrates / 100 * foodItem.grams) | roundNumber }} г</span> /{{ foodItem.grams }}г.
+          </p>
+        </ion-label>
+        <div>
+          <ion-button class="editBtn"
+                      [fill]="'clear'"
+                      [size]="'large'"
+                      (click)="selectFoodForChange(foodItem)"
+          >
+            <ion-icon name="create-outline"></ion-icon>
+          </ion-button>
+          <ion-button class="deleteBtn"
+                      [fill]="'clear'"
+                      [size]="'large'"
+                      [color]="'danger'"
+                      (click)="deleteProduct(foodItem.food.id)"
+          >
+            <ion-icon name="trash-outline"></ion-icon>
+          </ion-button>
+        </div>
+      </ion-item>
+    } @empty {
+      <span class="foodList__emptyLabel">Добавьте продукты</span>
+    }
+  </ion-list>
+  <ion-modal
+    class="modal"
+    [initialBreakpoint]="1"
+    [breakpoints]="[0, 1]"
+    (didDismiss)="selectedEatenFood.set(null)"
+  >
+    <ng-template>
+      <div class="modal__wrapper">
+        <div class="modal__wrapper-nameWrapper">
+          <h2>{{ selectedEatenFood()!.food.name }}</h2>
+          @if (selectedEatenFood()?.food?.brandName) {
+            <p class="tertiary">Бренд: {{ selectedEatenFood()!.food.brandName }}</p>
+          }
+        </div>
+        <ion-list class="modal__wrapper-fieldsList">
+          <ion-item class="modal__wrapper-fieldsList__item">
+            <ion-input
+              [formControl]="gramsOrPortionsControl"
+              [label]="usePortionsInput() ? 'Порции' : 'Граммовка'"
+              [inputmode]="'numeric'"
+              type="number"
+            >
+              <p slot="end">{{usePortionsInput() ? 'шт.' : 'г.'}}</p>
+            </ion-input>
+          </ion-item>
+          <ion-item class="modal__wrapper-fieldsList__item">
+            <ion-label>Калорийность</ion-label>
+            <p>{{ totalKcalInAddedProduct() | roundNumber }} ккал.</p>
+          </ion-item>
+          <ion-item class="modal__wrapper-fieldsList__item modal__wrapper-fieldsList__nutrimentsItem">
+            <ion-label>Пищевая ценность</ion-label>
+            <div class="modal__wrapper-fieldsList__nutrimentsItem-nutriments">
+              <p class="modal__wrapper-fieldsList__nutrimentsItem-nutriments__protein">Б: {{ totalProteinInAddedProduct() | roundNumber }} г, </p>
+              <p class="modal__wrapper-fieldsList__nutrimentsItem-nutriments__fat">Ж: {{ totalFatInAddedProduct() | roundNumber }} г, </p>
+              <p class="modal__wrapper-fieldsList__nutrimentsItem-nutriments__carb">У: {{ totalCarbsInAddedProduct() | roundNumber }}г </p>
+            </div>
+          </ion-item>
+          @if (selectedEatenFood()?.food?.gramsInPortion) {
+            <ion-item class="modal__wrapper-fieldsList__item modal__wrapper-fieldsList__nutrimentsItem">
+              <ion-toggle
+                (ionChange)="changePortionsValue($event.detail.checked)"
+              >Ввод в порциях <ion-note>{{ selectedEatenFood()!.food.gramsInPortion }}г. = 1 порция</ion-note></ion-toggle>
+            </ion-item>
+          }
+        </ion-list>
+        <ion-button
+          [disabled]="gramsOrPortionsControl.invalid"
+          [expand]="'block'"
+          (click)="changeProduct()"
+        >Изменить</ion-button>
+      </div>
+    </ng-template>
+  </ion-modal>
+</ion-content>

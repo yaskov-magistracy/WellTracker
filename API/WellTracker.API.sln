@@ -10,9 +10,16 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure", "Infrastru
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{D253257D-8BDD-41A3-933C-0DE55F35FFB1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TelegramBot", "TelegramBot\TelegramBot.csproj", "{49815125-BE5F-4972-B822-A5C8EA7EC59F}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GigaChat", "GigaChat\GigaChat.csproj", "{9910A240-33E3-4ADF-9016-EEE8481BBC2C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TelegramBotWorker", "TelegramBotWorker\TelegramBotWorker.csproj", "{D954F7C8-7533-46EC-927A-982619CE1095}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NotificationsWorker", "NotificationsWorker\NotificationsWorker.csproj", "{FBE84A35-1AF8-40FE-8960-B4309A4C7BC7}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{8DFDD5D6-C4E7-4F0A-ADFB-830E49752D82}"
+	ProjectSection(SolutionItems) = preProject
+		compose.yaml = compose.yaml
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -40,13 +47,17 @@ Global
 		{D253257D-8BDD-41A3-933C-0DE55F35FFB1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D253257D-8BDD-41A3-933C-0DE55F35FFB1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D253257D-8BDD-41A3-933C-0DE55F35FFB1}.Release|Any CPU.Build.0 = Release|Any CPU
-		{49815125-BE5F-4972-B822-A5C8EA7EC59F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{49815125-BE5F-4972-B822-A5C8EA7EC59F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{49815125-BE5F-4972-B822-A5C8EA7EC59F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{49815125-BE5F-4972-B822-A5C8EA7EC59F}.Release|Any CPU.Build.0 = Release|Any CPU
 		{9910A240-33E3-4ADF-9016-EEE8481BBC2C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{9910A240-33E3-4ADF-9016-EEE8481BBC2C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9910A240-33E3-4ADF-9016-EEE8481BBC2C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9910A240-33E3-4ADF-9016-EEE8481BBC2C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D954F7C8-7533-46EC-927A-982619CE1095}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D954F7C8-7533-46EC-927A-982619CE1095}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D954F7C8-7533-46EC-927A-982619CE1095}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D954F7C8-7533-46EC-927A-982619CE1095}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FBE84A35-1AF8-40FE-8960-B4309A4C7BC7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FBE84A35-1AF8-40FE-8960-B4309A4C7BC7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FBE84A35-1AF8-40FE-8960-B4309A4C7BC7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FBE84A35-1AF8-40FE-8960-B4309A4C7BC7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

@@ -3,6 +3,7 @@ version: "3.8"
 services:
   postgres:
     image: postgres
+    container_name: postgres
     environment:
       POSTGRES_DB: "WellTacker"
       POSTGRES_USER: ${POSTGRES_USER}
@@ -10,7 +11,7 @@ services:
     ports:
       - ":5432"
     volumes:
-      - wellTracker_postgres_data:/var/lib/postgresql/data/
+      - wellTracker_postgres_data:/var/lib/postgresql
     networks:
       - my-network
 
@@ -21,11 +22,44 @@ services:
       - "APP_NAME=WellTacker"
       - "APP_ENVIRONMENT=PRODUCTION"
       - "DATABASE_CONNECTION_STRING=host=postgres;Port=5432;Database=WellTacker;User Id=${POSTGRES_USER};Password=${POSTGRES_PASSWORD};"
+      - "TELEGRAM_BOT_TOKEN=${TELEGRAM_BOT_TOKEN}"
+      - "GIGACHAT_AUTHORIZATION_KEY=${GIGACHAT_AUTHORIZATION_KEY}"
+      - "GIGACHAT_SCOPE=${GIGACHAT_SCOPE}"
     ports:
       - 8080:8080
       - 8081:8081
     volumes:
       - backend_static_files:/app/_staticFiles
+    depends_on:
+      - postgres
+    networks:
+      - my-network
+
+  tg-worker:
+    image: ${BACKEND_TG_WORKER_IMAGE}
+    container_name: tg-worker
+    environment:
+      - "APP_NAME=WellTacker-tg-worker"
+      - "APP_ENVIRONMENT=PRODUCTION"
+      - "DATABASE_CONNECTION_STRING=host=postgres;Port=5432;Database=WellTacker;User Id=${POSTGRES_USER};Password=${POSTGRES_PASSWORD};"
+      - "TELEGRAM_BOT_TOKEN=${TELEGRAM_BOT_TOKEN}"
+      - "GIGACHAT_AUTHORIZATION_KEY=${GIGACHAT_AUTHORIZATION_KEY}"
+      - "GIGACHAT_SCOPE=${GIGACHAT_SCOPE}"
+    depends_on:
+      - postgres
+    networks:
+      - my-network
+
+  notifications-worker:
+    image: ${BACKEND_NOTIFICATIONS_WORKER_IMAGE}
+    container_name: notifications-worker
+    environment:
+      - "APP_NAME=WellTacker-notifications-worker"
+      - "APP_ENVIRONMENT=PRODUCTION"
+      - "DATABASE_CONNECTION_STRING=host=postgres;Port=5432;Database=WellTacker;User Id=${POSTGRES_USER};Password=${POSTGRES_PASSWORD};"
+      - "TELEGRAM_BOT_TOKEN=${TELEGRAM_BOT_TOKEN}"
+      - "GIGACHAT_AUTHORIZATION_KEY=${GIGACHAT_AUTHORIZATION_KEY}"
+      - "GIGACHAT_SCOPE=${GIGACHAT_SCOPE}"
     depends_on:
       - postgres
     networks:

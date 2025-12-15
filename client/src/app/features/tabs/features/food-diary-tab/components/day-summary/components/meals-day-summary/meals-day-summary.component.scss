@@ -1,0 +1,62 @@
+:host {
+  .card {
+    &__title {
+      display: flex;
+      justify-content: space-between;
+      &-mealIconAndMealName {
+        display: flex;
+        gap: 10px;
+        &__name {
+          font-size: 20px;
+          font-weight: 500;
+        }
+        &__icon {
+          position: relative;
+          bottom: 5px;
+        }
+      }
+      &-calories {
+        display: flex;
+        gap: 5px;
+        position: relative;
+        bottom: 5px;
+        &__caloriesCount {
+          display: inline-block;
+          text-align: right;
+          b {
+            font-size: 18px;
+          }
+        }
+        &__addBtn {
+          min-height: unset;
+          &::part(native) {
+            padding: 0;
+          }
+        }
+      }
+    }
+    &__content {
+      &-title {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        margin-bottom: 10px;
+        &__foodIcon {
+          width: 42px;
+          height: 42px;
+        }
+        &__count {
+          font-size: 20px;
+          line-height: 24px;
+          font-weight: 600;
+          &-required {
+            font-size: 18px;
+          }
+        }
+      }
+      &-bar {
+        height: 50px;
+      }
+    }
+  }
+}

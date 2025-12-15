@@ -1,22 +1,27 @@
 ﻿using API.Configuration.Auth;
 using API.Modules.ChatsModule.DTO;
+using Domain.Advices;
+using Domain.Advices.DTO;
 using Domain.Chats;
 using Domain.Chats.DTO;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Telegram.Bot.Types;
+using Chat = Domain.Chats.Chat;
 
 namespace API.Modules.ChatsModule;
 
+[Authorize]
 [Route("api/[controller]")]
 [ApiController]
 public class ChatsController(
-    IChatsService chatsService    
+    IChatsService chatsService,
+    IReportsService reportsService
 ) : ControllerBase
 {
     /// <summary>
     /// Получить все свои чаты
     /// </summary>
-    [Authorize]
     [HttpGet("")]
     public async Task<ActionResult<ICollection<Chat>>> GetChats()
     {
@@ -46,7 +51,6 @@ public class ChatsController(
     /// Создавай чат перед тем как отправить первое сообщение <br/>
     /// `Title` - название чата. Обычно туда просто ставят начало первого сообщения. Ограничение - 20 символов
     /// </remarks>
-    [Authorize]
     [HttpPost("")]
     public async Task<ActionResult<Chat>> CreateChat([FromBody] CreateChatRequest request)
     {
@@ -65,7 +69,33 @@ public class ChatsController(
         [FromRoute] Guid chatId,
         [FromBody] SendMessageRequest request)
     {
-        var response = await chatsService.SendMessage(chatId, request.Message);
+        var response = await chatsService.SendMessage(chatId, User.GetId(), request.Message);
         return response.ActionResult;
+    }
+
+    /// <summary>
+    /// Получить отчёт за неделю/вчера
+    /// </summary>
+    [HttpPost("{chatId:Guid}/report")]
+    public async Task<ActionResult<SendMessageResponse>> GetReport(
+        [FromRoute] Guid chatId,
+        [FromQuery] bool isWeekly = false)
+    {
+        var userId = User.GetId();
+        Report report;
+        string period;
+        if (isWeekly)
+        {
+            period = "неделю";
+            report = (await reportsService.GetWeeklyReport(userId, DateOnly.FromDateTime(DateTime.UtcNow))).Value;
+        }
+        else
+        {
+            period = "вчера";
+            report = (await reportsService.GetDailyReport(userId, DateOnly.FromDateTime(DateTime.UtcNow))).Value;
+        }
+        var userMessage = $"Проанализируй мои результаты за {period}";
+        var sentMessage = await chatsService.SendDeterminedMessage(chatId, userMessage, report.Text);
+        return sentMessage.ActionResult;
     }
 }

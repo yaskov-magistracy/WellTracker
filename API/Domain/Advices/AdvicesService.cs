@@ -6,34 +6,34 @@ namespace Domain.Advices;
 
 public interface IAdvicesService
 {
-    Task<(FoodEnergy, FoodNutriments)> GetTargets(Guid userId);
-    Task<(FoodEnergy, string[])> GetTargetAndAdvice(Guid userId, ICollection<NutrimentsRecord> records);
+    Task<FoodValue> GetTargets(Guid userId);
+    Task<(FoodValue, string[])> GetTargetsAndAdvice(Guid userId, ICollection<NutrimentsRecord> records);
 }
 
 public class AdvicesService(
     IUsersService usersService
 ) : IAdvicesService
 {
-    public async Task<(FoodEnergy, FoodNutriments)> GetTargets(Guid userId)
+    public async Task<FoodValue> GetTargets(Guid userId)
     {
         var user = (await usersService.GetById(userId)).Value;
         return GetTargets(user);
     }
 
-    public async Task<(FoodEnergy, string[])> GetTargetAndAdvice(Guid userId, ICollection<NutrimentsRecord> records)
+    public async Task<(FoodValue, string[])> GetTargetsAndAdvice(Guid userId, ICollection<NutrimentsRecord> records)
     {
         var user = (await usersService.GetById(userId)).Value;
-        var (targetEnergy, targetNutriments) = GetTargets(user);
+        var targets = GetTargets(user);
         records = records.Where(e => e.IsNormal()).ToArray();
-        var advice = await GetNutrimentsAdvice(records, targetNutriments);
+        var advice = await GetNutrimentsAdvice(records, targets.Nutriments);
         
         return (
-            targetEnergy,
+            targets,
             advice
         );
     }
 
-    private  (FoodEnergy, FoodNutriments) GetTargets(User user)
+    private FoodValue GetTargets(User user)
     {
         var targetKcal = user.Gender == UserGender.Male
             ? (15*user.TargetWeight) + (7*user.Height)
@@ -50,8 +50,8 @@ public class AdvicesService(
                                                                     - CaloriesCalc.FromProtein(targetProtein)
                                                                     - CaloriesCalc.FromFat(targetFat));
         return new(
-            new FoodEnergy(targetKcal, CaloriesCalc.ToKj(targetKcal)),
-            new FoodNutriments(targetProtein, targetFat, targetCarbohydrates));
+            new FoodNutriments(targetProtein, targetFat, targetCarbohydrates),
+            new FoodEnergy(targetKcal, CaloriesCalc.ToKj(targetKcal)));
     }
 
     public async Task<string[]> GetNutrimentsAdvice(

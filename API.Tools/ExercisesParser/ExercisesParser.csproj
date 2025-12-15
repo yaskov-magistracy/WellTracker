@@ -8,6 +8,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\..\API\Domain\Domain.csproj" />
       <ProjectReference Include="..\Infra\Infra.csproj" />
     </ItemGroup>
 

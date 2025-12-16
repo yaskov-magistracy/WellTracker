@@ -11,6 +11,10 @@ export default [
     loadComponent: () => import('../features/food-diary-tab/food-diary.component')
   },
   {
+    path: 'exercise-diary',
+    loadComponent: () => import('../features/exercise-diary/exercise-diary.component')
+  },
+  {
     path: 'user-profile',
     loadComponent: () => import('../features/user-profile-tab/user-profile-tab.component')
   },

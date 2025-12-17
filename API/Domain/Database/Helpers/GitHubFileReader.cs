@@ -2,6 +2,8 @@
 using System.Net.Http.Json;
 using System.Text.Json.Serialization;
 using CsvHelper;
+using Domain.Database.Helpers;
+using Domain.Exercises;
 
 namespace Domain.Database.Github;
 
@@ -33,6 +35,10 @@ public class GitHubFileReader : IGitHubFileReader
         var stream = await csvResponse.Content.ReadAsStreamAsync();
         var reader = new StreamReader(stream);
         var csvReader = new CsvReader(reader, CultureInfo.InvariantCulture);
+        
+        csvReader.Context.TypeConverterCache.AddConverter<MuscleType[]>(new EnumArrayCsvConverter<MuscleType>());
+        csvReader.Context.TypeConverterCache.AddConverter<EquipmentType[]>(new EnumArrayCsvConverter<EquipmentType>());
+
         return (csvReader, csvReader.GetRecords<T>());
     }
 

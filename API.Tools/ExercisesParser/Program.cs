@@ -2,6 +2,7 @@
 using CsvHelper;
 using CsvHelper.Configuration;
 using CsvHelper.TypeConversion;
+using Domain.Database.Helpers;
 using Domain.Exercises;
 using Domain.Exercises.DTO;
 
@@ -24,8 +25,8 @@ async Task SaveToCsvAsync(List<ExerciseCreateEntity> exercisesCreateEntities, st
         using var writer = new StreamWriter(filename, false, System.Text.Encoding.UTF8);
         using var csv = new CsvWriter(writer, CultureInfo.InvariantCulture);
             
-        csv.Context.TypeConverterCache.AddConverter<MuscleType[]>(new EnumArrayConverter<MuscleType>());
-        csv.Context.TypeConverterCache.AddConverter<EquipmentType[]>(new EnumArrayConverter<EquipmentType>());
+        csv.Context.TypeConverterCache.AddConverter<MuscleType[]>(new EnumArrayCsvConverter<MuscleType>());
+        csv.Context.TypeConverterCache.AddConverter<EquipmentType[]>(new EnumArrayCsvConverter<EquipmentType>());
         
         await csv.WriteRecordsAsync(exercisesCreateEntities);
         Console.WriteLine($"Данные сохранены в файл: {filename}");
@@ -34,28 +35,5 @@ async Task SaveToCsvAsync(List<ExerciseCreateEntity> exercisesCreateEntities, st
     catch (Exception ex)
     {
         Console.WriteLine($"Ошибка при сохранении в CSV: {ex.Message}");
-    }
-}
-
-public class CsvConfig
-{
-    public static CsvConfiguration GetConfiguration()
-    {
-        return new CsvConfiguration(CultureInfo.InvariantCulture)
-        {
-            HasHeaderRecord = true,
-        };
-    }
-}
-
-public class EnumArrayConverter<T> : DefaultTypeConverter where T : Enum
-{
-    public override string ConvertToString(object value, IWriterRow row, MemberMapData memberMapData)
-    {
-        if (value is T[] array)
-        {
-            return string.Join("|", array.Select(e => e.ToString()));
-        }
-        return string.Empty;
     }
 }

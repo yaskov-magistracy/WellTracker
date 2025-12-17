@@ -1,7 +1,8 @@
 ﻿using FoodsParserV2;
 
 var parser = new OpenFoodFactsParser();
-var products = await parser.GetRussianProductsAsync(100, 1);
+// TODO: Add PageSkipping
+var products = await parser.GetRussianProductsAsync(150, 15);
 await FoodsCsvWriter.SaveToCsvAsync(products);
 
 var a = 10;

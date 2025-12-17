@@ -50,7 +50,8 @@ public class DatabaseService(
             }
             if (request.AutoFillingParams == AutoFillingParams.FullRealData)
             {
-                throw new NotImplementedException("Полное заполнение ещё не поддерживается");
+                await databaseFoodsFiller.FillFromRepo();
+                await databaseExercisesFiller.FillFromRepo();
             }
         }
         catch (Exception e)

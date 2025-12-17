@@ -9,7 +9,7 @@ namespace Domain.Database.Github;
 
 public interface IGitHubFileReader
 {
-    Task<(CsvReader, IEnumerable<T>)> Read<T>();
+    Task<(CsvReader, IEnumerable<T>)> Read<T>(string relativePathToCsv);
 }
 
 public class GitHubFileReader : IGitHubFileReader
@@ -23,9 +23,9 @@ public class GitHubFileReader : IGitHubFileReader
         httpClient.DefaultRequestHeaders.Add("User-Agent", "C#-App");
     }
     
-    public async Task<(CsvReader, IEnumerable<T>)> Read<T>()
+    public async Task<(CsvReader, IEnumerable<T>)> Read<T>(string relativePathToCsv)
     {
-        var url = $"{BaseUrl}/repos/yaskov-magistracy/WellTracker/contents/API.Tools/FoodsParserV2/foods.csv";
+        var url = $"{BaseUrl}/repos/yaskov-magistracy/WellTracker/contents/API.Tools{relativePathToCsv}";
         var request = new HttpRequestMessage(
             HttpMethod.Get, 
             url);

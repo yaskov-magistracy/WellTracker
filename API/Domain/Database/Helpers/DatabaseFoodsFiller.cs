@@ -20,7 +20,7 @@ public class DatabaseFoodsFiller(
         int? maxEntities = null,
         int maxInChunk = 20)
     {
-        var (csvReader, foods) = await gitHubFileReader.Read<FoodCreateEntity>();
+        var (csvReader, foods) = await gitHubFileReader.Read<FoodCreateEntity>("/FoodsParserV2/foods.csv");
         foreach (var foodBatch in foods
                  .Take(maxEntities ?? int.MaxValue)
                  .Chunk(maxInChunk))

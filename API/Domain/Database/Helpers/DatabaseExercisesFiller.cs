@@ -20,7 +20,7 @@ public class DatabaseExercisesFiller(
         int? maxEntities = null, 
         int maxInChunk = 20)
     {
-        var (csvReader, exercises) = await gitHubFileReader.Read<ExerciseCreateEntity>();
+        var (csvReader, exercises) = await gitHubFileReader.Read<ExerciseCreateEntity>("/ExercisesParser/exercises.csv");
         foreach (var exerciseBatch in exercises
                      .Take(maxEntities ?? int.MaxValue)
                      .Chunk(maxInChunk))

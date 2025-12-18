@@ -27,7 +27,7 @@ public class EnumArrayCsvConverter<T>(
         
         try
         {
-            var values = text.Split(new[] { delimiter }, StringSplitOptions.RemoveEmptyEntries);
+            var values = text.Replace(" ", "").Split(new[] { delimiter }, StringSplitOptions.RemoveEmptyEntries);
             var result = new T[values.Length];
             
             for (int i = 0; i < values.Length; i++)

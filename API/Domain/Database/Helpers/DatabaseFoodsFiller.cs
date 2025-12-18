@@ -1,4 +1,6 @@
-﻿using Domain.Database.Github;
+﻿using System.Globalization;
+using CsvHelper;
+using Domain.Database.Github;
 using Domain.Foods;
 using Domain.Foods.DTO;
 
@@ -28,5 +30,14 @@ public class DatabaseFoodsFiller(
             await foodsService.AddBatch(foodBatch);
         }
         csvReader.Dispose();
+        
+        async Task Test()
+        {
+            using var a =
+                File.OpenRead("C:\\Users\\yasko\\Desktop\\Мага\\WellTracker\\API.Tools\\FoodsParserV2\\foods.csv");
+            using var reader = new StreamReader(a);
+            using var csvReader = new CsvReader(reader, CultureInfo.InvariantCulture);
+            var records = csvReader.GetRecords<FoodCreateEntity>().ToList();
+        }
     }
 }

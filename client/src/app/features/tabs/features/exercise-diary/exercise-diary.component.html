@@ -5,110 +5,114 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  @let diary = diarySig()!;
+  @let diary = diarySig();
   <h2 class="title">Итоги дня</h2>
-  <ion-card>
-    <ion-card-content>
+  @if (diary) {
+    <ion-card>
+      <ion-card-content>
 
-      <ion-list>
-        <ion-list-header>
-          <ion-label class="infoTitle">Общая информация</ion-label>
-        </ion-list-header>
-        <ion-item>
-          <ion-icon name="walk-outline" slot="start"></ion-icon>
+        <ion-list>
+          <ion-list-header>
+            <ion-label class="infoTitle">Общая информация</ion-label>
+          </ion-list-header>
+          <ion-item>
+            <ion-icon name="walk-outline" slot="start"></ion-icon>
 
-          <ion-label>
-            <h3>Шаги</h3>
-            <p
-              [ngClass]="{
+            <ion-label>
+              <h3>Шаги</h3>
+              <p
+                [ngClass]="{
               'success': diary.current.steps >= diary.target.steps,
               'warning': diary.current.steps >= diary.target.steps * 0.7 &&
                           diary.current.steps < diary.target.steps,
               'danger': diary.current.steps < diary.target.steps * 0.7
             }"
-            >
-              {{ diary.current.steps }} / {{ diary.target.steps }}
-            </p>
-          </ion-label>
-
-          <ion-button fill="clear" slot="end">
-            <ion-icon name="create-outline"></ion-icon>
-          </ion-button>
-        </ion-item>
-
-        <!-- КАЛОРИИ (без редактирования) -->
-        <ion-item>
-          <ion-icon name="flame-outline" slot="start"></ion-icon>
-
-          <ion-label>
-            <h3>Калории</h3>
-            <p
-              [ngClass]="{
-              'success': diary.current.info.totalKcalBurnt >= diary.target.info.totalKcalBurnt,
-              'warning': diary.current.info.totalKcalBurnt >= diary.target.info.totalKcalBurnt * 0.7 &&
-                          diary.current.info.totalKcalBurnt < diary.target.info.totalKcalBurnt,
-              'danger': diary.current.info.totalKcalBurnt < diary.target.info.totalKcalBurnt * 0.7
-            }"
-            >
-              {{ diary.current.info.totalKcalBurnt }}
-              /
-              {{ diary.target.info.totalKcalBurnt }} ккал
-            </p>
-          </ion-label>
-        </ion-item>
-      </ion-list>
-
-
-      <ion-list>
-        <ion-list-header>
-          <ion-label>Упражнения</ion-label>
-          <ion-button fill="clear">
-            <ion-icon name="add-circle-outline"></ion-icon>
-          </ion-button>
-        </ion-list-header>
-
-        @for (currentItem of diary.target.completedExercises; track currentItem.exercise.id) {
-
-          @let targetItem = currentItem;
-          <ion-item>
-            <ion-label>
-              <h3>{{ currentItem.exercise.name }}</h3>
-
-              <p
-                [ngClass]="{
-                  'success': (currentItem?.repeats ?? 0) >= targetItem.repeats,
-                  'warning': (currentItem?.repeats ?? 0) >= targetItem.repeats * 0.7 &&
-                              (currentItem?.repeats ?? 0) < targetItem.repeats,
-                  'danger': (currentItem?.repeats ?? 0) < targetItem.repeats * 0.7
-                }"
               >
-                {{ currentItem?.repeats ?? 0 }} / {{ targetItem.repeats }} повт.
+                {{ diary.current.steps }} / {{ diary.target.steps }}
               </p>
-
-              @if (currentItem.timeInSeconds) {
-                <p
-                  [ngClass]="{
-                    'success': (currentItem?.timeInSeconds ?? 0) >= targetItem.timeInSeconds,
-                    'warning': (currentItem?.timeInSeconds ?? 0) >= targetItem.timeInSeconds * 0.7 &&
-                                (currentItem?.timeInSeconds ?? 0) < targetItem.timeInSeconds,
-                    'danger': (currentItem?.timeInSeconds ?? 0) < targetItem.timeInSeconds * 0.7
-                  }"
-                >
-                  {{ currentItem?.timeInSeconds ?? 0 }}
-                  /
-                  {{ targetItem.timeInSeconds }} сек
-                </p>
-              }
             </ion-label>
 
             <ion-button fill="clear" slot="end">
               <ion-icon name="create-outline"></ion-icon>
             </ion-button>
           </ion-item>
-        }
-      </ion-list>
 
-    </ion-card-content>
-  </ion-card>
+          <!-- КАЛОРИИ (без редактирования) -->
+          <ion-item>
+            <ion-icon name="flame-outline" slot="start"></ion-icon>
+
+            <ion-label>
+              <h3>Калории</h3>
+              <p
+                [ngClass]="{
+              'success': diary.current.info.totalKcalBurnt >= diary.target.info.totalKcalBurnt,
+              'warning': diary.current.info.totalKcalBurnt >= diary.target.info.totalKcalBurnt * 0.7 &&
+                          diary.current.info.totalKcalBurnt < diary.target.info.totalKcalBurnt,
+              'danger': diary.current.info.totalKcalBurnt < diary.target.info.totalKcalBurnt * 0.7
+            }"
+              >
+                {{ diary.current.info.totalKcalBurnt }}
+                /
+                {{ diary.target.info.totalKcalBurnt }} ккал
+              </p>
+            </ion-label>
+          </ion-item>
+        </ion-list>
+
+
+        <ion-list>
+          <ion-list-header>
+            <ion-label>Упражнения</ion-label>
+            <ion-button fill="clear">
+              <ion-icon name="add-circle-outline"></ion-icon>
+            </ion-button>
+          </ion-list-header>
+
+          @for (currentItem of diary.current.completedExercises; track currentItem.exercise.id) {
+
+            @let targetItem = currentItem;
+            <ion-item>
+              <ion-label>
+                <h3>{{ currentItem.exercise.name }}</h3>
+
+                <p
+                  [ngClass]="{
+                  'success': (currentItem?.repeats ?? 0) >= targetItem.repeats,
+                  'warning': (currentItem?.repeats ?? 0) >= targetItem.repeats * 0.7 &&
+                              (currentItem?.repeats ?? 0) < targetItem.repeats,
+                  'danger': (currentItem?.repeats ?? 0) < targetItem.repeats * 0.7
+                }"
+                >
+                  {{ currentItem?.repeats ?? 0 }} / {{ targetItem.repeats }} повт.
+                </p>
+
+                @if (currentItem.timeInSeconds) {
+                  <p
+                    [ngClass]="{
+                    'success': (currentItem?.timeInSeconds ?? 0) >= targetItem.timeInSeconds,
+                    'warning': (currentItem?.timeInSeconds ?? 0) >= targetItem.timeInSeconds * 0.7 &&
+                                (currentItem?.timeInSeconds ?? 0) < targetItem.timeInSeconds,
+                    'danger': (currentItem?.timeInSeconds ?? 0) < targetItem.timeInSeconds * 0.7
+                  }"
+                  >
+                    {{ currentItem?.timeInSeconds ?? 0 }}
+                    /
+                    {{ targetItem.timeInSeconds }} сек
+                  </p>
+                }
+              </ion-label>
+
+              <ion-button fill="clear" slot="end">
+                <ion-icon name="create-outline"></ion-icon>
+              </ion-button>
+            </ion-item>
+          }
+        </ion-list>
+
+      </ion-card-content>
+    </ion-card>
+  } @else {
+    Пусто
+  }
 
 </ion-content>

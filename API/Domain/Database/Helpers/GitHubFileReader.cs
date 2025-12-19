@@ -2,12 +2,14 @@
 using System.Net.Http.Json;
 using System.Text.Json.Serialization;
 using CsvHelper;
+using Domain.Database.Helpers;
+using Domain.Exercises;
 
 namespace Domain.Database.Github;
 
 public interface IGitHubFileReader
 {
-    Task<(CsvReader, IEnumerable<T>)> Read<T>();
+    Task<(CsvReader, IEnumerable<T>)> Read<T>(string relativePathToCsv);
 }
 
 public class GitHubFileReader : IGitHubFileReader
@@ -21,9 +23,9 @@ public class GitHubFileReader : IGitHubFileReader
         httpClient.DefaultRequestHeaders.Add("User-Agent", "C#-App");
     }
     
-    public async Task<(CsvReader, IEnumerable<T>)> Read<T>()
+    public async Task<(CsvReader, IEnumerable<T>)> Read<T>(string relativePathToCsv)
     {
-        var url = $"{BaseUrl}/repos/yaskov-magistracy/WellTracker/contents/API.Tools/FoodsParserV2/foods.csv";
+        var url = $"{BaseUrl}/repos/yaskov-magistracy/WellTracker/contents/API.Tools{relativePathToCsv}";
         var request = new HttpRequestMessage(
             HttpMethod.Get, 
             url);
@@ -33,6 +35,10 @@ public class GitHubFileReader : IGitHubFileReader
         var stream = await csvResponse.Content.ReadAsStreamAsync();
         var reader = new StreamReader(stream);
         var csvReader = new CsvReader(reader, CultureInfo.InvariantCulture);
+        
+        csvReader.Context.TypeConverterCache.AddConverter<MuscleType[]>(new EnumArrayCsvConverter<MuscleType>());
+        csvReader.Context.TypeConverterCache.AddConverter<EquipmentType[]>(new EnumArrayCsvConverter<EquipmentType>());
+
         return (csvReader, csvReader.GetRecords<T>());
     }
 

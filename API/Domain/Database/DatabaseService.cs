@@ -45,12 +45,13 @@ public class DatabaseService(
                 .AddOrUpdate(user.Value.Id, user.Value.Weight - 5, DateOnly.FromDateTime(prevDay.AddDays(-1)));
             if (request.AutoFillingParams == AutoFillingParams.SomeRealData)
             {
-                await databaseFoodsFiller.FillFromRepo(100);
                 await databaseExercisesFiller.FillFromRepo(100);
+                await databaseFoodsFiller.FillFromRepo(100);
             }
             if (request.AutoFillingParams == AutoFillingParams.FullRealData)
             {
-                throw new NotImplementedException("Полное заполнение ещё не поддерживается");
+                await databaseExercisesFiller.FillFromRepo();
+                await databaseFoodsFiller.FillFromRepo();
             }
         }
         catch (Exception e)

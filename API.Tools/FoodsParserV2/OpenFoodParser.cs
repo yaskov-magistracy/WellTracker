@@ -57,7 +57,7 @@ public class OpenFoodFactsParser
                 Console.WriteLine($"Получено {parsedProducts.Count} продуктов со страницы {page}");
 
                 // Задержка чтобы не перегружать сервер
-                await Task.Delay(1000);
+                await Task.Delay(2000);
             }
             catch (HttpRequestException ex)
             {

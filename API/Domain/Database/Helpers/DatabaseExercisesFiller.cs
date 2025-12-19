@@ -1,4 +1,6 @@
-﻿using Domain.Exercises;
+﻿using Domain.Database.Github;
+using Domain.Exercises;
+using Domain.Exercises.DTO;
 
 namespace Domain.Database.Helpers;
 
@@ -10,18 +12,21 @@ public interface IDatabaseExercisesFiller
 }
 
 public class DatabaseExercisesFiller(
-    IExercisesService exercisesService
+    IExercisesService exercisesService,
+    IGitHubFileReader gitHubFileReader
 ) : IDatabaseExercisesFiller
 {
-    public async Task FillFromRepo(int? maxEntities = null, int maxInChunk = 20)
+    public async Task FillFromRepo(
+        int? maxEntities = null, 
+        int maxInChunk = 20)
     {
-        await exercisesService.AddBatch([
-            new("Жим штанги лёжа", 
-                "Описание",
-                ExerciseType.Strength, 
-                ExerciseMeasurement.Repeats,
-                [MuscleType.Chest, MuscleType.Triceps],
-                [EquipmentType.Barbell, EquipmentType.Bench])
-        ]);
+        var (csvReader, exercises) = await gitHubFileReader.Read<ExerciseCreateEntity>("/ExercisesParser/exercises.csv");
+        foreach (var exerciseBatch in exercises
+                     .Take(maxEntities ?? int.MaxValue)
+                     .Chunk(maxInChunk))
+        {
+            await exercisesService.AddBatch(exerciseBatch);
+        }
+        csvReader.Dispose();
     }
 }
